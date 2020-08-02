@@ -1,0 +1,127 @@
+<p>document-search works!</p>
+<div class="row templateDiv"><h2>Document Manager (All View)</h2></div>
+
+<div class="row templateDiv">
+        <form style="width: 75%">
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputTitle">Title</label>
+                    <input type="text" class="form-control" id="inputTitle" placeholder="Title">
+                  </div>
+                  <div class="form-group col-md-6">
+                    <label for="inputCategory">Category</label>
+                    <input type="text" class="form-control" id="inputCategory" placeholder="Category">
+                  </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputScategory">Sub-Category</label>
+                        <input type="text" class="form-control" id="inputScategory" placeholder="Sub-Category">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputJuridiction">Juridiction</label>
+                        <input type="text" class="form-control" id="inputJuridiction" placeholder="Juridiction">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputCounterpartN">Counterpart Name</label>
+                        <input type="text" class="form-control" id="inputCounterpartN" placeholder="Counterpart Name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputCounterpartId">Counterpart Id</label>
+                        <input type="text" class="form-control" id="inputCounterpartId" placeholder="Counterpart Id">
+                    </div>
+                </div> 
+                <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCounterpartN">LIBOR</label>
+                            <select id="inputIsLibor" class="form-control">
+                                    <option selected>Y</option>
+                                    <option>N</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputCounterpartId">Date of Maturity (>2021)</label>
+                            <select id="inputIsLibor" class="form-control">
+                                    <option selected>Y</option>
+                                    <option>N</option>
+                            </select>
+                        </div>
+                    </div>                      
+                <button type="submit" class="btn btn-primary">Search</button>
+                <button type="submit" class="btn btn-primary">Clear</button>
+        </form>
+</div>
+
+<div class="row templateDiv">
+        <table class="table">
+            <thead>
+              <tr>
+                <th>Document Name</th>
+                <th>Category</th>
+                <th>Sub-Category</th>
+                <th>Counterpart Name</th>
+                <th>Counterpart Id</th>
+                <th>Is LIBOR</th>
+                <th>DOM</th>
+                <th>Rate</th>
+                <th>Amount</th>
+                <th>Document Link</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Loan_Rahul</td>
+                <td>Loan</td>
+                <td>Consumer Loan</td>
+                <td>Rahul Das</td>
+                <td>123867</td>
+                <td>Y</td>
+                <td>N</td>
+                <td>10%</td>
+                <td>$ 14000</td>
+                <td><a href="#">View Document</a></td>
+              </tr>
+              <tr>
+                <td>Loan_Sanjib</td>
+                <td>Loan</td>
+                <td>Commercial Loan</td>
+                <td>Sanjib Ray</td>
+                <td>54896</td>
+                <td>Y</td>
+                <td>Y</td>
+                <td>11%</td>
+                <td>$ 150000</td>
+                <td><a href="#">View Document</a></td>
+              </tr>
+              <tr>
+                <td>Loan_XYZ</td>
+                <td>Loan</td>
+                <td>Syndicate Loan</td>
+                <td>Ramesh Singh</td>
+                <td>12398</td>
+                <td>Y</td>
+                <td>N</td>
+                <td>15%</td>
+                <td>$ 50000</td>
+                <td><a href="#">View Document</a></td>
+              </tr>
+              <tr>
+                <td>Loan_Rajib</td>
+                <td>Loan</td>
+                <td>Consumer Loan</td>
+                <td>Rajib Das</td>
+                <td>123867</td>
+                <td>Y</td>
+                <td>N</td>
+                <td>10%</td>
+                <td>$ 14000</td>
+                <td><a href="#">View Document</a></td>
+              </tr>
+              
+            </tbody>
+          </table>
+    
+      </div>
+

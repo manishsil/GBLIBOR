@@ -1,0 +1,74 @@
+<div class="row templateDiv"><h2>Upload Document Template</h2></div>
+<div class="row templateDiv">
+    <div *ngIf="currentFile" class="progress">
+    <div
+      class="progress-bar progress-bar-info progress-bar-striped"
+      role="progressbar"
+      attr.aria-valuenow="{{ progress }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      [ngStyle]="{ width: progress + '%' }"
+    >
+      {{ progress }}%
+    </div>
+</div>
+  
+  <label class="btn btn-default">
+    <input type="file" (change)="selectFile($event)" />
+  </label>
+
+  <button class="btn btn-success" [disabled]="!selectedFiles" (click)="upload()">
+    Upload
+  </button>
+</div>
+
+  
+  <!--<div class="alert alert-light" role="alert">{{ message }}</div>
+  
+  <div class="card">
+    <div class="card-header">List of Files</div>
+    <ul
+      class="list-group list-group-flush"
+      *ngFor="let file of fileInfos | async"
+    >
+      <li class="list-group-item">
+        <a href="{{ file.url }}">{{ file.name }}</a>
+      </li>
+    </ul>
+  </div>
+  Add Up -->
+
+  <div class="row templateDiv">
+    <table class="table templateTable">
+        <thead>
+          <tr>
+            <th>Sl. No</th>
+            <th>Template Name</th>
+            <th>Upload Date</th>
+            <th>Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Loan Document</td>
+            <td>10/03/2020</td>
+            <td><button type="button" class="btn"><span class="glyphicon glyphicon-download-alt"></span></button><span>   </span><button type="button" class="btn"><span class="glyphicon glyphicon-remove"></span></button></td>
+          </tr>
+          <tr>
+                <td>2</td>
+                <td>Syndicate Loan</td>
+                <td>11/04/2020</td>
+                <td><button type="button" class="btn"><span class="glyphicon glyphicon-download-alt"></span></button><span>   </span><button type="button" class="btn"><span class="glyphicon glyphicon-remove"></span></button></td>
+          </tr>
+          <tr>
+                <td>3</td>
+                <td>Credit Card Score</td>
+                <td>05/01/2020</td>
+                <td><button type="button" class="btn"><span class="glyphicon glyphicon-download-alt"></span></button><span>   </span><button type="button" class="btn"><span class="glyphicon glyphicon-remove"></span></button></td>
+           </tr>
+        </tbody>
+      </table>
+
+  </div>
