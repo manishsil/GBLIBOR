@@ -41,8 +41,6 @@
       </div>
 
 
-      <h1>********************************************</h1>
-
       <div class="row templateDiv"><h2>Document Manager (Loan)</h2></div>
       <div class="row templateDiv">
               <table class="table templateTable">
@@ -84,7 +82,6 @@
                 </table>
             </div>
 
-    <h1>********************************************</h1>
 
       <div class="row templateDiv"><h2>Document Manager (Derivatives)</h2></div>
       <div class="row templateDiv">
@@ -130,4 +127,267 @@
                      </tr>
                   </tbody>
                 </table>
-            </div>
+      </div>
+
+
+      <div class="row templateDiv"><h2>Transition Priority Process</h2></div>
+      <div class="row templateDiv">
+        <table class="transitionTable table">
+          
+          <tbody>
+            <tr>
+              <td style="width:250px">Contract Manutiry(Post Dec,2021)</td>
+              <td><input type="checkbox" value=""></td>
+            </tr>
+            <tr>
+                  <td>Preferred Counterparty List</td>
+                  <td><input type="checkbox" value=""></td>
+            </tr>
+            <tr>
+                  <td>Contract Value Limit</td>
+                  <td><input type="checkbox" value=""></td>
+             </tr>
+             <tr>
+                    <td>Preferred instrument</td>
+                    <td><input type="checkbox" value=""></td>
+             </tr>
+             <tr>
+                  <td>Fallback Complexity</td>
+                  <td style="text-align: left"><input type="checkbox" value=""></td>
+             </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="display: flex; justify-content: center; margin-top: 20px">
+        <button type="button" class="btn btn-primary">Save</button>
+        <button type="button" class="btn btn-primary">Transition Kick Off</button>
+      </div>
+
+
+      <div class="row templateDiv"><h2>Transaction Initiation</h2></div>
+      <div class="row templateDiv">
+          <table style="width: 75%" >
+          
+              <tbody>
+                <tr>
+                  <td style="width:150px">Contract Id</td>
+                  <td><input style="width: 200px" type="text" class="form-control" id="cid" placeholder="Contract Id"></td>
+                  <td>Counterpart Name</td>
+                  <td><input type="text" class="form-control" id="cid" placeholder="Counterpart Name"></td>
+                </tr>
+                <tr>
+                  <td>Contract Name</td>
+                  <td><input style="width: 200px" type="text" class="form-control" id="cid" placeholder="Contract Name"></td>
+                  <td>Counterpart Id</td>
+                  <td><input type="text" class="form-control" id="cid" placeholder="Counterpart Id"></td>
+                </tr>
+                <tr>
+                  <td>Contract Type</td>
+                  <td><input style="width: 200px" type="text" class="form-control" id="cid" placeholder="Contract Type"></td>
+                  <td>Maturity</td>
+                  <td><input type="text" class="form-control" id="cid" placeholder="Maturity"></td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="row templateDiv"><h2>Contract Details</h2></div>
+      <div class="row templateDiv">
+          <table class="table" style="width: 75%">
+              <thead>
+                  <tr>
+                    <th>Contract Id</th>
+                    <th>Counterpart Name</th>
+                    <th>Counterpart Id</th>
+                    <th>Contract Name</th>
+                    <th>Contract Type</th>
+                    <th>Maturity</th>
+                  </tr>
+                </thead>
+            <tbody>
+              <tr style="height: 40px">
+                <td style="width:150px">12345</td>
+                <td>Wells Fargo</td>
+                <td>re431we</td>
+                <td>Wells Fargo</td>
+                <td>Loan</td>
+                <td>23-Nov-2020</td>
+              </tr>
+              <tr style="height: 40px">
+                <td style="width:150px">12345</td>
+                <td>Bank Of America</td>
+                <td>re431we</td>
+                <td>Bank Of America</td>
+                <td>Commercial Loan</td>
+                <td>23-Dec-2020</td>
+              </tr>
+              <tr style="height: 40px">
+                <td style="width:150px">12345</td>
+                <td>Bank of New York</td>
+                <td>re431we</td>
+                <td>Bank of New York</td>
+                <td>Syndicate Loan</td>
+                <td>23-Sept-2021</td>
+              </tr>
+              <tr style="height: 40px">
+                <td style="width:150px">12345</td>
+                <td>JPMorgan Chase</td>
+                <td>re431we</td>
+                <td>JPMorgan Chase</td>
+                <td>Consumer Loan</td>
+                <td>23-Aug-2020</td>
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      <div class="row" style="display: flex; justify-content: center; margin-top: 20px">
+          <button type="button" class="btn btn-primary">Back to Priority</button>
+          <button type="button" class="btn btn-primary">Client Outreach</button>
+        </div>
+
+      <div class="row templateDiv"><h2>Client Outreach</h2></div>
+      <div class="row templateDiv">
+        <table style="width: 75%">
+          
+          <tbody>
+            <tr style="height: 40px">
+              <td style="width:150px">Contract Id</td>
+              <td><input type="text" class="form-control" id="coid" placeholder="Contract Id"></td>
+            </tr>
+            <tr style="height: 40px">
+                  <td>Client Id</td>
+                  <td><input type="text" class="form-control" id="cid" placeholder="Client Id"></td>
+            </tr>
+            <tr style="height: 40px">
+                  <td>Client Address</td>
+                  <td><input type="text" class="form-control" id="cadd" placeholder="Client Address"></td>
+             </tr>
+             <tr style="height: 40px">
+                    <td>Client Phone</td>
+                    <td><input type="text" class="form-control" id="cphone" placeholder="Client Phone"></td>
+             </tr>
+             <tr style="height: 40px">
+                  <td>Client Email</td>
+                  <td><input type="text" class="form-control" id="cmail" placeholder="Client Email"></td>
+             </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="display: flex; justify-content: center; margin-top: 20px">
+        <button type="button" class="btn btn-primary">Send Mail</button>
+        <button type="button" class="btn btn-primary">Contract Review</button>
+      </div>
+
+
+
+
+
+      <div class="row templateDiv"><h2>Cotract Analysis & Review</h2></div>
+      <div class="row templateDiv">
+        <table style="width: 75%">
+          
+          <tbody>
+            
+            <tr style="height: 40px">
+              <td>Contract Id</td>
+              <td colspan="3"><input  style="width: 400px" type="text" class="form-control" id="contractId" placeholder="Contract Id"></td>
+            </tr>
+            <tr style="height: 40px">
+              <td>Contract Validation</td>
+              <td style="width: 75px"><input type="checkbox" value=""></td>
+              <td style="width: 120px">Upload Evidence</td>
+              <td><input type="file" class="form-control-file" id="exampleFormControlFile1"></td>
+            </tr>
+            <tr style="height: 40px">
+                 <td>Risk Model Verification</td>
+                 <td><input type="checkbox" value=""></td>
+                 <td>Upload Evidence</td>
+                 <td><input type="file" class="form-control-file" id="exampleFormControlFile1"></td>
+            </tr>
+            <tr style="height: 40px">
+                 <td>Cash Flow Impact analysis</td>
+                 <td><input type="checkbox" value=""></td>
+                 <td>Upload Evidence</td>
+                 <td><input type="file" class="form-control-file" id="exampleFormControlFile1"></td>
+            </tr>
+             <tr style="height: 40px">
+                  <td>Existing Risk Flagged</td>
+                  <td><input type="checkbox" value=""></td>
+                  <td>Upload Evidence</td>
+                  <td><input type="file" class="form-control-file" id="exampleFormControlFile1"></td>
+             </tr>
+             <tr style="height: 40px">
+                  <td>New Risk Raised</td>
+                  <td><input type="checkbox" value=""></td>
+                  <td>Upload Evidence</td>
+                  <td><input type="file" class="form-control-file" id="exampleFormControlFile1"></td>
+             </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="display: flex; justify-content: center; margin-top: 20px">
+        <button type="button" class="btn btn-primary">Back</button>
+        <button type="button" class="btn btn-primary">Complete</button>
+        <button type="button" class="btn btn-primary">Amendment</button>
+      </div>
+
+
+
+      <div class="row templateDiv"><h2>Ammendment</h2></div>
+      <div class="row templateDiv">
+          <table style="width: 75%">
+          
+              <tbody>
+                <tr style="height: 40px">
+                  <td style="width: 100px">Contract Id</td>
+                  <td style="width: 75px"><input  style="width: 400px" type="text" class="form-control" id="contractId" placeholder="Contract Id"></td>
+                </tr>
+                <tr style="height: 40px">
+                     <td>Upload New Contract</td>
+                     <td><input type="file" class="form-control-file" id="exampleFormControlFile1"></td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+      <div class="row" style="display: flex; justify-content: center; margin-top: 20px">
+          <button type="button" class="btn btn-primary">Back to Review</button>
+          <button type="button" class="btn btn-primary">Save</button>
+          <button type="button" class="btn btn-primary">Go for Approval</button>
+        </div>
+
+
+
+      <div class="row templateDiv"><h2>Contract Approval</h2></div>
+      <div class="row templateDiv">
+        <h3 style="margin-right: 20px">Contract View</h3><input  style="width: 400px" type="text" class="form-control" id="contractId" placeholder="Contract Id">
+      </div>
+      <div class="row" style="display: flex; justify-content: center; margin-top: 20px">
+        <button type="button" class="btn btn-primary">Approve</button>
+        <button type="button" class="btn btn-primary">Decline</button>
+      </div>
+
+
+      
+    
+
+      <div class="row templateDiv"><h2>Contract Signing & Upload</h2></div>
+      <div class="row templateDiv">
+        <table style="width: 75%">
+          <tbody>
+           <tr style="height: 40px">
+              <td style="width: 90px">Digital Sign</td>
+              <td style="width: 75px"><input  style="width: 400px" type="text" class="form-control" id="contractId" placeholder="Contract Id"></td>
+            </tr>
+            <tr style="height: 40px">
+                 <td>Upload Signed Copy</td>
+                 <td><input type="file" class="form-control-file" id="exampleFormControlFile1"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" style="display: flex; justify-content: center; margin-top: 20px">
+        <button type="button" class="btn btn-primary">Complete Transaction</button>
+      </div>
+
+
+      

@@ -19,3 +19,10 @@ table {
     justify-content: center;
     margin-top: 20px;
   }
+
+
+
+  /*Transition Priority*/
+  .transitionTable{
+    width: 30%;
+  }

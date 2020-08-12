@@ -5,13 +5,15 @@ import {
   ApexAxisChartSeries,
   ApexChart,
   ApexXAxis,
-  ApexTitleSubtitle
+  ApexTitleSubtitle,
+  ApexYAxis
 } from "ng-apexcharts";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
   chart: ApexChart;
   xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
   title: ApexTitleSubtitle;
 };
 
@@ -25,13 +27,37 @@ export class ContractAnalysisComponent implements OnInit {
   
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
+  public chartOptions1: Partial<ChartOptions>;
 
   constructor() {
     this.chartOptions = {
       series: [
         {
-          name: "My-series",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+          name: "Valuation",
+          data: [10, 41]
+        }
+      ],
+      chart: {
+        height: 350,
+        type: "bar"
+      },
+      
+      title: {
+        text: "LIBOR vs Non-LIBOR contract analysis"
+      },
+      xaxis: {
+        categories: [
+          "LIBOR",
+          "Non-LIBOR"
+        ]
+      }
+    };
+    
+    this.chartOptions1 = {
+      series: [
+        {
+          name: "Valuation",
+          data: [19800000, 46433461]
         }
       ],
       chart: {
@@ -39,22 +65,17 @@ export class ContractAnalysisComponent implements OnInit {
         type: "bar"
       },
       title: {
-        text: "My First Angular Chart"
+        text: "LIBOR vs Non-LIBOR contract analysis"
       },
       xaxis: {
         categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep"
+          "LIBOR",
+          "Non-LIBOR"
         ]
       }
     };
+
+
   }
 
   ngOnInit(): void {
