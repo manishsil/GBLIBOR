@@ -15,6 +15,10 @@ import { ContractAnalysisComponent } from './contract-analysis/contract-analysis
 import { DocumentSearchComponent } from './document-search/document-search.component';
 import { DocumentManagerComponent } from './document-manager/document-manager.component';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { RepaperingReqComponent } from './RepaperingRequest/repapering-req/repapering-req.component';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatIconModule } from '@angular/material/icon';
+import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 
 
 
@@ -24,14 +28,21 @@ import { NgApexchartsModule } from "ng-apexcharts";
     TemplateUploadComponent,
     ContractAnalysisComponent,
     DocumentSearchComponent,
-    DocumentManagerComponent
+    DocumentManagerComponent,
+    RepaperingReqComponent
   ],
   imports: [
     BrowserModule,NgApexchartsModule,
     AppRoutingModule,MatFormFieldModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
+    MatStepperModule,MatIconModule,
     HttpClientModule, BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {
+    provide: STEPPER_GLOBAL_OPTIONS,
+    useValue: { displayDefaultIndicatorType: false }
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

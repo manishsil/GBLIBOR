@@ -4,10 +4,12 @@ import { TemplateUploadComponent } from './templateUpload/template-upload/templa
 import { DocumentSearchComponent } from './document-search/document-search.component';
 import { ContractAnalysisComponent } from './contract-analysis/contract-analysis.component';
 import { DocumentManagerComponent } from './document-manager/document-manager.component';
+import { RepaperingReqComponent } from './RepaperingRequest/repapering-req/repapering-req.component';
 
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: ''} , 
+  {path: 'repapering' , component: RepaperingReqComponent},
   {path: 'template' , component: TemplateUploadComponent},
   {path: 'documents' , component: DocumentManagerComponent},
   {path: 'search' , component: DocumentSearchComponent},
