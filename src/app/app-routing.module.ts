@@ -7,7 +7,7 @@ import { DocumentManagerComponent } from './document-manager/document-manager.co
 
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'template'} , 
+  {path: '', pathMatch: 'full', redirectTo: ''} , 
   {path: 'template' , component: TemplateUploadComponent},
   {path: 'documents' , component: DocumentManagerComponent},
   {path: 'search' , component: DocumentSearchComponent},
