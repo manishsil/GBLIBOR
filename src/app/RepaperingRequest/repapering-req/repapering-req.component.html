@@ -1,20 +1,81 @@
 <div style="text-align: center">
+  <br>
     <h1>Repapering Request</h1>
 </div>
 <mat-horizontal-stepper>
 
     <mat-step label="Initiation">
-      Step 1 Initiation
-      <div>
-        <button mat-button matStepperNext>Next</button>
+      <table>
+        <tr>
+          <td style="width: 15%" class="bold">Upload Doc</td>
+        <td style="width: 25%"><input type="text" [disabled]="true" [(ngModel)]="fileToUploaded.name" /></td>
+          <td style="width: 10%">
+            <button>
+              <label for="files">Upload</label>
+              <input id="files" (change)="handleFileInput($event.target.files)" type="file"  style="display: none" />
+            </button>
+          </td>
+          <td style="width: 50%">
+            <input type="button" value="Initiate" (click)="initiate()" [disabled]="!fileToUploaded.byteArr"/>
+          </td>
+        </tr>
+      </table>
+      <table *ngIf="isInitated">
+        <tr>
+          <td style="width: 15%" class="bold">Contract ID</td>
+          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="documentDt.contractId" /></td>
+          <td style="width: 15%" class="bold">Type</td>
+          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="documentDt.type" /></td>
+        </tr>
+        <tr>
+            <td class="bold">Customer ID</td>
+            <td><input type="text" [disabled]="true" [(ngModel)]="documentDt.customerId" /></td>
+            <td class="bold">SubType</td>
+            <td><input type="text" [disabled]="true" [(ngModel)]="documentDt.subtype" /></td>
+          </tr>
+          <tr>
+              <td class="bold">LIBOR</td>
+              <td><input type="checkbox" [checked]="documentDt.libor" [disabled]="true"></td>
+              <td class="bold">State</td>
+              <td><input type="text" [disabled]="true" [(ngModel)]="documentDt.state" /></td>
+          </tr>
+        </table>
+        <br>
+      <div *ngIf="isInitated">
+        <button mat-button matStepperNext>Review</button>
       </div>
     </mat-step>
   
     <mat-step label="Review">
-      Step 2 Review
+        <table>
+            <tr>
+              <td style="width: 15%" class="bold">Upload Doc</td>
+              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="fileToUploaded.name" /></td>
+              <td style="width: 15%" class="bold"></td>
+              <td style="width: 35%"></td>
+            </tr>
+            <tr>
+              <td style="width: 15%" class="bold">Contract ID</td>
+              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="documentDt.contractId" /></td>
+              <td style="width: 15%" class="bold">Type</td>
+              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="documentDt.type" /></td>
+            </tr>
+            <tr>
+                <td class="bold">Customer ID</td>
+                <td><input type="text" [disabled]="true" [(ngModel)]="documentDt.customerId" /></td>
+                <td class="bold">SubType</td>
+                <td><input type="text" [disabled]="true" [(ngModel)]="documentDt.subtype" /></td>
+              </tr>
+              <tr>
+                  <td class="bold">LIBOR</td>
+                  <td><input type="checkbox" [checked]="documentDt.libor" [disabled]="true"></td>
+                  <td class="bold">State</td>
+                  <td><input type="text" [disabled]="true" [(ngModel)]="documentDt.state" /></td>
+              </tr>
+            </table>
+            <br>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext>Amend</button>
       </div>
     </mat-step>
   
@@ -50,3 +111,31 @@
       </mat-step>
     
   </mat-horizontal-stepper>
+
+<!-- <hr> -->
+<mat-tab-group animationDuration="0ms" *ngIf="isInitated">
+  <mat-tab label="Risk">
+    <br> 
+    <table style="width: 90%">
+      <tr>
+        <th>Risk A</th>
+        <th>Risk B</th>
+        <th>Risk C</th>
+        <th>Risk D</th>
+      </tr>
+      <tr *ngFor="let item of analysedDt.risk">
+        <td>{{item.riskA}}</td>
+        <td>{{item.riskB}}</td>
+        <td>{{item.riskC}}</td>
+        <td>{{item.riskD}}</td>
+      </tr>
+    </table>
+    <br>
+  </mat-tab>
+  <mat-tab label="Financial"> Financial </mat-tab>
+  <mat-tab label="Collateral"> Collateral </mat-tab>
+  <mat-tab label="Work History"> Work History </mat-tab>
+  <mat-tab label="Client Outreach" *ngIf="false"> Client Outreachh </mat-tab>
+  <mat-tab label="Approvals" *ngIf="false">Approvals</mat-tab>
+  <mat-tab label="Verify" *ngIf="false">Verify</mat-tab>
+</mat-tab-group>

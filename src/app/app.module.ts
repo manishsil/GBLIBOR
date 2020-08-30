@@ -18,7 +18,10 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { RepaperingReqComponent } from './RepaperingRequest/repapering-req/repapering-req.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 
@@ -32,9 +35,9 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     RepaperingReqComponent
   ],
   imports: [
-    BrowserModule,NgApexchartsModule,
+    BrowserModule,NgApexchartsModule,FormsModule,ReactiveFormsModule,
     AppRoutingModule,MatFormFieldModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
-    MatStepperModule,MatIconModule,
+    MatStepperModule,MatIconModule, MatTabsModule, MatSnackBarModule,
     HttpClientModule, BrowserAnimationsModule
   ],
   providers: [

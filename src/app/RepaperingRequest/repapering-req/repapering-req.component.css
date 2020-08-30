@@ -1,0 +1,35 @@
+::ng-deep .mat-tab-label {
+  min-width: 60px !important;
+}
+::ng-deep .mat-simple-snackbar span {
+    margin: auto !important;
+    text-align: center !important;
+}
+::ng-deep .mat-snack-bar-container{
+    color: #856404 !important;
+    background-color: #fff3cd !important;
+    border-color: #ffeeba !important;
+    font-weight: bold;
+  }
+table {
+  width: 100%;
+}
+th, td {
+  padding: 5px;
+}
+
+label {
+  margin-bottom: 0px;
+  font-weight: inherit;
+}
+
+.bold {
+  font-weight: bold
+}
+
+input[type=text]{
+  border: none;
+  background: lightgray;
+  text-align: center;
+}
+
