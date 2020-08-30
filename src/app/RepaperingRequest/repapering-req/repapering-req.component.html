@@ -2,7 +2,7 @@
   <br>
     <h1>Repapering Request</h1>
 </div>
-<mat-horizontal-stepper>
+<mat-horizontal-stepper (selectionChange)="onStepChange($event)">
 
     <mat-step label="Initiation">
       <table>
@@ -113,7 +113,7 @@
   </mat-horizontal-stepper>
 
 <!-- <hr> -->
-<mat-tab-group animationDuration="0ms" *ngIf="isInitated">
+<mat-tab-group animationDuration="0ms" *ngIf="stepIndex && stepIndex!=0" [(selectedIndex)]="selectedTab">
   <mat-tab label="Risk">
     <br> 
     <table style="width: 90%">
@@ -135,7 +135,7 @@
   <mat-tab label="Financial"> Financial </mat-tab>
   <mat-tab label="Collateral"> Collateral </mat-tab>
   <mat-tab label="Work History"> Work History </mat-tab>
-  <mat-tab label="Client Outreach" *ngIf="false"> Client Outreachh </mat-tab>
-  <mat-tab label="Approvals" *ngIf="false">Approvals</mat-tab>
-  <mat-tab label="Verify" *ngIf="false">Verify</mat-tab>
+  <mat-tab label="Client Outreach" *ngIf="stepIndex && stepIndex>1"> Client Outreachh </mat-tab>
+  <mat-tab label="Approvals" *ngIf="stepIndex && stepIndex>1">Approvals</mat-tab>
+  <mat-tab label="Verify" *ngIf="stepIndex && stepIndex>3">Verify</mat-tab>
 </mat-tab-group>
