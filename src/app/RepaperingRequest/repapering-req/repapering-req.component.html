@@ -1,16 +1,16 @@
 <div style="text-align: center">
     <h1>Repapering Request</h1>
 </div>
-<mat-horizontal-stepper>
+<mat-horizontal-stepper #stepper linear [selectedIndex]="currentStep">
 
-    <mat-step label="Initiation">
+    <mat-step label="Initiation" [completed]="processing">
       Step 1 Initiation
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
     </mat-step>
   
-    <mat-step label="Review">
+    <mat-step label="Review" [completed]="processing">
       Step 2 Review
       <div>
         <button mat-button matStepperPrevious>Back</button>
@@ -19,19 +19,95 @@
     </mat-step>
   
     <mat-step label="Amendment">
-        Step 3 Amendment
+        <div style="width: 100%; min-height: 650px;">
+          <div style="text-align: center;height: 20px; width: 100%">
+            <span style="font-size: large; font-weight: bolder">FORM FIELDS</span>
+          </div>
+          <div class="amendmentDiv">
+            <div style="text-align: center"><span style="font-size: large; font-weight: bolder">As Is</span></div>
+            <div class="asIs">
+              <div class="sec1">
+                  <pdf-viewer [src]="pdfSrc" 
+                  [render-text]="true"
+                  style="display: block; width: 100%; height: 100%;"
+                  ></pdf-viewer>
+              </div>
+              <div class="sec2">
+                  <pdf-viewer [src]="pdfSrc" 
+                  [render-text]="true"
+                  style="display: block; width: 100%; height: 100%;"
+                  ></pdf-viewer>
+              </div>
+            </div>
+            <div  style="text-align: center; margin-top: 5px"><span style="font-size: large; font-weight: bolder">To Be</span></div>
+            <div class="toBe">
+                <div class="sec1">
+                    <pdf-viewer [src]="pdfSrc"[render-text]="true"style="display: block; width: 100%; height: 100%;"></pdf-viewer>
+                </div>
+                <div class="sec2">
+                   
+                </div>
+            </div>
+
+          </div>
+          <div class="detalilsTab" style="height: 100px;">
+              <mat-tab-group>
+                  <mat-tab label="Risk"> Risk </mat-tab>
+                  <mat-tab label="Financial"> Financial </mat-tab>
+                  <mat-tab label="Collateral"> Collateral </mat-tab>
+                  <mat-tab label="Work history"> Work history </mat-tab>
+                  <mat-tab label="Client Outreach"> Client Outreach </mat-tab>
+                  <mat-tab label="Approvals"> Approvals </mat-tab>
+              </mat-tab-group>
+          </div>
+        </div>
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
-          </div>
+        </div>
     </mat-step>
 
     <mat-step label="Authorize">
-        Step 4 Authorize
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
+            <div style="text-align: center;height: 20px; width: 100%">
+                <span style="font-size: large; font-weight: bolder">FORM FIELDS</span>
+            </div>
+            <div class="docDiv">
+              <div class="divAsIs">
+                <div class="headerTest" style="text-align: center"><span style="font-size: large; font-weight: bolder">As Is</span></div>
+                <div class="divPdf">
+                  <div class="wholePdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
+                  <div class="labourPdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
+                </div>
+                <div>Navigation</div>
+              </div>
+
+
+              <div class="divToBe">
+                  <div class="headerTest" style="text-align: center"><span style="font-size: large; font-weight: bolder">To Be</span></div>
+                  <div class="divPdf">
+                    <div class="wholePdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
+                    <div class="labourPdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
+                  </div>
+                  <div>Navigation</div>
+              </div>
+            </div>
+            <div class="detalilsTab" style="height: 100px;">
+                <mat-tab-group>
+                    <mat-tab label="Risk"> Risk </mat-tab>
+                    <mat-tab label="Financial"> Financial </mat-tab>
+                    <mat-tab label="Collateral"> Collateral </mat-tab>
+                    <mat-tab label="Work history"> Work history </mat-tab>
+                    <mat-tab label="Client Outreach"> Client Outreach </mat-tab>
+                    <mat-tab label="Approvals"> Approvals </mat-tab>
+                </mat-tab-group>
+            </div>
+            <div>
+                <button mat-button matStepperPrevious>Back</button>
+                <button mat-button matStepperNext>Next</button>
+            </div>
+        </div>
+        
       </mat-step>
 
       <mat-step label="Verification">

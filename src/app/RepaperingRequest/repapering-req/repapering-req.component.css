@@ -1,0 +1,53 @@
+.amendmentDiv{
+    height: 660px;
+    width: 100%;
+    /*display: flex;
+    justify-content: center;*/
+}
+
+.asIs{
+    height: 45%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.toBe{
+    height: 45%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.sec1{
+    height: 100%;
+    width: 50%;
+}
+.sec2{
+    height: 100%;
+    width: 50%;
+}
+
+
+/*Authorize*/
+.docDiv{
+    border: 1px solid white;
+}
+
+.divAsIs {
+    height: 550px;
+    border-bottom: 3px solid black
+}
+.divToBe{
+    height: 500px;
+}
+
+.divPdf{
+    display: flex;
+    justify-content: center;
+}
+.wholePdf, .labourPdf {
+    width: 50%;
+    height: 450px;
+}
+

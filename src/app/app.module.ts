@@ -19,7 +19,8 @@ import { RepaperingReqComponent } from './RepaperingRequest/repapering-req/repap
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-
+import {MatTabsModule} from '@angular/material/tabs';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -35,6 +36,8 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
     BrowserModule,NgApexchartsModule,
     AppRoutingModule,MatFormFieldModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
     MatStepperModule,MatIconModule,
+    MatTabsModule,
+    PdfViewerModule,
     HttpClientModule, BrowserAnimationsModule
   ],
   providers: [
