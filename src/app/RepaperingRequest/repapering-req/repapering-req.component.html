@@ -134,7 +134,27 @@
   </mat-tab>
   <mat-tab label="Financial"> Financial </mat-tab>
   <mat-tab label="Collateral"> Collateral </mat-tab>
-  <mat-tab label="Work History"> Work History </mat-tab>
+  <mat-tab label="Work History"> 
+    <div class="card">
+      <div class="card-container">
+        <div style="float: right">Approval History: 09/01/2020</div>
+        Manish Singh 
+        <div class="content-center">
+          <table>
+            <tr>
+              <td class="right-align-text" style="padding: 0">Assigned to:</td>
+              <td style="padding: 0">Manish Singh</td>
+            </tr>
+            <tr>
+                <td class="right-align-text" style="padding: 0">State:</td>
+                <td style="padding: 0">Approved</td>
+              </tr>
+          </table>
+        </div> 
+      </div>
+    </div>
+    <br>
+  </mat-tab>
   <mat-tab label="Client Outreach" *ngIf="stepIndex && stepIndex>1"> Client Outreachh </mat-tab>
   <mat-tab label="Approvals" *ngIf="stepIndex && stepIndex>1">Approvals</mat-tab>
   <mat-tab label="Verify" *ngIf="stepIndex && stepIndex>3">Verify</mat-tab>
