@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, AfterViewInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatStepper } from '@angular/material/stepper';
+
 
 @Component({
   selector: 'app-repapering-req',
   templateUrl: './repapering-req.component.html',
   styleUrls: ['./repapering-req.component.css']
 })
-export class RepaperingReqComponent implements OnInit {
+export class RepaperingReqComponent implements OnInit,AfterViewInit {
 
   stepIndex: number;
   selectedTab: number;
@@ -14,7 +16,9 @@ export class RepaperingReqComponent implements OnInit {
   fileToUploaded: {name: string, type: string, byteArr: any};
   documentDt: {contractId: string, type: string, customerId: string, subtype: string, libor: boolean, state: string};
   analysedDt: {risk: any, financial: any, collateral: any, workHistory: any, clientOutreach: any, approvals: any, verify: any};
-
+  currentStep: number =0;
+  processing: boolean= true;
+  pdfSrc: string="https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf"
   constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -64,6 +68,13 @@ export class RepaperingReqComponent implements OnInit {
     {riskA: 'Risk 21', riskB: 'Risk 22', riskC: 'Risk 23', riskD: 'Risk 24'},
     {riskA: 'Risk 31', riskB: 'Risk 23', riskC: 'Risk 33', riskD: 'Risk 34'},
     {riskA: 'Risk 41', riskB: 'Risk 24', riskC: 'Risk 43', riskD: 'Risk 44'}];
+
   }
+
+  @ViewChild('stepper') stepper: MatStepper;
+
+    ngAfterViewInit() {
+        //this.stepper.selectedIndex = 3; 
+    }
 
 }

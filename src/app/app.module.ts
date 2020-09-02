@@ -22,7 +22,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -37,7 +37,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   imports: [
     BrowserModule,NgApexchartsModule,FormsModule,ReactiveFormsModule,
     AppRoutingModule,MatFormFieldModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
-    MatStepperModule,MatIconModule, MatTabsModule, MatSnackBarModule,
+    MatStepperModule,MatIconModule, MatTabsModule, MatSnackBarModule,PdfViewerModule,
     HttpClientModule, BrowserAnimationsModule
   ],
   providers: [
