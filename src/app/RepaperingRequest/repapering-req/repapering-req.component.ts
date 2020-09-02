@@ -10,6 +10,8 @@ import { MatStepper } from '@angular/material/stepper';
 })
 export class RepaperingReqComponent implements OnInit,AfterViewInit {
 
+  stepIndex: number;
+  selectedTab: number;
   isInitated: boolean;
   fileToUploaded: {name: string, type: string, byteArr: any};
   documentDt: {contractId: string, type: string, customerId: string, subtype: string, libor: boolean, state: string};
@@ -23,6 +25,17 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit {
     this.fileToUploaded = {name: '', type: '', byteArr: ''};
     this.documentDt = {contractId: '', type: '', customerId: '', subtype: '', libor: false, state: ''};
     this.analysedDt = {risk: [], financial: [], collateral: [], workHistory: [], clientOutreach: [], approvals: [], verify: []};
+  }
+
+  onStepChange(event: any): void {
+    this.stepIndex = event.selectedIndex;
+    if (this.stepIndex === 3) {
+      this.selectedTab = 5;
+    } else if (this.stepIndex > 3) {
+      this.selectedTab = 6;
+    } else {
+      this.selectedTab = 0;
+    }
   }
 
   handleFileInput(files: FileList) {
@@ -48,6 +61,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit {
     this.documentDt = {contractId: 'CON0000001', type: 'Derivative', customerId: 'CID00000001',
                         subtype: 'Interest Rate Swap', libor: true, state: 'Initiated'};
     this.isInitated = true;
+    this.selectedTab = 0;
 
     this.analysedDt.risk =
     [{riskA: 'Risk 11', riskB: 'Risk 12', riskC: 'Risk 13', riskD: 'Risk 14'},
