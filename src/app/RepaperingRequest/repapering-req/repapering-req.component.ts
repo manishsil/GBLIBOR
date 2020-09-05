@@ -51,18 +51,11 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit {
     this.isInitated = false;
     this.fileToUploaded = {name: '', type: '', byteArr: ''};
     const file: any = files.item(0);
-    if ( /\.(jpe?g|png|gif|pdf)$/i.test(file.name) ) {
-      const fileReader = new FileReader();
-      fileReader.onload = () => {
-        this.fileToUploaded.byteArr = fileReader.result;
-      };
-      fileReader.readAsDataURL(file);
-      this.fileToUploaded.name = file.name;
-      this.fileToUploaded.type = file.type;
-    } else {
-      this.snackBar.open('File Format not accepted', '', {
-        duration: 3000, verticalPosition: 'top'});
-    }
+    const formData = new FormData();
+    formData.append('file', file);
+    this.service.uploadFile(formData).subscribe(resp => {
+      console.log(JSON.stringify(resp));
+    });
   }
 
   initiate() {
