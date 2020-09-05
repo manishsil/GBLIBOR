@@ -2,6 +2,8 @@ import { Component, OnInit,ViewChild, AfterViewInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
 import { GbliborService } from '../../gblibor.service';
+import { Loan } from '../../model/loan';
+import { Derivative } from '../../model/derivative';
 
 
 @Component({
@@ -24,8 +26,8 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit {
   pdfSrc: string="https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   contractId: number;
   riskData: any[] = [];
-  financialLoanData: any[] = [];
-  financialDerivtvData: any[] = [];
+  financialLoanData: Loan;
+  financialDerivtvData: Derivative;
   constructor(private snackBar: MatSnackBar, private service: GbliborService) { }
 
   ngOnInit(): void {
