@@ -4,6 +4,7 @@ import { MatStepper } from '@angular/material/stepper';
 import { GbliborService } from '../../gblibor.service';
 import { Loan } from '../../model/loan';
 import { Derivative } from '../../model/derivative';
+import { Contract } from '../../model/contract';
 
 
 @Component({
@@ -17,23 +18,18 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit {
   stepIndex: number;
   selectedTab: number;
   isInitated: boolean;
-  fileToUploaded: {name: string, type: string, byteArr: any};
-  documentDt: {"id":number,"contractId":string,"parentContractId":string,"documentFileName":string,"contractName":string,"legalEntityId":number,"legalEntityName":string,"counterPartyId":number,"counterPartyName":string,"contractTemplate":string,"contractStartDate":string,"contractExpiryDate":string,"contractTypeId":number,"contractSubTypeId":number,"currStatusId":number,"createdOn":string,"createdBy":string,"libor":true,"amendmentDoc":false};
-  //documentDt: {contractId: string, type: string, customerId: string, subtype: string, libor: boolean, state: string};
-  analysedDt: {risk: any, financial: any, collateral: any, workHistory: any, clientOutreach: any, approvals: any, verify: any};
+  fileName: string;
+  contractDt: Contract;
   currentStep = 0;
   processing = true;
   pdfSrc: string="https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   contractId: number;
-  riskData: any[] = [];
+  riskData: any[];
   financialLoanData: Loan;
   financialDerivtvData: Derivative;
   constructor(private snackBar: MatSnackBar, private service: GbliborService) { }
 
-  ngOnInit(): void {
-    this.fileToUploaded = {name: '', type: '', byteArr: ''};
-    //this.documentDt = {contractId: '', type: '', customerId: '', subtype: '', libor: false, state: ''};
-  }
+  ngOnInit(): void {}
 
   onStepChange(event: any): void {
     this.stepIndex = event.selectedIndex;
@@ -43,36 +39,35 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit {
       this.selectedTab = 6;
     } else {
       this.selectedTab = 0;
-      this.showRiskData();
     }
   }
 
   handleFileInput(files: FileList) {
     this.isInitated = false;
-    this.fileToUploaded = {name: '', type: '', byteArr: ''};
     const file: any = files.item(0);
     const formData = new FormData();
     formData.append('file', file);
     this.service.uploadFile(formData).subscribe(resp => {
-      console.log(JSON.stringify(resp));
+      this.fileName = resp.fileName;
     });
   }
 
-  initiate() {
-    // server call to upload file
-    this.service.upload('sample.pdf').subscribe(resp => {
-      console.log(JSON.stringify(resp));
+  loadInitiateData() {
+    // server call to load intitiate screen data
+    this.service.upload(this.fileName).subscribe(resp => {
+      this.contractDt = resp;
+      this.contractDt = {"id":1,"contractId":"CON0000000001","parentContractId":"","documentFileName":"mycontract.pdf","contractName":"Loan Document","legalEntityId":1,"legalEntityName":"XYZ","counterPartyId":1,"counterPartyName":"ABC","contractTemplate":"MASTER Loan Agreement","contractStartDate":"2020-09-01","contractExpiryDate":"2023-09-01","contractTypeId":1,"contractSubTypeId":1,"currStatusId":6,"createdOn":"2020-09-02T16:18:11.000+00:00","createdBy":"sm123456","libor":true,"amendmentDoc":false};
+      this.isInitated = true;
+      this.selectedTab = 0;
     });
-    this.service.saveOcr(this.fileToUploaded).subscribe(resp => {
-      console.log(JSON.stringify(resp));
-      this.documentDt = resp;
+  }
+
+  loadReviewData() {
+    this.service.loadReviewData(this.contractDt).subscribe(resp => {
+      this.contractDt = resp;
+      this.contractDt = {"id":1,"contractId":"CON0000000001","parentContractId":"","documentFileName":"mycontract.pdf","contractName":"Loan Document","legalEntityId":1,"legalEntityName":"XYZ","counterPartyId":1,"counterPartyName":"ABC","contractTemplate":"MASTER Loan Agreement","contractStartDate":"2020-09-01","contractExpiryDate":"2023-09-01","contractTypeId":1,"contractSubTypeId":1,"currStatusId":6,"createdOn":"2020-09-02T16:18:11.000+00:00","createdBy":"sm123456","libor":true,"amendmentDoc":false};
+      this.showRiskData();
     });
-    /* this.documentDt = {contractId: 'CON0000001', type: 'Derivative', customerId: 'CID00000001', subtype: 'Interest Rate Swap', libor: true, state: 'Initiated'}; */
-    this.documentDt = {"id":1,"contractId":"CON0000000001","parentContractId":"","documentFileName":"mycontract.pdf","contractName":"Loan Document","legalEntityId":1,"legalEntityName":"XYZ","counterPartyId":1,"counterPartyName":"ABC","contractTemplate":"MASTER Loan Agreement","contractStartDate":"2020-09-01","contractExpiryDate":"2023-09-01","contractTypeId":1,"contractSubTypeId":1,"currStatusId":6,"createdOn":"2020-09-02T16:18:11.000+00:00","createdBy":"sm123456","libor":true,"amendmentDoc":false};
-    this.isInitated = true;
-    this.selectedTab = 0;
-
-
   }
 
   laodTabDetails($event: any){

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError  } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -25,6 +25,12 @@ export class GbliborService {
 
   saveOcr(file: any): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/ocr/' + file).pipe(catchError(this.erroHandler));
+  }
+
+  loadReviewData(data: any) {
+    return this.http.post<any>('/save/workflow/initiate', data).pipe(map(res => {
+      return res;
+    }), mergeMap(res => this.http.get<any>('/find/workflow/review/' + res.contractId)));
   }
 
   getRiskData(contractId: number) {
