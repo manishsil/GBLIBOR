@@ -11,6 +11,12 @@ export class GbliborService {
 
   constructor( private http: HttpClient) { }
 
+  loggedUser = '';
+
+  getUserDetails(username: string): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/find/user/' + username ).pipe(catchError(this.erroHandler));
+  }
+
   uploadFile(file: any): Observable<any> {
     return this.http.post<any>(environment.apiUrl + '/uploadFile', file ).pipe(catchError(this.erroHandler));
   }

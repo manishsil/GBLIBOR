@@ -1,10 +1,13 @@
-import { Component, OnInit,ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit,ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatStepper } from '@angular/material/stepper';
-import { GbliborService } from '../../gblibor.service';
+import { GbliborService } from '../../../service/gblibor.service';
 import { Loan } from '../../model/loan';
 import { Derivative } from '../../model/derivative';
 import { Contract } from '../../model/contract';
+import { LoginService } from 'src/service/login.service';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/model/user';
 
 
 @Component({
@@ -12,7 +15,7 @@ import { Contract } from '../../model/contract';
   templateUrl: './repapering-req.component.html',
   styleUrls: ['./repapering-req.component.css']
 })
-export class RepaperingReqComponent implements OnInit,AfterViewInit {
+export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   @ViewChild('stepper') stepper: MatStepper;
   stepIndex: number;
@@ -27,9 +30,16 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit {
   riskData: any[];
   financialLoanData: Loan;
   financialDerivtvData: Derivative;
-  constructor(private snackBar: MatSnackBar, private service: GbliborService) { }
+  userDetails: User;
+  subscription: Subscription;
 
-  ngOnInit(): void {}
+  constructor(private snackBar: MatSnackBar, private service: GbliborService, private loginService: LoginService) { }
+
+  ngOnInit(): void {
+    this.subscription = this.loginService.getUserDetails().subscribe(dt => {
+      this.userDetails = dt;
+    });
+  }
 
   onStepChange(event: any): void {
     this.stepIndex = event.selectedIndex;
@@ -101,5 +111,9 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit {
   ngAfterViewInit() {
       //this.stepper.selectedIndex = 3; 
   }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+}
 
 }

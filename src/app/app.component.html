@@ -8,7 +8,12 @@
           <li class="active" style="width: 100px;text-align: center;"><a id="header" href="#">GBLIB</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li ><a id="header" href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          <li *ngIf="!username">
+            <a id="header" [routerLink] = "'/login'" ><span class="glyphicon glyphicon-log-in"></span> Login</a>
+          </li>
+          <li *ngIf="username" style="padding: 10px;margin-top: 5px;">
+              <span *ngIf="username" >{{username}}</span>
+          </li>
           <li id="searchbox"><input type="text" placeholder="Search.." name="search"></li>
           <li><i class="fas fa-search" aria-hidden="true"></i></li>
         </ul>
