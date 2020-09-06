@@ -11,6 +11,7 @@ import {MatTableModule} from '@angular/material/table';
 import {CdkTableModule} from '@angular/cdk/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ContractAnalysisComponent } from './contract-analysis/contract-analysis.component';
 import { DocumentSearchComponent } from './document-search/document-search.component';
 import { DocumentManagerComponent } from './document-manager/document-manager.component';
@@ -19,10 +20,12 @@ import { RepaperingReqComponent } from './RepaperingRequest/repapering-req/repap
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -32,12 +35,13 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ContractAnalysisComponent,
     DocumentSearchComponent,
     DocumentManagerComponent,
-    RepaperingReqComponent
+    RepaperingReqComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,NgApexchartsModule,FormsModule,ReactiveFormsModule,
-    AppRoutingModule,MatFormFieldModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
-    MatStepperModule,MatIconModule, MatTabsModule, MatSnackBarModule,PdfViewerModule,
+    AppRoutingModule,MatFormFieldModule,MatInputModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
+    MatStepperModule,MatIconModule, MatTabsModule, MatSnackBarModule,PdfViewerModule,MatCardModule,
     HttpClientModule, BrowserAnimationsModule
   ],
   providers: [

@@ -172,7 +172,7 @@
             </div>
 
           </div>
-          <div class="detalilsTab" style="height: 100px;">
+          <!-- <div class="detalilsTab" style="height: 100px;">
               <mat-tab-group>
                   <mat-tab label="Risk"> Risk </mat-tab>
                   <mat-tab label="Financial"> Financial </mat-tab>
@@ -181,7 +181,7 @@
                   <mat-tab label="Client Outreach"> Client Outreach </mat-tab>
                   <mat-tab label="Approvals"> Approvals </mat-tab>
               </mat-tab-group>
-          </div>
+          </div> -->
         </div>
         <div>
             <button mat-button matStepperPrevious>Back</button>
@@ -214,7 +214,7 @@
                   <div>Navigation</div>
               </div>
             </div>
-            <div class="detalilsTab" style="height: 100px;">
+            <!-- <div class="detalilsTab" style="height: 100px;">
                 <mat-tab-group>
                     <mat-tab label="Risk"> Risk </mat-tab>
                     <mat-tab label="Financial"> Financial </mat-tab>
@@ -223,7 +223,7 @@
                     <mat-tab label="Client Outreach"> Client Outreach </mat-tab>
                     <mat-tab label="Approvals"> Approvals </mat-tab>
                 </mat-tab-group>
-            </div>
+            </div> -->
             <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
@@ -409,7 +409,11 @@
       </table>
     <br>
   </mat-tab>
-  <mat-tab label="Collateral"> Collateral </mat-tab>
+  <mat-tab label="Collateral"> 
+  <br>
+  
+  <br>
+  </mat-tab>
   <mat-tab label="Work History"> 
     <div class="card">
       <div class="card-container">
@@ -431,7 +435,46 @@
     </div>
     <br>
   </mat-tab>
-  <mat-tab label="Client Outreach" *ngIf="stepIndex && stepIndex>1"> Client Outreachh </mat-tab>
+  <mat-tab label="Client Outreach" *ngIf="stepIndex && stepIndex>1"> 
+    <br>
+    <table *ngIf="clientOutreach">
+      <tr>
+        <td style="width: 10%" class="bold">Client Name</td>
+        <td colspan="2">
+          <input type="text" [(ngModel)]="clientOutreach.name" />
+        </td>
+        <td><input type="button" value="Send Email" (click)="sendEmail()"/></td>
+      </tr>
+      <tr>
+        <td style="width: 10%" class="bold">Address</td>
+        <td colspan="2">
+          <input type="text" [(ngModel)]="clientOutreach.address" />
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="width: 10%" class="bold">Zip</td>
+        <td style="width: 40%">
+          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.zip" />
+        </td>
+        <td style="width: 10%" class="bold">Phone</td>
+        <td style="width: 40%">
+          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.phone" />
+        </td>
+      </tr>
+      <tr>
+        <td class="bold">Fax</td>
+        <td>
+          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.fax" />
+        </td>
+        <td class="bold">Email</td>
+        <td>
+          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.email" />
+        </td>
+      </tr>
+    </table>
+    <br>
+  </mat-tab>
   <mat-tab label="Approvals" *ngIf="stepIndex && stepIndex>1">Approvals</mat-tab>
   <mat-tab label="Verify" *ngIf="stepIndex && stepIndex>3">Verify</mat-tab>
 </mat-tab-group>

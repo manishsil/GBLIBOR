@@ -27,10 +27,14 @@ label {
   font-weight: bold
 }
 
-input[type=text]{
+input[type=text]:disabled{
   border: none;
   background: lightgray;
   text-align: center;
+}
+
+input[type=text]{
+  width: 90%;
 }
 
 .card {
