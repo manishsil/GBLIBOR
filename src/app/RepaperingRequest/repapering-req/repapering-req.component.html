@@ -23,53 +23,59 @@
             </td>
         </tr>
       </table>      
-      <div *ngIf="isInitated">
+      <div *ngIf="isInitated"><!---->
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
-        <button mat-button matStepperNext (click)="loadReviewData()">Review</button>
+        <br>
+        <button mat-button matStepperNext>Review</button>
       </div>
     </mat-step>
   
     <mat-step label="Review">
       <app-contract-details [contractDt]="contractDt"></app-contract-details>
+      <br>
       <div>
-        <button mat-button matStepperNext (click)="loadAmendmendData()">Amend</button>
+        <button mat-button matStepperNext>Amend</button>
       </div>
+      <br>
     </mat-step>
   
     <mat-step label="Amendment">
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
+        <table><tr><th style="text-align: center">As is</th><th style="text-align: center">To be</th></tr>
+          <tr>
+            <td><iframe width='500px' height='300px' src='' id='pdfFrame1'></iframe></td>
+            <td><iframe width='500px' height='300px' src='' id='pdfFrame2'></iframe></td>
+          </tr>
+        </table>
         <br>
-        
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+            <button mat-button>Save</button> &nbsp;&nbsp;
+            <button mat-button matStepperNext>Authorize</button>
         </div>
     </mat-step>
 
     <mat-step label="Authorize">
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
-        <div>          
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
+        <table><tr><th style="text-align: center">As is</th><th style="text-align: center">To be</th></tr>
+          <tr>
+            <td><iframe width='500px' height='300px' src='' id='pdfFrame3'></iframe></td>
+            <td><iframe width='500px' height='300px' src='' id='pdfFrame4'></iframe></td>
+          </tr>
+        </table>
+        <br>         
+        <div>
+          <button mat-button matStepperNext>Verify</button>
         </div>
-        
       </mat-step>
 
       <mat-step label="Verification">
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
+          <button mat-button matStepperNext>Close</button>
+        </div>
       </mat-step>
       <mat-step label="Close">
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Complete</button>
-          </div>
       </mat-step>
     
   </mat-horizontal-stepper>
@@ -277,6 +283,6 @@
     </table>
     <br>
   </mat-tab>
-  <mat-tab label="Approvals" *ngIf="stepIndex && stepIndex>1">Approvals</mat-tab>
-  <mat-tab label="Verify" *ngIf="stepIndex && stepIndex>3">Verify</mat-tab>
+  <mat-tab label="Approvals" *ngIf="stepIndex && stepIndex>1"></mat-tab>
+  <mat-tab label="Verify" *ngIf="stepIndex && stepIndex>3"></mat-tab>
 </mat-tab-group>
