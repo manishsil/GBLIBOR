@@ -58,10 +58,10 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     const file: any = files.item(0);
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('userid', this.userDetails.userId.toString());
+    formData.append('userid', this.userDetails.loginId);
 
     this.service.uploadFile(formData).subscribe(resp => {
-      //this.fileName = resp.fileName;
+      this.fileName = resp.documentFileName;
       this.contractId = resp.contractId;
     });
   }
