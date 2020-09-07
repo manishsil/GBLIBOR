@@ -68,7 +68,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   loadInitiateData() {
     // server call to load intitiate screen data
-    this.service.upload(this.fileName).subscribe(resp => {
+    this.service.getWorkFlowIntiateData(this.contractId).subscribe(resp => {
       this.contractDt = resp;
       this.isInitated = true;
       this.selectedTab = 0;
