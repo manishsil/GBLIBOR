@@ -21,6 +21,9 @@ export class GbliborService {
     return this.http.post<any>(environment.apiUrl + '/uploadFile', file ).pipe(catchError(this.erroHandler));
   }
 
+  getWorkFlowIntiateData(contractId: number) {
+    return this.http.get<any>(environment.apiUrl + '/find/workflow/initiate/' + contractId).pipe(catchError(this.erroHandler));
+  }
   upload(filename: string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/upload/scandoc/' + filename).pipe(catchError(this.erroHandler));
   }
