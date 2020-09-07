@@ -1,0 +1,46 @@
+<table *ngIf="contractDt">
+    <tr>
+        <td style="width: 15%" class="bold">Contract ID</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractId" /></td>
+        <td style="width: 15%" class="bold">Parent Contract ID</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.parentContractId" /></td>
+    </tr>
+    <tr>
+        <td style="width: 15%" class="bold">Document File Name</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.documentFileName" /></td>
+        <td style="width: 15%" class="bold">Contract Name</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractName" /></td>
+    </tr>
+    <tr>
+        <td style="width: 15%" class="bold">Legal Entity Name</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.legalEntityName" /></td>
+        <td style="width: 15%" class="bold">Counter Party Name</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.counterPartyName" /></td>
+    </tr>
+
+    <tr>
+        <td style="width: 15%" class="bold">Contract Template Name</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractTemplate" /></td>
+        <td style="width: 15%" class="bold"></td>
+        <td style="width: 35%"></td>
+    </tr>
+    <tr>
+        <td style="width: 15%" class="bold">Contract Type</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractType[contractDt.contractTypeId]" /></td>
+        <td style="width: 15%" class="bold">Contract subType</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractSubType[contractDt.contractSubTypeId]" /></td>
+    </tr>
+    <tr>
+        <td style="width: 15%" class="bold">Contract Start Date</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractStartDate" /></td>
+        <td style="width: 15%" class="bold">Contract Expiry Date</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractExpiryDate" /></td>
+    </tr>
+    <tr>
+        <td class="bold">LIBOR</td>
+        <td><input type="checkbox" [checked]="contractDt.libor" [disabled]="true"></td>
+        <td class="bold">State</td>
+        <td><input type="checkbox" [checked]="contractDt.amendmentDoc" [disabled]="true"></td>
+    </tr>
+</table>
+<br>

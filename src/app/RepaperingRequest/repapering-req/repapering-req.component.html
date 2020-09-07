@@ -22,179 +22,24 @@
               <input type="button" value="Initiate" (click)="loadInitiateData()" [disabled]="!fileName"/>
             </td>
         </tr>
-      </table>
-      <table *ngIf="isInitated">
-        <tr>
-          <td style="width: 15%" class="bold">Contract ID</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractId" /></td>
-          <td style="width: 15%" class="bold">Parent Contract ID</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.parentContractId" /></td>
-        </tr>
-        <tr>
-          <td style="width: 15%" class="bold">Document File Name</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.documentFileName" /></td>
-          <td style="width: 15%" class="bold">Contract Name</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractName" /></td>
-        </tr>
-        <tr>
-          <td style="width: 15%" class="bold">Legal Entity Name</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.legalEntityName" /></td>
-          <td style="width: 15%" class="bold">Counter Party Name</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.counterPartyName" /></td>
-        </tr>
-
-        <tr>
-          <td style="width: 15%" class="bold">Contract Template Name</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractTemplate" /></td>
-          <td style="width: 15%" class="bold"></td>
-          <td style="width: 35%"></td>
-        </tr>
-        <tr>
-          <td style="width: 15%" class="bold">Contract Type</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractType[contractDt.contractTypeId]" /></td>
-          <td style="width: 15%" class="bold">Contract subType</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractSubType[contractDt.contractSubTypeId]" /></td>
-        </tr>
-        <tr>
-          <td style="width: 15%" class="bold">Contract Start Date</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractStartDate" /></td>
-          <td style="width: 15%" class="bold">Contract Expirt Date</td>
-          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractExpiryDate" /></td>
-        </tr>
-          <tr>
-            <td class="bold">LIBOR</td>
-            <td><input type="checkbox" [checked]="contractDt.libor" [disabled]="true"></td>
-            <td class="bold">State</td>
-            <td><input type="checkbox" [checked]="contractDt.amendmentDoc" [disabled]="true"></td>
-          </tr>
-        </table>
-        <br>
+      </table>      
       <div *ngIf="isInitated">
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
         <button mat-button matStepperNext (click)="loadReviewData()">Review</button>
       </div>
     </mat-step>
   
     <mat-step label="Review">
-        <table *ngIf="contractDt">
-            <tr>
-              <td style="width: 15%" class="bold">Contract ID</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractId" /></td>
-              <td style="width: 15%" class="bold">Parent Contract ID</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.parentContractId" /></td>
-            </tr>
-            <tr>
-              <td style="width: 15%" class="bold">Document File Name</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.documentFileName" /></td>
-              <td style="width: 15%" class="bold">Contract Name</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractName" /></td>
-            </tr>
-            <tr>
-              <td style="width: 15%" class="bold">Legal Entity Name</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.legalEntityName" /></td>
-              <td style="width: 15%" class="bold">Counter Party Name</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.counterPartyName" /></td>
-            </tr>
-    
-            <tr>
-              <td style="width: 15%" class="bold">Contract Template Name</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractTemplate" /></td>
-              <td style="width: 15%" class="bold"></td>
-              <td style="width: 35%"></td>
-            </tr>
-            <tr>
-              <td style="width: 15%" class="bold">Contract Type</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractType[contractDt.contractTypeId]" /></td>
-              <td style="width: 15%" class="bold">Contract subType</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractSubType[contractDt.contractSubTypeId]" /></td>
-            </tr>
-            <tr>
-              <td style="width: 15%" class="bold">Contract Start Date</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractStartDate" /></td>
-              <td style="width: 15%" class="bold">Contract Expiry Date</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractExpiryDate" /></td>
-            </tr>
-              <tr>
-                <td class="bold">LIBOR</td>
-                <td><input type="checkbox" [checked]="contractDt.libor" [disabled]="true"></td>
-                <td class="bold">State</td>
-                <td><input type="checkbox" [checked]="contractDt.amendmentDoc" [disabled]="true"></td>
-              </tr>
-            </table>
-        <!-- <table>
-            <tr>
-              <td style="width: 15%" class="bold">Upload Doc</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="fileToUploaded.name" /></td>
-              <td style="width: 15%" class="bold"></td>
-              <td style="width: 35%"></td>
-            </tr>
-            <tr>
-              <td style="width: 15%" class="bold">Contract ID</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractId" /></td>
-              <td style="width: 15%" class="bold">Type</td>
-              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.type" /></td>
-            </tr>
-            <tr>
-                <td class="bold">Customer ID</td>
-                <td><input type="text" [disabled]="true" [(ngModel)]="contractDt.customerId" /></td>
-                <td class="bold">SubType</td>
-                <td><input type="text" [disabled]="true" [(ngModel)]="contractDt.subtype" /></td>
-              </tr>
-              <tr>
-                  <td class="bold">LIBOR</td>
-                  <td><input type="checkbox" [checked]="contractDt.libor" [disabled]="true"></td>
-                  <td class="bold">State</td>
-                  <td><input type="text" [disabled]="true" [(ngModel)]="contractDt.state" /></td>
-              </tr>
-            </table> -->
-            <br>
+      <app-contract-details [contractDt]="contractDt"></app-contract-details>
       <div>
         <button mat-button matStepperNext (click)="loadAmendmendData()">Amend</button>
       </div>
     </mat-step>
   
     <mat-step label="Amendment">
-        <div style="width: 100%; min-height: 650px;">
-          <div style="text-align: center;height: 20px; width: 100%">
-            <span style="font-size: large; font-weight: bolder">FORM FIELDS</span>
-          </div>
-          <div class="amendmentDiv">
-            <div style="text-align: center"><span style="font-size: large; font-weight: bolder">As Is</span></div>
-            <div class="asIs">
-              <div class="sec1">
-                  <pdf-viewer [src]="pdfSrc" 
-                  [render-text]="true"
-                  style="display: block; width: 100%; height: 100%;"
-                  ></pdf-viewer>
-              </div>
-              <div class="sec2">
-                  <pdf-viewer [src]="pdfSrc" 
-                  [render-text]="true"
-                  style="display: block; width: 100%; height: 100%;"
-                  ></pdf-viewer>
-              </div>
-            </div>
-            <div  style="text-align: center; margin-top: 5px"><span style="font-size: large; font-weight: bolder">To Be</span></div>
-            <div class="toBe">
-                <div class="sec1">
-                    <pdf-viewer [src]="pdfSrc"[render-text]="true"style="display: block; width: 100%; height: 100%;"></pdf-viewer>
-                </div>
-                <div class="sec2">
-                   
-                </div>
-            </div>
-
-          </div>
-          <!-- <div class="detalilsTab" style="height: 100px;">
-              <mat-tab-group>
-                  <mat-tab label="Risk"> Risk </mat-tab>
-                  <mat-tab label="Financial"> Financial </mat-tab>
-                  <mat-tab label="Collateral"> Collateral </mat-tab>
-                  <mat-tab label="Work history"> Work history </mat-tab>
-                  <mat-tab label="Client Outreach"> Client Outreach </mat-tab>
-                  <mat-tab label="Approvals"> Approvals </mat-tab>
-              </mat-tab-group>
-          </div> -->
-        </div>
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
+        <br>
+        
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
@@ -202,40 +47,8 @@
     </mat-step>
 
     <mat-step label="Authorize">
-        <div>
-            <div style="text-align: center;height: 20px; width: 100%">
-                <span style="font-size: large; font-weight: bolder">FORM FIELDS</span>
-            </div>
-            <div class="docDiv">
-              <div class="divAsIs">
-                <div class="headerTest" style="text-align: center"><span style="font-size: large; font-weight: bolder">As Is</span></div>
-                <div class="divPdf">
-                  <div class="wholePdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
-                  <div class="labourPdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
-                </div>
-                <div>Navigation</div>
-              </div>
-
-
-              <div class="divToBe">
-                  <div class="headerTest" style="text-align: center"><span style="font-size: large; font-weight: bolder">To Be</span></div>
-                  <div class="divPdf">
-                    <div class="wholePdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
-                    <div class="labourPdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
-                  </div>
-                  <div>Navigation</div>
-              </div>
-            </div>
-            <!-- <div class="detalilsTab" style="height: 100px;">
-                <mat-tab-group>
-                    <mat-tab label="Risk"> Risk </mat-tab>
-                    <mat-tab label="Financial"> Financial </mat-tab>
-                    <mat-tab label="Collateral"> Collateral </mat-tab>
-                    <mat-tab label="Work history"> Work history </mat-tab>
-                    <mat-tab label="Client Outreach"> Client Outreach </mat-tab>
-                    <mat-tab label="Approvals"> Approvals </mat-tab>
-                </mat-tab-group>
-            </div> -->
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
+        <div>          
             <div>
                 <button mat-button matStepperPrevious>Back</button>
                 <button mat-button matStepperNext>Next</button>
@@ -245,14 +58,14 @@
       </mat-step>
 
       <mat-step label="Verification">
-        Step 5 Verification
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Next</button>
           </div>
       </mat-step>
       <mat-step label="Close">
-        You are now done.
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
         <div>
             <button mat-button matStepperPrevious>Back</button>
             <button mat-button matStepperNext>Complete</button>

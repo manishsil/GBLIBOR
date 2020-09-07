@@ -26,6 +26,7 @@ import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { LoginComponent } from './login/login.component';
+import { ContractDetailsComponent } from './contract-details/contract-details.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { LoginComponent } from './login/login.component';
     DocumentSearchComponent,
     DocumentManagerComponent,
     RepaperingReqComponent,
-    LoginComponent
+    LoginComponent,
+    ContractDetailsComponent
   ],
   imports: [
     BrowserModule,NgApexchartsModule,FormsModule,ReactiveFormsModule,
