@@ -36,8 +36,8 @@ export class GbliborService {
     return this.http.post<any>(environment.apiUrl + '/ocr/workflow', contractid).pipe(catchError(this.erroHandler));
   }
 
-  loadReviewData(contractid: number) {
-    return this.http.post<any>(environment.apiUrl + '/review/workflow',  contractid);
+  loadReviewData(data: any) {
+    return this.http.post<any>(environment.apiUrl + '/review/workflow',  data);
     /* return this.http.post<any>(environment.apiUrl + '/save/workflow/initiate', data).pipe(map(res => {
       return res;
     }), mergeMap(res => this.http.get<any>(environment.apiUrl + '/find/workflow/review/' + res.contractId))); */
