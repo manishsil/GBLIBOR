@@ -31,6 +31,8 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   financialLoanData: Loan;
   financialDerivtvData: Derivative;
   userDetails: User;
+  contractType = {1: 'Loan', 2: 'Derivative'};
+  contractSubType = {1: 'Mortgage Loan', 2: 'Syndicate Loan', 3: 'Bilateral Loan', 4: 'Student Loan', 5: 'Currency Swap', 6: 'Interest Rate Swap'};
   subscription: Subscription;
   clientOutreach: {name: string, address: string, zip: string, phone: string, fax: string, email: string};
 
@@ -78,7 +80,9 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   loadOCRData() {
     // server call to load intitiate screen data
     this.service.getOcr(this.contractId).subscribe(resp => {
-      console.log(JSON.stringify(resp));
+      this.snackBar.open('Contract Number ' + resp.contractId , '', {
+        duration: 2000, verticalPosition: 'bottom'
+      });
     });
   }
 
@@ -110,12 +114,15 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   showFinancialData() {
-    this.service.getFinancialLoanData(this.contractId).subscribe(dt => {
-      this.financialLoanData = dt;
-    });
-    this.service.getFinancialDerivativeData(this.contractId).subscribe(dt => {
-      this.financialDerivtvData = dt;
-    });
+    if (this.contractDt.contractTypeId === 1) {
+      this.service.getFinancialLoanData(this.contractId).subscribe(dt => {
+        this.financialLoanData = dt;
+      });
+    } else if (this.contractDt.contractTypeId === 2) {
+      this.service.getFinancialDerivativeData(this.contractId).subscribe(dt => {
+        this.financialDerivtvData = dt;
+      });
+    }
     //this.financialLoanData = {"loanContractFinancialId":1,"contractId":1,"counterPartyId":1,"loanAmount":2350000.0,"loanCurrency":"USD","startDate":"2020-09-04","maturityDate":"2023-09-04","tenorMonths":36,"rateOfInterest":2.06,"loanTypeId":1,"collateralInfo":"","paymentSchedule":1,"borrowerName":"XYZ LLC","lenderName":"ABC Corp Bank","adminAgentName":"Agent","jointLeadArrangerName":"Joint Lead Arranger","coSyndicationAgentName":"Co Syndication Agent","coDocumentationAgentName":"Co Documentation Agent"};
 
     //this.financialDerivtvData = {"derivativeContractFinancialId":1,"contractId":1,"counterPartyId":1,"jurisdiction":"NEW YORK","governingLaw":"New YORK Law","masterAgreementType":"ISDA Master 2002","masterAgreementActive":"Y","creditSupportAnnex":"Credit support Annex for Swap","creditSupportAnnexActive":"Y","creditSupByTitleTransfer":"Y","initialMargin":1000000.0,"nettedAgainstVariation":"Y","nettingEligible":"Y","collateralEnforceability":"Y","triggerDowngrade":"Y","rehypothicationRights":"Y","colleteralType":"Stocks","validCurrencies":"USD,GBP","baseCurrency":"USD","valuationPercentage":10.0,"minTransferAmount":10000.0,"thresholdAmount":20000.0,"variationMargin":10.0,"triparty":"Y"};
@@ -132,6 +139,13 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   sendEmail() {
     //send email
+  }
+
+  loadAmendmendData() {
+    this.service.getAmendmentData(this.contractId).subscribe(dt => {
+      this.contractDt = dt;
+      console.log(JSON.stringify(dt));
+    });
   }
 
 

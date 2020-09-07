@@ -5,12 +5,7 @@
     margin: auto !important;
     text-align: center !important;
 }
-::ng-deep .mat-snack-bar-container{
-    color: #856404 !important;
-    background-color: #fff3cd !important;
-    border-color: #ffeeba !important;
-    font-weight: bold;
-  }
+
 table {
   width: 100%;
 }
