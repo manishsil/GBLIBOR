@@ -17,8 +17,10 @@
             </button>
           </td>
           <td style="width: 50%">
-            <input type="button" value="Initiate" (click)="loadInitiateData()" [disabled]="!fileName"/>
-          </td>
+              <input type="button" value="OCR" (click)="loadOCRData()" />
+              &nbsp;&nbsp;
+              <input type="button" value="Initiate" (click)="loadInitiateData()" [disabled]="!fileName"/>
+            </td>
         </tr>
       </table>
       <table *ngIf="isInitated">

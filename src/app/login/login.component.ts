@@ -21,9 +21,10 @@ export class LoginComponent implements OnInit {
   login(): void {
     if (this.username && this.password){
      this.service.getUserDetails(this.username).subscribe(dt => {
-       this.loginService.setUserDetails(dt);
-       //this.loginService.setUserDetails({firstName: 'Manish', lastName: 'Singh'});
-       this.router.navigate(['/repapering']);
+      setTimeout(() => {
+        this.loginService.setUserDetails(dt);
+       });
+      this.router.navigate(['/repapering']);
      });
     } else {
       alert('Invalid credentials');
