@@ -22,7 +22,7 @@ export class GbliborService {
   }
 
   getWorkFlowIntiateData(contractId: number) {
-    return this.http.get<any>(environment.apiUrl + '/find/workflow/initiate/' + contractId).pipe(catchError(this.erroHandler));
+    return this.http.get<any>(environment.apiUrl + '/initiate/workflow' + contractId).pipe(catchError(this.erroHandler));
   }
   upload(filename: string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/upload/scandoc/' + filename).pipe(catchError(this.erroHandler));
@@ -33,28 +33,35 @@ export class GbliborService {
   }
 
   getOcr(contractid: number): Observable<any> {
-    return this.http.get<any>(environment.apiUrl + '/ocr/workflow/' + contractid).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/ocr/workflow', contractid).pipe(catchError(this.erroHandler));
   }
 
   loadReviewData(data: any) {
-    return this.http.get<any>(environment.apiUrl + '/find/workflow/review/' + data);
+    return this.http.post<any>(environment.apiUrl + '/review/workflow',  data);
     /* return this.http.post<any>(environment.apiUrl + '/save/workflow/initiate', data).pipe(map(res => {
       return res;
     }), mergeMap(res => this.http.get<any>(environment.apiUrl + '/find/workflow/review/' + res.contractId))); */
   }
 
+  getAmendmentData(contractid: number): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/amend/workflow', contractid).pipe(catchError(this.erroHandler));
+  }
+
   getRiskData(contractId: number) {
-    return this.http.get<any>(environment.apiUrl + '/find/contractrisk/' + contractId).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/find/contractrisk', contractId).pipe(catchError(this.erroHandler));
   }
 
   getFinancialLoanData(contractId: number) {
-    return this.http.get<any>(environment.apiUrl + '/find/loan/' + contractId).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/find/loan', contractId).pipe(catchError(this.erroHandler));
   }
 
   getFinancialDerivativeData(contractId: number) {
-    return this.http.get<any>(environment.apiUrl + '/find/derivative/' + contractId).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/find/derivative', contractId).pipe(catchError(this.erroHandler));
   }
+
   erroHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'server Error');
   }
+
+
 }

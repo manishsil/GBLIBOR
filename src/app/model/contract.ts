@@ -1,6 +1,6 @@
 export class Contract {
     id: number;
-    contractId: string;
+    contractId: number;
     parentContractId: string;
     documentFileName: string;
     contractName: string;

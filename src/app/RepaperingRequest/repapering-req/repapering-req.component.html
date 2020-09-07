@@ -44,16 +44,21 @@
         </tr>
 
         <tr>
-            <td style="width: 15%" class="bold">Contract Template Name</td>
-            <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractTemplate" /></td>
-            <td style="width: 15%" class="bold">Counter Party Name</td>
-            <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractExpiryDate" /></td>
-          </tr>
-
+          <td style="width: 15%" class="bold">Contract Template Name</td>
+          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractTemplate" /></td>
+          <td style="width: 15%" class="bold"></td>
+          <td style="width: 35%"></td>
+        </tr>
         <tr>
-          <td style="width: 15%" class="bold">Legal Entity Name</td>
+          <td style="width: 15%" class="bold">Contract Type</td>
+          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractType[contractDt.contractTypeId]" /></td>
+          <td style="width: 15%" class="bold">Contract subType</td>
+          <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractSubType[contractDt.contractSubTypeId]" /></td>
+        </tr>
+        <tr>
+          <td style="width: 15%" class="bold">Contract Start Date</td>
           <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractStartDate" /></td>
-          <td style="width: 15%" class="bold">Counter Party Name</td>
+          <td style="width: 15%" class="bold">Contract Expirt Date</td>
           <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractExpiryDate" /></td>
         </tr>
           <tr>
@@ -91,16 +96,21 @@
             </tr>
     
             <tr>
-                <td style="width: 15%" class="bold">Contract Template Name</td>
-                <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractTemplate" /></td>
-                <td style="width: 15%" class="bold">Counter Party Name</td>
-                <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractExpiryDate" /></td>
-              </tr>
-    
+              <td style="width: 15%" class="bold">Contract Template Name</td>
+              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractTemplate" /></td>
+              <td style="width: 15%" class="bold"></td>
+              <td style="width: 35%"></td>
+            </tr>
             <tr>
-              <td style="width: 15%" class="bold">Legal Entity Name</td>
+              <td style="width: 15%" class="bold">Contract Type</td>
+              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractType[contractDt.contractTypeId]" /></td>
+              <td style="width: 15%" class="bold">Contract subType</td>
+              <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractSubType[contractDt.contractSubTypeId]" /></td>
+            </tr>
+            <tr>
+              <td style="width: 15%" class="bold">Contract Start Date</td>
               <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractStartDate" /></td>
-              <td style="width: 15%" class="bold">Counter Party Name</td>
+              <td style="width: 15%" class="bold">Contract Expiry Date</td>
               <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractExpiryDate" /></td>
             </tr>
               <tr>
@@ -138,7 +148,7 @@
             </table> -->
             <br>
       <div>
-        <button mat-button matStepperNext>Amend</button>
+        <button mat-button matStepperNext (click)="loadAmendmendData()">Amend</button>
       </div>
     </mat-step>
   
@@ -274,140 +284,117 @@
   </mat-tab>
   <mat-tab label="Financial"> 
     <br> 
-    <table style="width: 90%" *ngIf="financialLoanData && financialDerivtvData">
-        <tr>
-          <th style="width: 20%">Loan</th>
-          <th style="width: 30%"></th>
-          <th style="width: 20%">Derivative</th>
-          <th style="width: 30%"></th>
-        </tr>
+    <table style="width: 90%" *ngIf="financialLoanData">
         <tr>
           <td style="width: 20%">Loan Amount</td>
           <td style="width: 30%">{{financialLoanData.loanAmount}}</td>
-          <td style="width: 20%; border-left: 1px solid">Jurisdiction</td>
-          <td style="width: 30%">{{financialDerivtvData.jurisdiction}}</td>
-        </tr>
-        <tr>
           <td style="width: 20%">Loan Currency</td>
           <td style="width: 30%">{{financialLoanData.loanCurrency}}</td>
-          <td style="width: 20%; border-left: 1px solid">Governing Law</td>
-          <td style="width: 30%">{{financialDerivtvData.governingLaw}}</td>
         </tr>
         <tr>
-        <td style="width: 20%">Start Date</td>
+          <td style="width: 20%">Start Date</td>
           <td style="width: 30%">{{financialLoanData.startDate}}</td>
-          <td style="width: 20%; border-left: 1px solid">Master Agreement Type</td>
-          <td style="width: 30%">{{financialDerivtvData.masterAgreementType}}</td>
-        </tr>
-        <tr>
           <td style="width: 20%">Maturity Date</td>
           <td style="width: 30%">{{financialLoanData.maturityDate}}</td>
-          <td style="width: 20%; border-left: 1px solid">Master Agreement Active</td>
-            <td style="width: 30%">{{financialDerivtvData.masterAgreementActive}}</td>
         </tr>
         <tr>
           <td style="width: 20%">Tenure Months</td>
           <td style="width: 30%">{{financialLoanData.tenorMonths}}</td>
-          <td style="width: 20%; border-left: 1px solid">Credit Support Annex</td>
-          <td style="width: 30%">{{financialDerivtvData.creditSupportAnnex}}</td>
-        </tr>
-        <tr>
           <td style="width: 20%">Rate Of Interest</td>
           <td style="width: 30%">{{financialLoanData.rateOfInterest}}</td>
-          <td style="width: 20%; border-left: 1px solid">Credit Support Annex Active</td>
-          <td style="width: 30%">{{financialDerivtvData.creditSupportAnnexActive}}</td>
         </tr>
         <tr>
           <td style="width: 20%">Collateral Info</td>
           <td style="width: 30%">{{financialLoanData.collateralInfo}}</td>
-          <td style="width: 20%; border-left: 1px solid">Credit Supply</td>
-          <td style="width: 30%">{{financialDerivtvData.creditSupByTitleTransfer}}</td>
-        </tr>
-        <tr>
           <td style="width: 20%">Borrower Name</td>
           <td style="width: 30%">{{financialLoanData.borrowerName}}</td>
-          <td style="width: 20%; border-left: 1px solid">Initial Margin</td>
-          <td style="width: 30%">{{financialDerivtvData.initialMargin}}</td>
         </tr>
         <tr>
           <td style="width: 20%">Lender Name</td>
           <td style="width: 30%">{{financialLoanData.lenderName}}</td>
-          <td style="width: 20%; border-left: 1px solid">Netted Against Variation</td>
-          <td style="width: 30%">{{financialDerivtvData.nettedAgainstVariation}}</td>
-        </tr>
-        <tr>
           <td style="width: 20%">Admin Agent Name</td>
           <td style="width: 30%">{{financialLoanData.adminAgentName}}</td>
-          <td style="width: 20%; border-left: 1px solid">Netting Elligible</td>
-          <td style="width: 30%">{{financialDerivtvData.nettingEligible}}</td>
         </tr>
         <tr>
           <td style="width: 20%">Joint Lead Agreement</td>
           <td style="width: 30%">{{financialLoanData.jointLeadArrangerName}}</td>
-          <td style="width: 20%; border-left: 1px solid">Collaterla Enforceability</td>
-          <td style="width: 30%">{{financialDerivtvData.collateralEnforceability}}</td>
-        </tr>
-        <tr>
           <td style="width: 20%">co Syndication Agent</td>
           <td style="width: 30%">{{financialLoanData.coSyndicationAgentName}}</td>
-          <td style="width: 20%; border-left: 1px solid">Trigger Downgrade</td>
-          <td style="width: 30%">{{financialDerivtvData.triggerDowngrade}}</td>
         </tr>
         <tr>
           <td style="width: 20%">co Doc Agent Name</td>
           <td style="width: 30%">{{financialLoanData.coDocumentationAgentName}}</td>
-          <td style="width: 20%; border-left: 1px solid">Rights</td>
-          <td style="width: 30%">{{financialDerivtvData.rehypothicationRights}}</td>
+          <td style="width: 20%; "></td>
+          <td style="width: 30%"></td>
+        </tr>
+    </table>
+    <table style="width: 90%" *ngIf="financialDerivtvData">
+        <tr>
+          <td style="width: 20%; ">Jurisdiction</td>
+          <td style="width: 30%">{{financialDerivtvData.jurisdiction}}</td>          
+          <td style="width: 20%; ">Governing Law</td>
+          <td style="width: 30%">{{financialDerivtvData.governingLaw}}</td>
         </tr>
         <tr>
-          <td style="width: 20%"></td>
-          <td style="width: 30%"></td>
-          <td style="width: 20%; border-left: 1px solid">Collateral Type</td>
+          <td style="width: 20%; ">Master Agreement Type</td>
+          <td style="width: 30%">{{financialDerivtvData.masterAgreementType}}</td>          
+          <td style="width: 20%; ">Master Agreement Active</td>
+            <td style="width: 30%">{{financialDerivtvData.masterAgreementActive}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Credit Support Annex</td>
+          <td style="width: 30%">{{financialDerivtvData.creditSupportAnnex}}</td>          
+          <td style="width: 20%; ">Credit Support Annex Active</td>
+          <td style="width: 30%">{{financialDerivtvData.creditSupportAnnexActive}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Credit Supply</td>
+          <td style="width: 30%">{{financialDerivtvData.creditSupByTitleTransfer}}</td>          
+          <td style="width: 20%; ">Initial Margin</td>
+          <td style="width: 30%">{{financialDerivtvData.initialMargin}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Netted Against Variation</td>
+          <td style="width: 30%">{{financialDerivtvData.nettedAgainstVariation}}</td>
+          <td style="width: 20%; ">Netting Elligible</td>
+          <td style="width: 30%">{{financialDerivtvData.nettingEligible}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Collaterla Enforceability</td>
+          <td style="width: 30%">{{financialDerivtvData.collateralEnforceability}}</td>
+          <td style="width: 20%; ">Trigger Downgrade</td>
+          <td style="width: 30%">{{financialDerivtvData.triggerDowngrade}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Rights</td>
+          <td style="width: 30%">{{financialDerivtvData.rehypothicationRights}}</td>
+          <td style="width: 20%; ">Collateral Type</td>
           <td style="width: 30%">{{financialDerivtvData.colleteralType}}</td>
         </tr>
         <tr>
-            <td style="width: 20%"></td>
-            <td style="width: 30%"></td>
-          <td style="width: 20%; border-left: 1px solid">Valid Currencies</td>
+          <td style="width: 20%; ">Valid Currencies</td>
           <td style="width: 30%">{{financialDerivtvData.validCurrencies}}</td>
+          <td style="width: 20%; ">Base Currency</td>
+          <td style="width: 30%">{{financialDerivtvData.baseCurrency}}</td>
         </tr>
         <tr>
-            <td style="width: 20%"></td>
-            <td style="width: 30%"></td>
-          <td style="width: 20%; border-left: 1px solid">Base Currency</td>
-          <td style="width: 30%">{{financialDerivtvData.baseCurrency}}</td>
-          </tr>
-          <tr>
-              <td style="width: 20%"></td>
-              <td style="width: 30%"></td>
-            <td style="width: 20%; border-left: 1px solid">Valuation Percentage</td>
-            <td style="width: 30%">{{financialDerivtvData.valuationPercentage}}</td>
-          </tr>
-          <tr>
-              <td style="width: 20%"></td>
-              <td style="width: 30%"></td>
-            <td style="width: 20%; border-left: 1px solid">Min Transfer Amount</td>
-            <td style="width: 30%">{{financialDerivtvData.minTransferAmount}}</td>
-          </tr>
-          <tr>
-            <td style="width: 20%"></td>
-            <td style="width: 30%"></td>
-            <td style="width: 20%; border-left: 1px solid">Threshhold Amount</td>
-            <td style="width: 30%">{{financialDerivtvData.thresholdAmount}}</td>
-          </tr>
-          <tr>
-            <td style="width: 20%"></td>
-            <td style="width: 30%"></td>
-            <td style="width: 20%; border-left: 1px solid">Variation Margin</td>
-            <td style="width: 30%">{{financialDerivtvData.variationMargin}}</td>
-          </tr>
-          <tr>
-            <td style="width: 20%"></td>
-            <td style="width: 30%"></td>
-            <td style="width: 20%; border-left: 1px solid">Triparty</td>
-            <td style="width: 30%">{{financialDerivtvData.triparty}}</td>
-          </tr>
-
+          <td style="width: 20%; ">Valuation Percentage</td>
+          <td style="width: 30%">{{financialDerivtvData.valuationPercentage}}</td>
+          <td style="width: 20%; ">Min Transfer Amount</td>
+          <td style="width: 30%">{{financialDerivtvData.minTransferAmount}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Threshhold Amount</td>
+          <td style="width: 30%">{{financialDerivtvData.thresholdAmount}}</td>  
+          <td style="width: 20%; ">Variation Margin</td>
+          <td style="width: 30%">{{financialDerivtvData.variationMargin}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Triparty</td>
+          <td style="width: 30%">{{financialDerivtvData.triparty}}</td>
+          <td style="width: 20%"></td>
+          <td style="width: 30%"></td>
+        </tr>
       </table>
     <br>
   </mat-tab>
