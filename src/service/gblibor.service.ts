@@ -29,14 +29,15 @@ export class GbliborService {
     return this.http.get<any>(environment.apiUrl + '/save/workflow/scanupload').pipe(catchError(this.erroHandler));
   }
 
-  saveOcr(file: any): Observable<any> {
-    return this.http.get<any>(environment.apiUrl + '/ocr/' + file).pipe(catchError(this.erroHandler));
+  getOcr(contractid: number): Observable<any> {
+    return this.http.get<any>(environment.apiUrl + '/ocr/workflow/' + contractid).pipe(catchError(this.erroHandler));
   }
 
   loadReviewData(data: any) {
-    return this.http.post<any>('/save/workflow/initiate', data).pipe(map(res => {
+    return this.http.get<any>(environment.apiUrl + '/find/workflow/review/' + data);
+    /* return this.http.post<any>(environment.apiUrl + '/save/workflow/initiate', data).pipe(map(res => {
       return res;
-    }), mergeMap(res => this.http.get<any>('/find/workflow/review/' + res.contractId)));
+    }), mergeMap(res => this.http.get<any>(environment.apiUrl + '/find/workflow/review/' + res.contractId))); */
   }
 
   getRiskData(contractId: number) {

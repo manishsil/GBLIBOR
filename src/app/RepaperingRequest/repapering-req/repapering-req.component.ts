@@ -5,7 +5,7 @@ import { GbliborService } from '../../../service/gblibor.service';
 import { Loan } from '../../model/loan';
 import { Derivative } from '../../model/derivative';
 import { Contract } from '../../model/contract';
-import { LoginService } from 'src/service/login.service';
+import { LoginService } from '../../../service/login.service';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/model/user';
 
@@ -58,8 +58,11 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     const file: any = files.item(0);
     const formData = new FormData();
     formData.append('file', file);
+    formData.append('userid', this.userDetails.userId.toString());
+
     this.service.uploadFile(formData).subscribe(resp => {
-      this.fileName = resp.fileName;
+      //this.fileName = resp.fileName;
+      this.contractId = resp.contractId;
     });
   }
 
@@ -67,16 +70,22 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     // server call to load intitiate screen data
     this.service.upload(this.fileName).subscribe(resp => {
       this.contractDt = resp;
-      this.contractDt = {"id":1,"contractId":"CON0000000001","parentContractId":"","documentFileName":"mycontract.pdf","contractName":"Loan Document","legalEntityId":1,"legalEntityName":"XYZ","counterPartyId":1,"counterPartyName":"ABC","contractTemplate":"MASTER Loan Agreement","contractStartDate":"2020-09-01","contractExpiryDate":"2023-09-01","contractTypeId":1,"contractSubTypeId":1,"currStatusId":6,"createdOn":"2020-09-02T16:18:11.000+00:00","createdBy":"sm123456","libor":true,"amendmentDoc":false};
       this.isInitated = true;
       this.selectedTab = 0;
     });
   }
 
+  loadOCRData() {
+    // server call to load intitiate screen data
+    this.service.getOcr(this.contractId).subscribe(resp => {
+      console.log(JSON.stringify(resp));
+    });
+  }
+
   loadReviewData() {
-    this.service.loadReviewData(this.contractDt).subscribe(resp => {
+    this.service.loadReviewData(this.contractId).subscribe(resp => {
       this.contractDt = resp;
-      this.contractDt = {"id":1,"contractId":"CON0000000001","parentContractId":"","documentFileName":"mycontract.pdf","contractName":"Loan Document","legalEntityId":1,"legalEntityName":"XYZ","counterPartyId":1,"counterPartyName":"ABC","contractTemplate":"MASTER Loan Agreement","contractStartDate":"2020-09-01","contractExpiryDate":"2023-09-01","contractTypeId":1,"contractSubTypeId":1,"currStatusId":6,"createdOn":"2020-09-02T16:18:11.000+00:00","createdBy":"sm123456","libor":true,"amendmentDoc":false};
+      //this.contractDt = {"id":1,"contractId":"CON0000000001","parentContractId":"","documentFileName":"mycontract.pdf","contractName":"Loan Document","legalEntityId":1,"legalEntityName":"XYZ","counterPartyId":1,"counterPartyName":"ABC","contractTemplate":"MASTER Loan Agreement","contractStartDate":"2020-09-01","contractExpiryDate":"2023-09-01","contractTypeId":1,"contractSubTypeId":1,"currStatusId":6,"createdOn":"2020-09-02T16:18:11.000+00:00","createdBy":"sm123456","libor":true,"amendmentDoc":false};
       this.showRiskData();
     });
   }
@@ -94,22 +103,22 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 }
 
   showRiskData() {
-    /* this.service.getRiskData(this.contractId).subscribe(dt => {
+    this.service.getRiskData(this.contractId).subscribe(dt => {
       this.riskData = dt;
-    }); */
-    this.riskData = [{"contractRiskId":1,"contractId":1,"riskId":"R000123","riskDesc":"This is Closed Risk Description","resolutionStatus":2},{"contractRiskId":2,"contractId":1,"riskId":"R000124","riskDesc":"This is Open Risk Description","resolutionStatus":1},{"contractRiskId":3,"contractId":1,"riskId":"R000124","riskDesc":"This is newly added open Risk Description","resolutionStatus":1}];
+    });
+    //this.riskData = [{"contractRiskId":1,"contractId":1,"riskId":"R000123","riskDesc":"This is Closed Risk Description","resolutionStatus":2},{"contractRiskId":2,"contractId":1,"riskId":"R000124","riskDesc":"This is Open Risk Description","resolutionStatus":1},{"contractRiskId":3,"contractId":1,"riskId":"R000124","riskDesc":"This is newly added open Risk Description","resolutionStatus":1}];
   }
 
   showFinancialData() {
-    /* this.service.getFinancialLoanData(this.contractId).subscribe(dt => {
+    this.service.getFinancialLoanData(this.contractId).subscribe(dt => {
       this.financialLoanData = dt;
     });
     this.service.getFinancialDerivativeData(this.contractId).subscribe(dt => {
       this.financialDerivtvData = dt;
-    }); */
-    this.financialLoanData = {"loanContractFinancialId":1,"contractId":1,"counterPartyId":1,"loanAmount":2350000.0,"loanCurrency":"USD","startDate":"2020-09-04","maturityDate":"2023-09-04","tenorMonths":36,"rateOfInterest":2.06,"loanTypeId":1,"collateralInfo":"","paymentSchedule":1,"borrowerName":"XYZ LLC","lenderName":"ABC Corp Bank","adminAgentName":"Agent","jointLeadArrangerName":"Joint Lead Arranger","coSyndicationAgentName":"Co Syndication Agent","coDocumentationAgentName":"Co Documentation Agent"};
+    });
+    //this.financialLoanData = {"loanContractFinancialId":1,"contractId":1,"counterPartyId":1,"loanAmount":2350000.0,"loanCurrency":"USD","startDate":"2020-09-04","maturityDate":"2023-09-04","tenorMonths":36,"rateOfInterest":2.06,"loanTypeId":1,"collateralInfo":"","paymentSchedule":1,"borrowerName":"XYZ LLC","lenderName":"ABC Corp Bank","adminAgentName":"Agent","jointLeadArrangerName":"Joint Lead Arranger","coSyndicationAgentName":"Co Syndication Agent","coDocumentationAgentName":"Co Documentation Agent"};
 
-    this.financialDerivtvData = {"derivativeContractFinancialId":1,"contractId":1,"counterPartyId":1,"jurisdiction":"NEW YORK","governingLaw":"New YORK Law","masterAgreementType":"ISDA Master 2002","masterAgreementActive":"Y","creditSupportAnnex":"Credit support Annex for Swap","creditSupportAnnexActive":"Y","creditSupByTitleTransfer":"Y","initialMargin":1000000.0,"nettedAgainstVariation":"Y","nettingEligible":"Y","collateralEnforceability":"Y","triggerDowngrade":"Y","rehypothicationRights":"Y","colleteralType":"Stocks","validCurrencies":"USD,GBP","baseCurrency":"USD","valuationPercentage":10.0,"minTransferAmount":10000.0,"thresholdAmount":20000.0,"variationMargin":10.0,"triparty":"Y"};
+    //this.financialDerivtvData = {"derivativeContractFinancialId":1,"contractId":1,"counterPartyId":1,"jurisdiction":"NEW YORK","governingLaw":"New YORK Law","masterAgreementType":"ISDA Master 2002","masterAgreementActive":"Y","creditSupportAnnex":"Credit support Annex for Swap","creditSupportAnnexActive":"Y","creditSupByTitleTransfer":"Y","initialMargin":1000000.0,"nettedAgainstVariation":"Y","nettingEligible":"Y","collateralEnforceability":"Y","triggerDowngrade":"Y","rehypothicationRights":"Y","colleteralType":"Stocks","validCurrencies":"USD,GBP","baseCurrency":"USD","valuationPercentage":10.0,"minTransferAmount":10000.0,"thresholdAmount":20000.0,"variationMargin":10.0,"triparty":"Y"};
   }
 
   showCollateralData() {
