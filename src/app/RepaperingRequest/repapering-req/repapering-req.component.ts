@@ -25,7 +25,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   contractDt: Contract;
   currentStep = 0;
   processing = true;
-  pdfSrc: any; // "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
+  pdfSrc: any;
   contractId: number;
   riskData: any[];
   financialLoanData: Loan;
@@ -51,6 +51,31 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     } else {
       this.selectedTab = 0;
     }
+    switch (this.stepIndex){
+      case 1: {
+        this.loadReviewData();
+        break;
+      }
+      case 2: {
+         this.loadAmendmendData();
+         break;
+      }
+      case 3: {
+        this.loadAuthorizeData();
+        break;
+      }
+      case 4: {
+         this.loadVerifyData();
+         break;
+      }
+      case 5: {
+        this.loadCloseData();
+        break;
+     }
+      default: {
+         break;
+      }
+   }
   }
 
   handleFileInput(files: FileList) {
@@ -64,6 +89,11 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
       this.fileName = resp.documentFileName;
       this.contractId = resp.contractId;
     });
+    const fileReader = new FileReader();
+    fileReader.onload = () => {
+      this.pdfSrc = fileReader.result;
+    };
+    fileReader.readAsDataURL(file);
   }
 
   loadInitiateData() {
@@ -137,6 +167,26 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     this.service.getAmendmentData(this.contractId).subscribe(dt => {
       this.contractDt = dt;
       console.log(JSON.stringify(dt));
+    });
+    document.getElementById('pdfFrame1').setAttribute('src', this.pdfSrc);
+    document.getElementById('pdfFrame2').setAttribute('src', this.pdfSrc);
+  }
+
+  loadAuthorizeData() {
+    this.service.getAuthorizeData(this.contractId).subscribe(dt => {
+      this.contractDt = dt;
+    });
+    document.getElementById('pdfFrame3').setAttribute('src', this.pdfSrc);
+    document.getElementById('pdfFrame4').setAttribute('src', this.pdfSrc);
+  }
+  loadVerifyData() {
+    this.service.getVerifyData(this.contractId).subscribe(dt => {
+      this.contractDt = dt;
+    });
+  }
+  loadCloseData() {
+    this.service.getCloseData(this.contractId).subscribe(dt => {
+      this.contractDt = dt;
     });
   }
 

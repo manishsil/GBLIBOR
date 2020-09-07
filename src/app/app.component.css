@@ -44,19 +44,20 @@ p {
 }
 
 .sidenav {
-  background-color: #0c9acee0 !important;
+  background-color:#004165 !important;
 }
 .navbar {
-  background-color: #0c9acee0 !important;
+  background-color: #004165 !important;
 }
 
 p > a {
   color: #fff;
 }
 img {
-  height: 50px;
-  width: 200px;
-  margin-top: -14px;
+  height: 51px;
+  width: 227px;
+  margin-top: -15px;
+  margin-left: -16px;
 }
 #header {
   color: #fff;

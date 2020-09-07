@@ -47,6 +47,18 @@ export class GbliborService {
     return this.http.post<any>(environment.apiUrl + '/amend/workflow', contractid).pipe(catchError(this.erroHandler));
   }
 
+  getAuthorizeData(contractid: number): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/authorize/workflow', contractid).pipe(catchError(this.erroHandler));
+  }
+
+  getVerifyData(contractid: number): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/verify/workflow', contractid).pipe(catchError(this.erroHandler));
+  }
+
+  getCloseData(contractid: number): Observable<any> {
+    return this.http.post<any>(environment.apiUrl + '/close/workflow', contractid).pipe(catchError(this.erroHandler));
+  }
+
   getRiskData(contractId: number) {
     return this.http.post<any>(environment.apiUrl + '/find/contractrisk', contractId).pipe(catchError(this.erroHandler));
   }
