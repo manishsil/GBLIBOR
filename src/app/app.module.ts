@@ -21,7 +21,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import {MatTabsModule} from '@angular/material/tabs';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-
+import { DashBoardComponent } from './dash-board/dash-board.component';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -30,13 +31,14 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ContractAnalysisComponent,
     DocumentSearchComponent,
     DocumentManagerComponent,
-    RepaperingReqComponent
+    RepaperingReqComponent,
+    DashBoardComponent
   ],
   imports: [
     BrowserModule,NgApexchartsModule,
     AppRoutingModule,MatFormFieldModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
     MatStepperModule,MatIconModule,
-    MatTabsModule,
+    MatTabsModule,MatSelectModule,
     PdfViewerModule,
     HttpClientModule, BrowserAnimationsModule
   ],
