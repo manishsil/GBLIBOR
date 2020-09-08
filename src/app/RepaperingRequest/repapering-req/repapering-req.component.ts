@@ -196,15 +196,16 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
       this.approvalsDt = dt;
       console.log(JSON.stringify(dt));
     });
-    this.approvalsDt = [{contractId: 123,state: 'Autorize', approver: 'Abc Xyz', groupName: 'RISK-MGMT', responsibility: 'Risk Management', comments: 'ok', createdOn: '02/02/2020', updatedOn: '02/04/2020'}];
+    //this.approvalsDt = [{contractId: 123,state: 'Autorize', approver: 'Abc Xyz', groupName: 'RISK-MGMT', responsibility: 'Risk Management', comments: 'ok', createdOn: '02/02/2020', updatedOn: '02/04/2020'}];
 
   }
 
   showVerifyData() {
     this.service.getVerifyTabData(this.contractId).subscribe(dt => {
       console.log(JSON.stringify(dt));
+      this.verifyDt = dt;
     });
-    this.verifyDt = [{state: 'Verified', verifier: 'Abc Xyz', notes: 'verification done', updatedOn: '02/05/2020'}];
+    //this.verifyDt = [{state: 'Verified', verifier: 'Abc Xyz', notes: 'verification done', updatedOn: '02/05/2020'}];
 
   }
 
