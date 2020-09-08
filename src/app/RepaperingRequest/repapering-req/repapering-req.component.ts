@@ -8,6 +8,8 @@ import { Contract } from '../../model/contract';
 import { LoginService } from '../../../service/login.service';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/model/user';
+import { Approval } from 'src/app/model/approval';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -32,11 +34,22 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   financialDerivtvData: Derivative;
   userDetails: User;
   subscription: Subscription;
+  routesubc: Subscription;
   clientOutreach: {name: string, address: string, zip: string, phone: string, fax: string, email: string};
+  approvalsDt: Approval[];
+  verifyDt: {state: string, verifier: string, notes: string, updatedOn: string}[];
 
-  constructor(private snackBar: MatSnackBar, private service: GbliborService, private loginService: LoginService) { }
+  constructor(private snackBar: MatSnackBar, private service: GbliborService,
+              private loginService: LoginService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.routesubc = this.route.queryParams.subscribe(params => {
+      if (params && params.cId) {
+        this.contractId = params.cId;
+        this.loadAuthorizeData();
+        this.currentStep = 3;
+      }
+    });
     this.subscription = this.loginService.getUserDetails().subscribe(dt => {
       this.userDetails = dt;
     });
@@ -44,13 +57,13 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   onStepChange(event: any): void {
     this.stepIndex = event.selectedIndex;
-    if (this.stepIndex === 3) {
+    /* if (this.stepIndex === 3) {
       this.selectedTab = 5;
     } else if (this.stepIndex > 3) {
       this.selectedTab = 6;
     } else {
       this.selectedTab = 0;
-    }
+    } */
     switch (this.stepIndex){
       case 1: {
         this.loadReviewData();
@@ -76,6 +89,24 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
          break;
       }
    }
+  }
+
+  laodTabDetails($event: any){
+    if ($event.index === 0) {
+      this.showRiskData();
+    } else if ($event.index === 1) {
+      this.showFinancialData();
+    } else if ($event.index === 2) {
+      this.showCollateralData();
+    } else if ($event.index === 3) {
+      this.showWorkhistoryData();
+    } else if ($event.index === 4) {
+      this.showClientOutreachData();
+    } else if ($event.index === 5) {
+      this.showApprovalsData();
+    } else if ($event.index === 6) {
+      this.showVerifyData();
+    }
   }
 
   handleFileInput(files: FileList) {
@@ -120,18 +151,6 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     });
   }
 
-  laodTabDetails($event: any){
-    if ($event.index === 0) {
-      this.showRiskData();
-    } else if ($event.index === 1) {
-      this.showFinancialData();
-    } else if ($event.index === 3) {
-      this.showCollateralData();
-    } else if ($event.index === 4) {
-      this.showClientOutreachData();
-    }
-}
-
   showRiskData() {
     this.service.getRiskData(this.contractId).subscribe(dt => {
       this.riskData = dt;
@@ -154,8 +173,17 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     //service call
   }
 
+  showWorkhistoryData() {
+    this.service.getWorkHistoryData(this.contractId).subscribe(dt => {
+      console.log(JSON.stringify(dt));
+    });
+  }
+
   showClientOutreachData() {
-    //service call
+    /* this.service.getClientOutreachData(this.contractId).subscribe(dt => {
+      console.log(JSON.stringify(dt));
+      this.clientOutreach = dt;
+    }); */
     this.clientOutreach = {name: 'XYZ Corp', address: 'abc', zip: '7001', phone: '17389', fax: '2384', email: 'djfjd@gmail.com'};
   }
 
@@ -163,21 +191,38 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     //send email
   }
 
+  showApprovalsData() {
+    this.service.getApprovalsData(this.contractId).subscribe(dt => {
+      this.approvalsDt = dt;
+      console.log(JSON.stringify(dt));
+    });
+    this.approvalsDt = [{contractId: 123,state: 'Autorize', approver: 'Abc Xyz', groupName: 'RISK-MGMT', responsibility: 'Risk Management', comments: 'ok', createdOn: '02/02/2020', updatedOn: '02/04/2020'}];
+
+  }
+
+  showVerifyData() {
+    this.service.getVerifyTabData(this.contractId).subscribe(dt => {
+      console.log(JSON.stringify(dt));
+    });
+    this.verifyDt = [{state: 'Verified', verifier: 'Abc Xyz', notes: 'verification done', updatedOn: '02/05/2020'}];
+
+  }
+
   loadAmendmendData() {
     this.service.getAmendmentData(this.contractId).subscribe(dt => {
       this.contractDt = dt;
       console.log(JSON.stringify(dt));
+      //document.getElementById('pdfFrame2').setAttribute('src', this.pdfSrc);
+      document.getElementById('pdfFrame1').setAttribute('src', this.pdfSrc);
     });
-    document.getElementById('pdfFrame1').setAttribute('src', this.pdfSrc);
-    document.getElementById('pdfFrame2').setAttribute('src', this.pdfSrc);
   }
 
   loadAuthorizeData() {
     this.service.getAuthorizeData(this.contractId).subscribe(dt => {
       this.contractDt = dt;
+      document.getElementById('pdfFrame3').setAttribute('src', this.pdfSrc);
+    //document.getElementById('pdfFrame4').setAttribute('src', this.pdfSrc);
     });
-    document.getElementById('pdfFrame3').setAttribute('src', this.pdfSrc);
-    document.getElementById('pdfFrame4').setAttribute('src', this.pdfSrc);
   }
   loadVerifyData() {
     this.service.getVerifyData(this.contractId).subscribe(dt => {
@@ -197,6 +242,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
-}
+    this.routesubc.unsubscribe();
+  }
 
 }

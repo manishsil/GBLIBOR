@@ -22,7 +22,7 @@ export class GbliborService {
   }
 
   getWorkFlowIntiateData(contractId: number) {
-    return this.http.get<any>(environment.apiUrl + '/initiate/workflow' + contractId).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/initiate/workflow', contractId).pipe(catchError(this.erroHandler));
   }
   upload(filename: string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/upload/scandoc/' + filename).pipe(catchError(this.erroHandler));
@@ -44,7 +44,7 @@ export class GbliborService {
   }
 
   getAmendmentData(contractid: number): Observable<any> {
-    return this.http.post<any>(environment.apiUrl + '/amend/workflow', contractid).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/edit/workflow', contractid).pipe(catchError(this.erroHandler));
   }
 
   getAuthorizeData(contractid: number): Observable<any> {
@@ -69,6 +69,30 @@ export class GbliborService {
 
   getFinancialDerivativeData(contractId: number) {
     return this.http.post<any>(environment.apiUrl + '/find/derivative', contractId).pipe(catchError(this.erroHandler));
+  }
+
+  getCollateralData(contractId: number) {
+    return this.http.post<any>(environment.apiUrl + '/find/collateral', contractId).pipe(catchError(this.erroHandler));
+  }
+
+  getWorkHistoryData(contractId: number) {
+    return this.http.post<any>(environment.apiUrl + '/find/workhistory', contractId).pipe(catchError(this.erroHandler));
+  }
+
+  getClientOutreachData(contractId: number) {
+    return this.http.post<any>(environment.apiUrl + '/find/outreach', contractId).pipe(catchError(this.erroHandler));
+  }
+
+  getApprovalsData(contractId: number) {
+    return this.http.post<any>(environment.apiUrl + '/find/approval', contractId).pipe(catchError(this.erroHandler));
+  }
+
+  getVerifyTabData(contractId: number) {
+    return this.http.post<any>(environment.apiUrl + '/find/verify', contractId).pipe(catchError(this.erroHandler));
+  }
+
+  getMyApprovalsData(username: string) {
+    return this.http.get<any>(environment.apiUrl + '/find/myapproval' + username).pipe(catchError(this.erroHandler));
   }
 
   erroHandler(error: HttpErrorResponse) {

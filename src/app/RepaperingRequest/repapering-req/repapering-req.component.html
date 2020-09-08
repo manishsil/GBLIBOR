@@ -44,7 +44,7 @@
         <table><tr><th style="text-align: center">As is</th><th style="text-align: center">To be</th></tr>
           <tr>
             <td><iframe width='500px' height='300px' src='' id='pdfFrame1'></iframe></td>
-            <td><iframe width='500px' height='300px' src='' id='pdfFrame2'></iframe></td>
+            <td><iframe width='500px' height='300px' src='\assets\abc.pdf' id='pdfFrame2'></iframe></td>
           </tr>
         </table>
         <br>
@@ -59,7 +59,7 @@
         <table><tr><th style="text-align: center">As is</th><th style="text-align: center">To be</th></tr>
           <tr>
             <td><iframe width='500px' height='300px' src='' id='pdfFrame3'></iframe></td>
-            <td><iframe width='500px' height='300px' src='' id='pdfFrame4'></iframe></td>
+            <td><iframe width='500px' height='300px' src='\assets\abc.pdf' id='pdfFrame4'></iframe></td>
           </tr>
         </table>
         <br>         
@@ -283,6 +283,46 @@
     </table>
     <br>
   </mat-tab>
-  <mat-tab label="Approvals" *ngIf="stepIndex && stepIndex>1"></mat-tab>
-  <mat-tab label="Verify" *ngIf="stepIndex && stepIndex>3"></mat-tab>
+  <mat-tab label="Approvals" *ngIf="stepIndex && stepIndex>1">
+    <br> 
+    <table style="width: 90%" *ngIf="approvalsDt">
+      <tr>
+        <th style="width: 10%">State</th>
+        <th style="width: 15%">Approver</th>
+        <th style="width: 10%">Group Name</th>
+        <th style="width: 15%">Responsibility</th>
+        <th style="width: 30%">Comments</th>
+        <th style="width: 10%">Created</th>
+        <th style="width: 10%">Updated</th>
+      </tr>
+      <tr *ngFor="let item of approvalsDt">
+        <td>{{item.state}}</td>
+        <td>{{item.approver}}</td>
+        <td>{{item.groupName}}</td>
+        <td>{{item.responsibility}}</td>
+        <td>{{item.comments}}</td>
+        <td>{{item.createdOn}}</td>
+        <td>{{item.updatedOn}}</td>
+      </tr>
+    </table>
+    <br>
+  </mat-tab>
+  <mat-tab label="Verify" *ngIf="stepIndex && stepIndex>3">
+      <br> 
+      <table style="width: 90%" *ngIf="verifyDt">
+        <tr>
+          <th style="width: 15%">Contract Risk ID</th>
+          <th style="width: 20%">Risk ID</th>
+          <th style="width: 50%">Description</th>
+          <th style="width: 15%">Status</th>
+        </tr>
+        <tr *ngFor="let item of verifyDt">
+          <td>{{item.state}}</td>
+          <td>{{item.verifier}}</td>
+          <td>{{item.notes}}</td>
+          <td>{{item.updatedOn}}</td>
+        </tr>
+      </table>
+      <br>
+  </mat-tab>
 </mat-tab-group>
