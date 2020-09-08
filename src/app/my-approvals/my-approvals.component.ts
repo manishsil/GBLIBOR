@@ -44,17 +44,6 @@ export class MyApprovalsComponent implements OnInit, OnDestroy {
       this.userDetails = data;
       this.service.getMyApprovalsData(this.userDetails.loginId).subscribe(dt => {
         this.approvalsDt = dt;
-        this.approvalsDt .forEach(el => {
-          if (el.groupName === 'LIBOR-PRO-MGMT') {
-            this.libor.push(el);
-          } else if (el.groupName === 'RISK-MGMT') {
-            this.risk.push(el);
-          } else if (el.groupName === 'LEGAL-MGMT') {
-            this.legal.push(el);
-          } else if (el.groupName === 'TREASURY-MGMT') {
-            this.treasury.push(el);
-          }
-        });
       });
     });
   }

@@ -21,8 +21,8 @@
     <tr>
         <td style="width: 15%" class="bold">Contract Template Name</td>
         <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractTemplate" /></td>
-        <td style="width: 15%" class="bold"></td>
-        <td style="width: 35%"></td>
+        <td style="width: 15%" class="bold">State</td>
+        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="currStatus[contractDt.currStatusId]" /></td>
     </tr>
     <tr>
         <td style="width: 15%" class="bold">Contract Type</td>
@@ -39,7 +39,7 @@
     <tr>
         <td class="bold">LIBOR</td>
         <td><input type="checkbox" [checked]="contractDt.libor" [disabled]="true"></td>
-        <td class="bold">State</td>
+        <td class="bold">Amendment Document</td>
         <td><input type="checkbox" [checked]="contractDt.amendmentDoc" [disabled]="true"></td>
     </tr>
 </table>

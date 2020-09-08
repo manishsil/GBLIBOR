@@ -1,10 +1,9 @@
 export class Approval {
     contractId: number;
-    state: string;
-    approver: string;
-    groupName: string;
-    responsibility: string;
-    comments: string;
     createdOn: string;
+    assignedTo: string;
     updatedOn: string;
+    updatedBy: string;
+    statusId: number;
+    comments: string;
 }
