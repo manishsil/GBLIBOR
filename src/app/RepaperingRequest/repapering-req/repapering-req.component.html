@@ -48,9 +48,26 @@
           </tr>
         </table>
         <br>
+        <table style="width: 99%">
+          <tr>
+            <td style="text-align: center; width: 500px">
+              <table>
+                <tr><td></td></tr>
+                <tr><td><button mat-button (click)="save()" style="width: 100px">Save</button></td></tr>
+                <tr><td></td></tr>
+                <tr><td><button mat-button (click)="skip()" [disabled]="!this.content" style="width: 100px">Skip</button></td></tr>
+                <tr><td></td></tr>
+                <tr><td> <button mat-button (click)="preview()" style="width: 100px">Preview</button></td></tr>
+              </table>
+              </td>
+              <td style=" width: 480px;">
+                  <quill-editor [styles]="{height: '200px'}" [(ngModel)]="content" [modules]="modules"></quill-editor>
+              </td>
+          </tr>
+        </table>
+        <br>
         <div>
-            <button mat-button>Save</button> &nbsp;&nbsp;
-            <button mat-button matStepperNext>Authorize</button>
+          <button mat-button matStepperNext>Authorize</button>
         </div>
     </mat-step>
 
