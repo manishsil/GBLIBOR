@@ -105,7 +105,7 @@
     <br> 
     <table style="width: 90%" *ngIf="financialLoanData">
         <tr>
-          <td style="width: 20%">Loan Amount</td>
+          <td style="width: 20%">Loan Amount ($)</td>
           <td style="width: 30%">{{financialLoanData.loanAmount}}</td>
           <td style="width: 20%">Loan Currency</td>
           <td style="width: 30%">{{financialLoanData.loanCurrency}}</td>
@@ -251,14 +251,14 @@
         <td colspan="2">
           <input type="text" [(ngModel)]="clientOutreach.name" />
         </td>
-        <td><input type="button" value="Send Email" (click)="sendEmail()"/></td>
+        <td><input style="width: 200px; text-align: center" type="button" value="Send Email" (click)="sendEmail()"/></td>
       </tr>
       <tr>
         <td style="width: 10%" class="bold">Address</td>
         <td colspan="2">
           <input type="text" [(ngModel)]="clientOutreach.address" />
         </td>
-        <td></td>
+        <td><input style="width: 200px; text-align: center" type="button" value="Send Email with Attachment" (click)="sendEmail()"/></td>
       </tr>
       <tr>
         <td style="width: 10%" class="bold">Zip</td>
@@ -287,22 +287,22 @@
     <br> 
     <table style="width: 90%" *ngIf="approvalsDt">
       <tr>
+        <th style="width: 15%">Contract ID</th>
         <th style="width: 10%">State</th>
         <th style="width: 15%">Approver</th>
-        <th style="width: 10%">Group Name</th>
-        <th style="width: 15%">Responsibility</th>
-        <th style="width: 30%">Comments</th>
-        <th style="width: 10%">Created</th>
-        <th style="width: 10%">Updated</th>
+        <th style="width: 20%">Comments</th>
+        <th style="width: 10%">Created On</th>
+        <th style="width: 10%">Updated On</th>
+        <th style="width: 20%"></th>
       </tr>
       <tr *ngFor="let item of approvalsDt">
-        <td>{{item.state}}</td>
-        <td>{{item.approver}}</td>
-        <td>{{item.groupName}}</td>
-        <td>{{item.responsibility}}</td>
+        <td>{{item.contractId}}</td>
+        <td>{{statusIds[item.statusId]}}</td>
+        <td>{{item.assignedTo}}</td>
         <td>{{item.comments}}</td>
         <td>{{item.createdOn}}</td>
         <td>{{item.updatedOn}}</td>
+        <td><input type="button" value="Approve" (click)="approve()" /></td>
       </tr>
     </table>
     <br>

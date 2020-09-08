@@ -11,7 +11,7 @@
           <li *ngIf="!username">
             <a id="header" [routerLink] = "'/login'" ><span class="glyphicon glyphicon-log-in"></span> Login</a>
           </li>
-          <li *ngIf="username" style="padding: 10px;margin-top: 5px;">
+          <li *ngIf="username" style="padding: 10px;margin-top: 5px;color: #fff">
               <span *ngIf="username" >{{username}}</span>
           </li>
           <li id="searchbox"><input type="text" placeholder="Search.." name="search"></li>
@@ -32,7 +32,7 @@
           <p><a [routerLink] = "'/'">Classify Contracts </a></p>
           <p><a [routerLink] = "'/'">Review Contracts</a></p>
           <p><a [routerLink] = "'/'">Edit Contracts  </a></p>
-          <p><a [routerLink] = "'/approvals'">My Approval</a></p>
+          <p><a [routerLink] = "'/'">My Approval</a></p>
           <p><a [routerLink] = "'/'">My Contract</a></p>
 
         <!--<p><a [routerLink] = "'/template'">Template Upload  </a></p>

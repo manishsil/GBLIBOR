@@ -38,6 +38,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   clientOutreach: {name: string, address: string, zip: string, phone: string, fax: string, email: string};
   approvalsDt: Approval[];
   verifyDt: {state: string, verifier: string, notes: string, updatedOn: string}[];
+  statusIds = {1: 'Pending', 2: 'completed', 3: 'Rejected', 4: 'Cancelled'};
 
   constructor(private snackBar: MatSnackBar, private service: GbliborService,
               private loginService: LoginService, private route: ActivatedRoute) { }
@@ -119,6 +120,9 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     this.service.uploadFile(formData).subscribe(resp => {
       this.fileName = resp.documentFileName;
       this.contractId = resp.contractId;
+      this.snackBar.open('File Uploaded Successfully', '', {
+        duration: 2000, verticalPosition: 'bottom'
+      });
     });
     const fileReader = new FileReader();
     fileReader.onload = () => {
@@ -140,7 +144,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     // server call to load intitiate screen data
     this.service.getOcr(this.contractId).subscribe(resp => {
       this.snackBar.open('Contract Number ' + resp.contractId , '', {
-        duration: 2000, verticalPosition: 'bottom'
+        duration: 2500, verticalPosition: 'bottom'
       });
     });
   }
@@ -148,6 +152,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   loadReviewData() {
     this.service.loadReviewData(this.contractId).subscribe(resp => {
       this.contractDt = resp;
+      this.showRiskData();
     });
   }
 
@@ -184,7 +189,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
       console.log(JSON.stringify(dt));
       this.clientOutreach = dt;
     }); */
-    this.clientOutreach = {name: 'XYZ Corp', address: 'abc', zip: '7001', phone: '17389', fax: '2384', email: 'djfjd@gmail.com'};
+    this.clientOutreach = {name: 'XYZ Corp', address: 'Sector B, New Delhi', zip: '110011', phone: '01186745239', fax: '23846985', email: 'libor@gmail.com'};
   }
 
   sendEmail() {
@@ -192,14 +197,37 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   showApprovalsData() {
-    this.service.getApprovalsData(this.contractId).subscribe(dt => {
+    this.service.getApproveLegal(this.contractId).subscribe(dt => {
       this.approvalsDt = dt;
+      this.contractDt.currStatusId = 6;
       console.log(JSON.stringify(dt));
     });
     //this.approvalsDt = [{contractId: 123,state: 'Autorize', approver: 'Abc Xyz', groupName: 'RISK-MGMT', responsibility: 'Risk Management', comments: 'ok', createdOn: '02/02/2020', updatedOn: '02/04/2020'}];
 
   }
 
+  approve() {
+    if (this.contractDt.currStatusId === 6) {
+      this.service.getApproveProgram(this.contractId).subscribe(dt => {
+        this.approvalsDt = dt;
+        this.contractDt.currStatusId = 7;
+        console.log(JSON.stringify(dt));
+      });
+    } else if (this.contractDt.currStatusId === 7) {
+      this.service.getApproveRisk(this.contractId).subscribe(dt => {
+        this.approvalsDt = dt;
+        this.contractDt.currStatusId = 8;
+        console.log(JSON.stringify(dt));
+      });
+    } else if (this.contractDt.currStatusId === 8) {
+      this.service.getApproveTreasury(this.contractId).subscribe(dt => {
+        this.approvalsDt = dt;
+        this.contractDt.currStatusId = 9;
+        console.log(JSON.stringify(dt));
+      });
+    }
+
+  }
   showVerifyData() {
     this.service.getVerifyTabData(this.contractId).subscribe(dt => {
       console.log(JSON.stringify(dt));
