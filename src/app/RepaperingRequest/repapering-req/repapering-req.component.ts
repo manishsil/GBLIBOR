@@ -37,11 +37,18 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   routesubc: Subscription;
   clientOutreach: {name: string, address: string, zip: string, phone: string, fax: string, email: string};
   approvalsDt: Approval[];
+  modules = {};
+  content: string;
+  index = 0;
+  amendData = ['This is paragraph 1', 'This is paragraph 2', 'This is paragraph 3'];
   verifyDt: {state: string, verifier: string, notes: string, updatedOn: string}[];
   statusIds = {1: 'Pending', 2: 'completed', 3: 'Rejected', 4: 'Cancelled'};
 
   constructor(private snackBar: MatSnackBar, private service: GbliborService,
-              private loginService: LoginService, private route: ActivatedRoute) { }
+              private loginService: LoginService, private route: ActivatedRoute) {
+                this.modules = {toolbar: [['bold', 'italic', 'underline', 'strike']]};
+
+              }
 
   ngOnInit(): void {
     this.routesubc = this.route.queryParams.subscribe(params => {
@@ -198,7 +205,8 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   showApprovalsData() {
     this.service.getApproveLegal(this.contractId).subscribe(dt => {
-      this.approvalsDt = dt;
+      this.approvalsDt = [];
+      this.approvalsDt.push(dt);
       this.contractDt.currStatusId = 6;
       console.log(JSON.stringify(dt));
     });
@@ -209,19 +217,22 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   approve() {
     if (this.contractDt.currStatusId === 6) {
       this.service.getApproveProgram(this.contractId).subscribe(dt => {
-        this.approvalsDt = dt;
+        this.approvalsDt = [];
+        this.approvalsDt.push(dt);
         this.contractDt.currStatusId = 7;
         console.log(JSON.stringify(dt));
       });
     } else if (this.contractDt.currStatusId === 7) {
       this.service.getApproveRisk(this.contractId).subscribe(dt => {
-        this.approvalsDt = dt;
+        this.approvalsDt = [];
+        this.approvalsDt.push(dt);
         this.contractDt.currStatusId = 8;
         console.log(JSON.stringify(dt));
       });
     } else if (this.contractDt.currStatusId === 8) {
       this.service.getApproveTreasury(this.contractId).subscribe(dt => {
-        this.approvalsDt = dt;
+        this.approvalsDt = [];
+        this.approvalsDt.push(dt);
         this.contractDt.currStatusId = 9;
         console.log(JSON.stringify(dt));
       });
@@ -241,8 +252,8 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     this.service.getAmendmentData(this.contractId).subscribe(dt => {
       this.contractDt = dt;
       console.log(JSON.stringify(dt));
-      //document.getElementById('pdfFrame2').setAttribute('src', this.pdfSrc);
       document.getElementById('pdfFrame1').setAttribute('src', this.pdfSrc);
+      this.content = this.amendData[0];
     });
   }
 
@@ -264,6 +275,24 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     });
   }
 
+  save() {
+    console.log(this.content);
+    this.amendData[this.index] = this.content;
+    this.index += 1;
+    const data = this.amendData[this.index];
+    this.content = data ? data : '';
+  }
+
+  skip() {
+    this.index += 1;
+    const data = this.amendData[this.index];
+    this.content = data ? data : '';
+  }
+
+  preview() {
+    //service call
+    console.log(JSON.stringify(this.amendData));
+  }
 
   ngAfterViewInit() {
       //this.stepper.selectedIndex = 3; 

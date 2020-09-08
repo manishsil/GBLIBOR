@@ -25,6 +25,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { QuillModule } from 'ngx-quill';
 import { LoginComponent } from './login/login.component';
 import { ContractDetailsComponent } from './contract-details/contract-details.component';
 import { MyApprovalsComponent } from './my-approvals/my-approvals.component';
@@ -43,6 +44,7 @@ import { MyApprovalsComponent } from './my-approvals/my-approvals.component';
     MyApprovalsComponent
   ],
   imports: [
+    QuillModule.forRoot(),
     BrowserModule,NgApexchartsModule,FormsModule,ReactiveFormsModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
     MatStepperModule,MatIconModule, MatTabsModule, MatSnackBarModule,PdfViewerModule,MatCardModule,
