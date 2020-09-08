@@ -27,6 +27,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { LoginComponent } from './login/login.component';
 import { ContractDetailsComponent } from './contract-details/contract-details.component';
+import { MyApprovalsComponent } from './my-approvals/my-approvals.component';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ContractDetailsComponent } from './contract-details/contract-details.co
     DocumentManagerComponent,
     RepaperingReqComponent,
     LoginComponent,
-    ContractDetailsComponent
+    ContractDetailsComponent,
+    MyApprovalsComponent
   ],
   imports: [
     BrowserModule,NgApexchartsModule,FormsModule,ReactiveFormsModule,

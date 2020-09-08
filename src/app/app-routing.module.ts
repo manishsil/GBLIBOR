@@ -6,6 +6,7 @@ import { ContractAnalysisComponent } from './contract-analysis/contract-analysis
 import { DocumentManagerComponent } from './document-manager/document-manager.component';
 import { RepaperingReqComponent } from './RepaperingRequest/repapering-req/repapering-req.component';
 import { LoginComponent } from './login/login.component';
+import { MyApprovalsComponent } from './my-approvals/my-approvals.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'template' , component: TemplateUploadComponent},
   {path: 'documents' , component: DocumentManagerComponent},
   {path: 'search' , component: DocumentSearchComponent},
-  {path: 'analysis' , component: ContractAnalysisComponent}
+  {path: 'analysis' , component: ContractAnalysisComponent},
+  {path: 'approvals' , component: MyApprovalsComponent}
 ];
 
 @NgModule({
