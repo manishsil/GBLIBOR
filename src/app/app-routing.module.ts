@@ -18,7 +18,7 @@ const routes: Routes = [
   {path: 'documents' , component: DocumentManagerComponent},
   {path: 'search' , component: DocumentSearchComponent},
   {path: 'analysis' , component: ContractAnalysisComponent},
-  {path: 'dashboard' , component: DashBoardComponent}
+  {path: 'dashboard' , component: DashBoardComponent},
   {path: 'approvals' , component: MyApprovalsComponent}
 ];
 
