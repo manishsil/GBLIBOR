@@ -95,16 +95,16 @@ export class GbliborService {
     return this.http.get<any>(environment.apiUrl + '/find/myapproval' + username).pipe(catchError(this.erroHandler));
   }
   getApproveRisk(contractId: number) {
-    return this.http.post<any>(environment.apiUrl + 'authrisk/workflow', contractId).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/authrisk/workflow', contractId).pipe(catchError(this.erroHandler));
   }
   getApproveProgram(contractId: number) {
-    return this.http.post<any>(environment.apiUrl + 'authprogram/workflow', contractId).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/authprogram/workflow', contractId).pipe(catchError(this.erroHandler));
   }
   getApproveLegal(contractId: number) {
-    return this.http.post<any>(environment.apiUrl + 'authlegal/workflow', contractId).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/authlegal/workflow', contractId).pipe(catchError(this.erroHandler));
   }
   getApproveTreasury(contractId: number) {
-    return this.http.post<any>(environment.apiUrl + 'authtreasury/workflow', contractId).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/authtreasury/workflow', contractId).pipe(catchError(this.erroHandler));
   }
 
   erroHandler(error: HttpErrorResponse) {
