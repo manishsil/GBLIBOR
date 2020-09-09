@@ -29,6 +29,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   processing = true;
   pdfSrc: any;
   contractId: number;
+  counterPartyId: number;
   riskData: any[];
   financialLoanData: Loan;
   financialDerivtvData: Derivative;
@@ -142,6 +143,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     // server call to load intitiate screen data
     this.service.getWorkFlowIntiateData(this.contractId).subscribe(resp => {
       this.contractDt = resp;
+      this.counterPartyId = resp.counterPartyId;
       this.isInitated = true;
       this.selectedTab = 0;
     });
@@ -171,11 +173,11 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   showFinancialData() {
     if (this.contractDt.contractTypeId === 1) {
-      this.service.getFinancialLoanData(this.contractId).subscribe(dt => {
+      this.service.getFinancialLoanData(this.counterPartyId).subscribe(dt => {
         this.financialLoanData = dt;
       });
     } else if (this.contractDt.contractTypeId === 2) {
-      this.service.getFinancialDerivativeData(this.contractId).subscribe(dt => {
+      this.service.getFinancialDerivativeData(this.counterPartyId).subscribe(dt => {
         this.financialDerivtvData = dt;
       });
     }
