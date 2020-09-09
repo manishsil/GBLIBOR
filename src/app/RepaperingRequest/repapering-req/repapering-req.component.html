@@ -1,128 +1,345 @@
 <div style="text-align: center">
+  <br>
     <h1>Repapering Request</h1>
 </div>
-<mat-horizontal-stepper #stepper linear [selectedIndex]="currentStep">
 
-    <mat-step label="Initiation" [completed]="processing">
-      Step 1 Initiation
-      <div>
-        <button mat-button matStepperNext>Next</button>
+<mat-horizontal-stepper #stepper linear [selectedIndex]="currentStep" (selectionChange)="onStepChange($event)">
+
+    <mat-step label="Initiation">
+      <table>
+        <tr>
+          <td style="width: 15%" class="bold">Upload Doc</td>
+        <td style="width: 25%"><input type="text" [disabled]="true" [(ngModel)]="fileName" /></td>
+          <td style="width: 10%">
+            <button>
+              <label for="files">Upload</label>
+              <input id="files" (change)="handleFileInput($event.target.files)" type="file"  style="display: none" />
+            </button>
+          </td>
+          <td style="width: 50%">
+              <input type="button" value="OCR" (click)="loadOCRData()" />
+              &nbsp;&nbsp;
+              <input type="button" value="Initiate" (click)="loadInitiateData()" [disabled]="!fileName"/>
+            </td>
+        </tr>
+      </table>      
+      <div *ngIf="isInitated"><!---->
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
+        <br>
+        <button mat-button matStepperNext>Review</button>
       </div>
     </mat-step>
   
-    <mat-step label="Review" [completed]="processing">
-      Step 2 Review
+    <mat-step label="Review">
+      <app-contract-details [contractDt]="contractDt"></app-contract-details>
+      <br>
       <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext>Amend</button>
       </div>
+      <br>
     </mat-step>
   
     <mat-step label="Amendment">
-        <div style="width: 100%; min-height: 650px;">
-          <div style="text-align: center;height: 20px; width: 100%">
-            <span style="font-size: large; font-weight: bolder">FORM FIELDS</span>
-          </div>
-          <div class="amendmentDiv">
-            <div style="text-align: center"><span style="font-size: large; font-weight: bolder">As Is</span></div>
-            <div class="asIs">
-              <div class="sec1">
-                  <pdf-viewer [src]="pdfSrc" 
-                  [render-text]="true"
-                  style="display: block; width: 100%; height: 100%;"
-                  ></pdf-viewer>
-              </div>
-              <div class="sec2">
-                  <pdf-viewer [src]="pdfSrc" 
-                  [render-text]="true"
-                  style="display: block; width: 100%; height: 100%;"
-                  ></pdf-viewer>
-              </div>
-            </div>
-            <div  style="text-align: center; margin-top: 5px"><span style="font-size: large; font-weight: bolder">To Be</span></div>
-            <div class="toBe">
-                <div class="sec1">
-                    <pdf-viewer [src]="pdfSrc"[render-text]="true"style="display: block; width: 100%; height: 100%;"></pdf-viewer>
-                </div>
-                <div class="sec2">
-                   
-                </div>
-            </div>
-
-          </div>
-          <div class="detalilsTab" style="height: 100px;">
-              <mat-tab-group>
-                  <mat-tab label="Risk"> Risk </mat-tab>
-                  <mat-tab label="Financial"> Financial </mat-tab>
-                  <mat-tab label="Collateral"> Collateral </mat-tab>
-                  <mat-tab label="Work history"> Work history </mat-tab>
-                  <mat-tab label="Client Outreach"> Client Outreach </mat-tab>
-                  <mat-tab label="Approvals"> Approvals </mat-tab>
-              </mat-tab-group>
-          </div>
-        </div>
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
+        <table><tr><th style="text-align: center">As is</th><th style="text-align: center">To be</th></tr>
+          <tr>
+            <td><iframe width='500px' height='300px' src='' id='pdfFrame1'></iframe></td>
+            <td><iframe width='500px' height='300px' src='\assets\abc.pdf' id='pdfFrame2'></iframe></td>
+          </tr>
+        </table>
+        <br>
+        <table style="width: 99%">
+          <tr>
+            <td style="text-align: center; width: 500px">
+              <table>
+                <tr><td></td></tr>
+                <tr><td><button mat-button (click)="save()" style="width: 100px">Save</button></td></tr>
+                <tr><td></td></tr>
+                <tr><td><button mat-button (click)="skip()" [disabled]="!this.content" style="width: 100px">Skip</button></td></tr>
+                <tr><td></td></tr>
+                <tr><td> <button mat-button (click)="preview()" style="width: 100px">Preview</button></td></tr>
+              </table>
+              </td>
+              <td style=" width: 480px;">
+                  <quill-editor [styles]="{height: '200px'}" [(ngModel)]="content" [modules]="modules"></quill-editor>
+              </td>
+          </tr>
+        </table>
+        <br>
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext>Authorize</button>
         </div>
     </mat-step>
 
     <mat-step label="Authorize">
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
+        <table><tr><th style="text-align: center">As is</th><th style="text-align: center">To be</th></tr>
+          <tr>
+            <td><iframe width='500px' height='300px' src='' id='pdfFrame3'></iframe></td>
+            <td><iframe width='500px' height='300px' src='\assets\abc.pdf' id='pdfFrame4'></iframe></td>
+          </tr>
+        </table>
+        <br>         
         <div>
-            <div style="text-align: center;height: 20px; width: 100%">
-                <span style="font-size: large; font-weight: bolder">FORM FIELDS</span>
-            </div>
-            <div class="docDiv">
-              <div class="divAsIs">
-                <div class="headerTest" style="text-align: center"><span style="font-size: large; font-weight: bolder">As Is</span></div>
-                <div class="divPdf">
-                  <div class="wholePdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
-                  <div class="labourPdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
-                </div>
-                <div>Navigation</div>
-              </div>
-
-
-              <div class="divToBe">
-                  <div class="headerTest" style="text-align: center"><span style="font-size: large; font-weight: bolder">To Be</span></div>
-                  <div class="divPdf">
-                    <div class="wholePdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
-                    <div class="labourPdf"><pdf-viewer [src]="pdfSrc"[render-text]="true"></pdf-viewer></div>
-                  </div>
-                  <div>Navigation</div>
-              </div>
-            </div>
-            <div class="detalilsTab" style="height: 100px;">
-                <mat-tab-group>
-                    <mat-tab label="Risk"> Risk </mat-tab>
-                    <mat-tab label="Financial"> Financial </mat-tab>
-                    <mat-tab label="Collateral"> Collateral </mat-tab>
-                    <mat-tab label="Work history"> Work history </mat-tab>
-                    <mat-tab label="Client Outreach"> Client Outreach </mat-tab>
-                    <mat-tab label="Approvals"> Approvals </mat-tab>
-                </mat-tab-group>
-            </div>
-            <div>
-                <button mat-button matStepperPrevious>Back</button>
-                <button mat-button matStepperNext>Next</button>
-            </div>
+          <button mat-button matStepperNext>Verify</button>
         </div>
-        
       </mat-step>
 
       <mat-step label="Verification">
-        Step 5 Verification
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
         <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
+          <button mat-button matStepperNext>Close</button>
+        </div>
       </mat-step>
       <mat-step label="Close">
-        You are now done.
-        <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Complete</button>
-          </div>
+        <app-contract-details [contractDt]="contractDt"></app-contract-details>
       </mat-step>
     
   </mat-horizontal-stepper>
+
+<!-- <hr> -->
+<mat-tab-group animationDuration="0ms" *ngIf="stepIndex && stepIndex!=0" 
+[(selectedIndex)]="selectedTab" (selectedTabChange)="laodTabDetails($event)">
+  <mat-tab label="Risk">
+    <br> 
+    <table style="width: 90%" *ngIf="riskData">
+      <tr>
+        <th style="width: 20%">Contract Risk ID</th>
+        <th style="width: 20%">Risk ID</th>
+        <th style="width: 50%">Description</th>
+        <th style="width: 10%">Status</th>
+      </tr>
+      <tr *ngFor="let item of riskData">
+        <td style="width: 20%">{{item.contractRiskId}}</td>
+        <td style="width: 20%">{{item.riskId}}</td>
+        <td style="width: 50%">{{item.riskDesc}}</td>
+        <td style="width: 10%">{{item.resolutionStatus}}</td>
+      </tr>
+    </table>
+    <br>
+  </mat-tab>
+  <mat-tab label="Financial"> 
+    <br> 
+    <table style="width: 90%" *ngIf="financialLoanData">
+        <tr>
+          <td style="width: 20%">Loan Amount ($)</td>
+          <td style="width: 30%">{{financialLoanData.loanAmount}}</td>
+          <td style="width: 20%">Loan Currency</td>
+          <td style="width: 30%">{{financialLoanData.loanCurrency}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%">Start Date</td>
+          <td style="width: 30%">{{financialLoanData.startDate}}</td>
+          <td style="width: 20%">Maturity Date</td>
+          <td style="width: 30%">{{financialLoanData.maturityDate}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%">Tenure Months</td>
+          <td style="width: 30%">{{financialLoanData.tenorMonths}}</td>
+          <td style="width: 20%">Rate Of Interest</td>
+          <td style="width: 30%">{{financialLoanData.rateOfInterest}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%">Collateral Info</td>
+          <td style="width: 30%">{{financialLoanData.collateralInfo}}</td>
+          <td style="width: 20%">Borrower Name</td>
+          <td style="width: 30%">{{financialLoanData.borrowerName}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%">Lender Name</td>
+          <td style="width: 30%">{{financialLoanData.lenderName}}</td>
+          <td style="width: 20%">Admin Agent Name</td>
+          <td style="width: 30%">{{financialLoanData.adminAgentName}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%">Joint Lead Agreement</td>
+          <td style="width: 30%">{{financialLoanData.jointLeadArrangerName}}</td>
+          <td style="width: 20%">co Syndication Agent</td>
+          <td style="width: 30%">{{financialLoanData.coSyndicationAgentName}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%">co Doc Agent Name</td>
+          <td style="width: 30%">{{financialLoanData.coDocumentationAgentName}}</td>
+          <td style="width: 20%; "></td>
+          <td style="width: 30%"></td>
+        </tr>
+    </table>
+    <table style="width: 90%" *ngIf="financialDerivtvData">
+        <tr>
+          <td style="width: 20%; ">Jurisdiction</td>
+          <td style="width: 30%">{{financialDerivtvData.jurisdiction}}</td>          
+          <td style="width: 20%; ">Governing Law</td>
+          <td style="width: 30%">{{financialDerivtvData.governingLaw}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Master Agreement Type</td>
+          <td style="width: 30%">{{financialDerivtvData.masterAgreementType}}</td>          
+          <td style="width: 20%; ">Master Agreement Active</td>
+            <td style="width: 30%">{{financialDerivtvData.masterAgreementActive}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Credit Support Annex</td>
+          <td style="width: 30%">{{financialDerivtvData.creditSupportAnnex}}</td>          
+          <td style="width: 20%; ">Credit Support Annex Active</td>
+          <td style="width: 30%">{{financialDerivtvData.creditSupportAnnexActive}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Credit Supply</td>
+          <td style="width: 30%">{{financialDerivtvData.creditSupByTitleTransfer}}</td>          
+          <td style="width: 20%; ">Initial Margin</td>
+          <td style="width: 30%">{{financialDerivtvData.initialMargin}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Netted Against Variation</td>
+          <td style="width: 30%">{{financialDerivtvData.nettedAgainstVariation}}</td>
+          <td style="width: 20%; ">Netting Elligible</td>
+          <td style="width: 30%">{{financialDerivtvData.nettingEligible}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Collaterla Enforceability</td>
+          <td style="width: 30%">{{financialDerivtvData.collateralEnforceability}}</td>
+          <td style="width: 20%; ">Trigger Downgrade</td>
+          <td style="width: 30%">{{financialDerivtvData.triggerDowngrade}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Rights</td>
+          <td style="width: 30%">{{financialDerivtvData.rehypothicationRights}}</td>
+          <td style="width: 20%; ">Collateral Type</td>
+          <td style="width: 30%">{{financialDerivtvData.colleteralType}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Valid Currencies</td>
+          <td style="width: 30%">{{financialDerivtvData.validCurrencies}}</td>
+          <td style="width: 20%; ">Base Currency</td>
+          <td style="width: 30%">{{financialDerivtvData.baseCurrency}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Valuation Percentage</td>
+          <td style="width: 30%">{{financialDerivtvData.valuationPercentage}}</td>
+          <td style="width: 20%; ">Min Transfer Amount</td>
+          <td style="width: 30%">{{financialDerivtvData.minTransferAmount}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Threshhold Amount</td>
+          <td style="width: 30%">{{financialDerivtvData.thresholdAmount}}</td>  
+          <td style="width: 20%; ">Variation Margin</td>
+          <td style="width: 30%">{{financialDerivtvData.variationMargin}}</td>
+        </tr>
+        <tr>
+          <td style="width: 20%; ">Triparty</td>
+          <td style="width: 30%">{{financialDerivtvData.triparty}}</td>
+          <td style="width: 20%"></td>
+          <td style="width: 30%"></td>
+        </tr>
+      </table>
+    <br>
+  </mat-tab>
+  <mat-tab label="Collateral"> 
+  <br>
+  
+  <br>
+  </mat-tab>
+  <mat-tab label="Work History"> 
+    <div class="card">
+      <div class="card-container">
+        <div style="float: right">Approval History: 09/01/2020</div>
+        Manish Singh 
+        <div class="content-center">
+          <table>
+            <tr>
+              <td class="right-align-text" style="padding: 0">Assigned to:</td>
+              <td style="padding: 0">Manish Singh</td>
+            </tr>
+            <tr>
+                <td class="right-align-text" style="padding: 0">State:</td>
+                <td style="padding: 0">Approved</td>
+              </tr>
+          </table>
+        </div> 
+      </div>
+    </div>
+    <br>
+  </mat-tab>
+  <mat-tab label="Client Outreach" *ngIf="stepIndex && stepIndex>1"> 
+    <br>
+    <table *ngIf="clientOutreach">
+      <tr>
+        <td style="width: 10%" class="bold">Client Name</td>
+        <td colspan="2">
+          <input type="text" [(ngModel)]="clientOutreach.name" />
+        </td>
+        <td><input style="width: 200px; text-align: center" type="button" value="Send Email" (click)="sendEmail()"/></td>
+      </tr>
+      <tr>
+        <td style="width: 10%" class="bold">Address</td>
+        <td colspan="2">
+          <input type="text" [(ngModel)]="clientOutreach.address" />
+        </td>
+        <td><input style="width: 200px; text-align: center" type="button" value="Send Email with Attachment" (click)="sendEmail()"/></td>
+      </tr>
+      <tr>
+        <td style="width: 10%" class="bold">Zip</td>
+        <td style="width: 40%">
+          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.zip" />
+        </td>
+        <td style="width: 10%" class="bold">Phone</td>
+        <td style="width: 40%">
+          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.phone" />
+        </td>
+      </tr>
+      <tr>
+        <td class="bold">Fax</td>
+        <td>
+          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.fax" />
+        </td>
+        <td class="bold">Email</td>
+        <td>
+          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.email" />
+        </td>
+      </tr>
+    </table>
+    <br>
+  </mat-tab>
+  <mat-tab label="Approvals" *ngIf="stepIndex && stepIndex>1">
+    <br> 
+    <table style="width: 90%" *ngIf="approvalsDt">
+      <tr>
+        <th style="width: 15%">Contract ID</th>
+        <th style="width: 10%">State</th>
+        <th style="width: 15%">Approver</th>
+        <th style="width: 20%">Comments</th>
+        <th style="width: 10%">Created On</th>
+        <th style="width: 10%">Updated On</th>
+        <th style="width: 20%"></th>
+      </tr>
+      <tr *ngFor="let item of approvalsDt">
+        <td>{{item.contractId}}</td>
+        <td>{{statusIds[item.statusId]}}</td>
+        <td>{{item.assignedTo}}</td>
+        <td>{{item.comments}}</td>
+        <td>{{item.createdOn}}</td>
+        <td>{{item.updatedOn}}</td>
+        <td><input type="button" value="Approve" (click)="approve()" /></td>
+      </tr>
+    </table>
+    <br>
+  </mat-tab>
+  <mat-tab label="Verify" *ngIf="stepIndex && stepIndex>3">
+      <br> 
+      <table style="width: 90%" *ngIf="verifyDt">
+        <tr>
+          <th style="width: 15%">Contract Risk ID</th>
+          <th style="width: 20%">Risk ID</th>
+          <th style="width: 50%">Description</th>
+          <th style="width: 15%">Status</th>
+        </tr>
+        <tr *ngFor="let item of verifyDt">
+          <td>{{item.state}}</td>
+          <td>{{item.verifier}}</td>
+          <td>{{item.notes}}</td>
+          <td>{{item.updatedOn}}</td>
+        </tr>
+      </table>
+      <br>
+  </mat-tab>
+</mat-tab-group>
