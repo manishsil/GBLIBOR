@@ -8,6 +8,8 @@ export class LoginService {
 
   constructor() { }
 
+  loginId: string;
+
   private userDetails = new Subject<any>();
 
   setUserDetails(obj: any) {

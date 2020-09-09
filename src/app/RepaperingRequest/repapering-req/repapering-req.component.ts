@@ -59,9 +59,9 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
         this.currentStep = 3;
       }
     });
-    this.subscription = this.loginService.getUserDetails().subscribe(dt => {
+    /* this.subscription = this.loginService.getUserDetails().subscribe(dt => {
       this.userDetails = dt;
-    });
+    }); */
   }
 
   onStepChange(event: any): void {
@@ -123,7 +123,8 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     const file: any = files.item(0);
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('userid', this.userDetails.loginId);
+    //formData.append('userid', this.userDetails.loginId);
+    formData.append('userid', this.loginService.loginId);
 
     this.service.uploadFile(formData).subscribe(resp => {
       this.fileName = resp.documentFileName;
@@ -301,7 +302,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    //this.subscription.unsubscribe();
     this.routesubc.unsubscribe();
   }
 

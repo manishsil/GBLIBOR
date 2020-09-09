@@ -23,6 +23,7 @@ export class LoginComponent implements OnInit {
      this.service.getUserDetails(this.username).subscribe(dt => {
       setTimeout(() => {
         this.loginService.setUserDetails(dt);
+        this.loginService.loginId = dt.loginId;
        });
       this.router.navigate(['/repapering']);
      });
