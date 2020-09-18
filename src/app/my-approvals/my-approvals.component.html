@@ -1,0 +1,64 @@
+<div style="font-weight: bold; background-color: lightgray; padding: 10px;margin-left: -15px;">
+    My Approvals
+</div>
+<br>
+<table style="width: 100%" *ngIf="approvalsDt">
+        <tr>
+          <th style="width: 10%">Contract ID</th>
+          <th style="width: 10%">State</th>
+          <th style="width: 10%">Approver</th>
+          <th style="width: 13%">Group Name</th>
+          <th style="width: 12%">Responsibility</th>
+          <th style="width: 15%">Comments</th>
+          <th style="width: 10%">Created</th>
+          <th style="width: 10%">Updated</th>
+          <th style="width: 10%"></th>
+        </tr>
+        <tr *ngFor="let item of libor">
+          <td>{{item.contractId}}</td>
+          <td>{{item.state}}</td>
+          <td>{{item.approver}}</td>
+          <td>{{item.groupName}}</td>
+          <td>{{item.responsibility}}</td>
+          <td>{{item.comments}}</td>
+          <td>{{item.createdOn}}</td>
+          <td>{{item.updatedOn}}</td>
+          <td><input type="button" value="Approve" (click)="navWorkflow(item.contractId)" /></td>
+        </tr>
+        <tr><td></td></tr>
+        <tr *ngFor="let item of risk">
+          <td>{{item.contractId}}</td>
+          <td>{{item.state}}</td>
+          <td>{{item.approver}}</td>
+          <td>{{item.groupName}}</td>
+          <td>{{item.responsibility}}</td>
+          <td>{{item.comments}}</td>
+          <td>{{item.createdOn}}</td>
+          <td>{{item.updatedOn}}</td>
+          <td><input type="button" value="Approve" (click)="navWorkflow(item.contractId)" /></td>
+        </tr>
+        <tr><td></td></tr>
+        <tr *ngFor="let item of legal">
+          <td>{{item.contractId}}</td>
+          <td>{{item.state}}</td>
+          <td>{{item.approver}}</td>
+          <td>{{item.groupName}}</td>
+          <td>{{item.responsibility}}</td>
+          <td>{{item.comments}}</td>
+          <td>{{item.createdOn}}</td>
+          <td>{{item.updatedOn}}</td>
+          <td><input type="button" value="Approve" (click)="navWorkflow(item.contractId)" /></td>
+        </tr>
+        <tr><td></td></tr>
+        <tr *ngFor="let item of treasury">
+          <td>{{item.contractId}}</td>
+          <td>{{item.state}}</td>
+          <td>{{item.approver}}</td>
+          <td>{{item.groupName}}</td>
+          <td>{{item.responsibility}}</td>
+          <td>{{item.comments}}</td>
+          <td>{{item.createdOn}}</td>
+          <td>{{item.updatedOn}}</td>
+          <td><input type="button" value="Approve" (click)="navWorkflow(item.contractId)" /></td>
+        </tr>
+      </table>

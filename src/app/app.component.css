@@ -37,6 +37,39 @@ footer {
   display: table-cell; /* Make elements inside the container behave like table cells */
 }
 
+p {
+  border: 1px solid black;
+  margin: 5px; 
+  padding-left: 5px; 
+}
+
+.sidenav {
+  background-color:#004165 !important;
+}
+.navbar {
+  background-color: #004165 !important;
+}
+
+p > a {
+  color: #fff;
+}
+img {
+  height: 51px;
+  width: 227px;
+  margin-top: -15px;
+  margin-left: -16px;
+}
+#header {
+  color: #fff;
+}
+#searchbox {
+  margin-top: 10px;
+}
+
+li > a:hover {
+  background-color:orangered;
+}
+
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
   .sidenav {

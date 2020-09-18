@@ -6,16 +6,20 @@ import { ContractAnalysisComponent } from './contract-analysis/contract-analysis
 import { DocumentManagerComponent } from './document-manager/document-manager.component';
 import { RepaperingReqComponent } from './RepaperingRequest/repapering-req/repapering-req.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
+import { LoginComponent } from './login/login.component';
+import { MyApprovalsComponent } from './my-approvals/my-approvals.component';
 
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: ''} , 
+  {path: '', pathMatch: 'full', redirectTo: ''} ,
+  {path: 'login' , component: LoginComponent},
   {path: 'repapering' , component: RepaperingReqComponent},
   {path: 'template' , component: TemplateUploadComponent},
   {path: 'documents' , component: DocumentManagerComponent},
   {path: 'search' , component: DocumentSearchComponent},
   {path: 'analysis' , component: ContractAnalysisComponent},
-  {path: 'dashboard' , component: DashBoardComponent}
+  {path: 'dashboard' , component: DashBoardComponent},
+  {path: 'approvals' , component: MyApprovalsComponent}
 ];
 
 @NgModule({
