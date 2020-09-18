@@ -1,6 +1,7 @@
 
   <div class="content-wrapper">
 
+<h1 style="margin-left: 25vw">DASHBOARDS</h1>
 <mat-form-field appearance="fill">
   <mat-label>Select Dash Board Type</mat-label>
   <mat-select (selectionChange)="onDashboardChange($event)">
@@ -14,7 +15,7 @@
       <div class="row">
 
 
-            <div *ngFor="let ele of portFolioMngObjs" class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2 mt-4">
+            <div *ngFor="let ele of dashBoardObj" class="col-lg-4 col-md-4 col-sm-6 col-12 mb-2 mt-4">
                     <div class="inforide">
                       <div class="row">
                         <div class="col-lg-3 col-md-4 col-sm-4 col-4 rideone">
