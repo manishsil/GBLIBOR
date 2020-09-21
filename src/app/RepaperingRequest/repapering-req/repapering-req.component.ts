@@ -255,7 +255,8 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   showFallbackData() {
-    this.service.getFallbackData().subscribe(dt => {
+    this.service.getFallbackData(this.contractId).subscribe(dt => {
+      console.log(JSON.stringify(dt));
       this.fallbackData = dt;
     });
   }
