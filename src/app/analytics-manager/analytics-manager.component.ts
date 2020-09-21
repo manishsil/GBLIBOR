@@ -13,7 +13,7 @@ export class AnalyticsManagerComponent implements OnInit {
   global = false;
   contract = false;
   contractId: number;
-  globalData: Global;
+  globalData: Global[];
   contractMeta: ContractMeta;
 
   constructor(private service: GbliborService) { }
@@ -22,7 +22,7 @@ export class AnalyticsManagerComponent implements OnInit {
   }
 
   getGlobalData() {
-  /*   this.globalData = {
+    /*  this.globalData = [{
       regulatoryEventId: 11,
       contractType : 12,
       domainContextDictionaryId: 'ms',
@@ -34,7 +34,7 @@ export class AnalyticsManagerComponent implements OnInit {
       phraseRule: 'gsg',
       entityRule: 'gssfg',
       referenceExamples: 'gfdg'
-    }; */
+    }]; */
     this.service.getGlobalData().subscribe(dt => {
       this.globalData = dt;
     });
