@@ -30,6 +30,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   pdfSrc: any;
   contractId: number;
   counterPartyId: number;
+  fallbackData: any;
   riskData: any[];
   financialLoanData: Loan;
   financialDerivtvData: Derivative;
@@ -104,16 +105,18 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     if ($event.index === 0) {
       this.showRiskData();
     } else if ($event.index === 1) {
-      this.showFinancialData();
+      this.showRiskData();
     } else if ($event.index === 2) {
-      this.showCollateralData();
+      this.showFinancialData();
     } else if ($event.index === 3) {
-      this.showWorkhistoryData();
+      this.showCollateralData();
     } else if ($event.index === 4) {
-      this.showClientOutreachData();
+      this.showWorkhistoryData();
     } else if ($event.index === 5) {
-      this.showApprovalsData();
+      this.showClientOutreachData();
     } else if ($event.index === 6) {
+      this.showApprovalsData();
+    } else if ($event.index === 7) {
       this.showVerifyData();
     }
   }
@@ -249,6 +252,12 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     });
     //this.verifyDt = [{state: 'Verified', verifier: 'Abc Xyz', notes: 'verification done', updatedOn: '02/05/2020'}];
 
+  }
+
+  showFallbackData() {
+    this.service.getFallbackData().subscribe(dt => {
+      this.fallbackData = dt;
+    });
   }
 
   loadAmendmendData() {

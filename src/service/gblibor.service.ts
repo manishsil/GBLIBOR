@@ -107,6 +107,18 @@ export class GbliborService {
     return this.http.post<any>(environment.apiUrl + '/authtreasury/workflow', contractId).pipe(catchError(this.erroHandler));
   }
 
+  getGlobalData() {
+    return this.http.get<any>(environment.apiUrl + '/get/domaindata/global').pipe(catchError(this.erroHandler));
+  }
+
+  getContractMetaData(contractId: number) {
+    return this.http.post<any>(environment.apiUrl + '/get/contractmetadata', contractId).pipe(catchError(this.erroHandler));
+  }
+
+  getFallbackData() {
+    return this.http.get<any>(environment.apiUrl + ' /get/fallbackdata').pipe(catchError(this.erroHandler));
+  }
+
   erroHandler(error: HttpErrorResponse) {
     return throwError(error.message || 'server Error');
   }

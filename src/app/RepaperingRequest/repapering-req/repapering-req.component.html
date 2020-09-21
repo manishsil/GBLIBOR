@@ -61,7 +61,8 @@
               </table>
               </td>
               <td style=" width: 480px;">
-                  <quill-editor [styles]="{height: '200px'}" [(ngModel)]="content" [modules]="modules"></quill-editor>
+                <!-- <textarea [(ngModel)]="content" rows="40" cols="140"></textarea> -->
+                 <quill-editor [styles]="{height: '200px'}" [(ngModel)]="content" [modules]="modules"></quill-editor>
               </td>
           </tr>
         </table>
@@ -100,6 +101,69 @@
 <!-- <hr> -->
 <mat-tab-group animationDuration="0ms" *ngIf="stepIndex && stepIndex!=0" 
 [(selectedIndex)]="selectedTab" (selectedTabChange)="laodTabDetails($event)">
+  <mat-tab label="Fallback Analysis">
+    <br> 
+    <div> <!--*ngIf="fallbackData"-->
+      <div style="padding:10px 0 0 15px;">
+        <div style="font-weight: bold">Fallback</div>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Benchmark Unavailable<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Benchmark Illegal
+      </div>
+      <div style="padding:10px 0 0 15px;">
+        <div style="font-weight: bold">Fallback Robustness</div>
+        <mat-checkbox [checked]="true" ></mat-checkbox>  Fallback Robustness<br>
+      </div>
+      <div style="padding:10px 0 0 15px;">
+        <div style="font-weight: bold">Asset Class Consistency</div>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback AssetClass Consistency<br>
+      </div>
+      <div style="padding:10px 0 0 15px;">
+        <div style="font-weight: bold">Implementation Fairness and Flexibility</div>
+        <mat-checkbox [checked]="true" ></mat-checkbox>  Fallback Implementation Fairness<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Implementation Flexibility<br>
+      </div>
+      <div style="padding:10px 0 0 15px;">
+        <div style="font-weight: bold">Benchmark Rate</div>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Explicit Benchmark Rate Forward-looking SOFR<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Explicit Benchmark Rate Next Available Term SOFR<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Explicit Benchmark Rate Compounded SOFR<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Explicit Benchmark Rate Relevant ISDA Fallback Rate<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Explicit Benchmark Rate Issuer Selected Rate<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Explicit Benchmark Rate Noteholder Selected Rate<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Explicit Benchmark Rate Transaction Specific Rate<br>
+      </div>
+      <div style="padding:10px 0 0 15px;">
+        <div style="font-weight: bold">Spread Adjustment</div>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Spread Adjustment Hardwired ARCC Selected<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Spread Adjustment Hardwired ISDA Selected<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Spread Adjustment Hardwired Other Selected<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Spread Adjustment Amendment Lender Consent<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Spread Adjustment Amendment Borrower Consent<br>
+      </div>
+      <div style="padding:10px 0 0 15px;">
+        <div style="font-weight: bold">Term Structure</div>
+        <mat-checkbox [checked]="true" >  </mat-checkbox> Fallback Term Structure<br>
+      </div>
+      <div style="padding:10px 0 0 15px;">
+        <div style="font-weight: bold">Proposed Trigger</div>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Permenent Cessation Benchmark Admin<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Permenent Cessation Regulatory Supervisor<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Pre-cessation Regulatory Supervisor<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Pre-cessation Other<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Pre-cessation FederalOrState Law<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Early Opt-in SOFR Hardwired<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Early Opt-in Lender Amendment<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Early Opt-in Syndicate Agent Amendment<br>
+      </div>
+      <div style="padding:10px 0 0 15px;">
+        <div style="font-weight: bold"> Existing Trigger</div>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Trigger WaterFall1 Unavailable At_source<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Trigger WaterFall2 Agent Unable Quotes Banks London interbank market<br>
+        <mat-checkbox [checked]="true" > </mat-checkbox>  Fallback Trigger WaterFall3 Agent Unable Quotes Banks New York City<br>
+      </div>
+    </div>
+    <br>
+  </mat-tab>
   <mat-tab label="Risk">
     <br> 
     <table style="width: 90%" *ngIf="riskData">

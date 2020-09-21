@@ -8,11 +8,13 @@ import { RepaperingReqComponent } from './RepaperingRequest/repapering-req/repap
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { LoginComponent } from './login/login.component';
 import { MyApprovalsComponent } from './my-approvals/my-approvals.component';
+import { AnalyticsManagerComponent } from './analytics-manager/analytics-manager.component';
 
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: ''} ,
   {path: 'login' , component: LoginComponent},
+  {path: 'analytics' , component: AnalyticsManagerComponent},
   {path: 'repapering' , component: RepaperingReqComponent},
   {path: 'template' , component: TemplateUploadComponent},
   {path: 'documents' , component: DocumentManagerComponent},
