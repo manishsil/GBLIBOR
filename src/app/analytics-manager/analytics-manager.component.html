@@ -1,125 +1,174 @@
 <br>
-<button mat-button [matMenuTriggerFor]="menu">Category</button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="global=true;contract=false; getGlobalData();">Global Setup</button>
-  <button mat-menu-item (click)="global=false;contract=true">Contract Metadata</button>
-</mat-menu>
+<mat-tab-group animationDuration="0ms" [(selectedIndex)]="selectedTab" (selectedTabChange)="laodTabDetails($event)">
+  <mat-tab label="Global Setup">
+        <div>
+            <br>
+            <table *ngIf="globalData">
+                <tr>
+                    <td style="width: 50%" class="bold">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Event Type</mat-label>
+                            <mat-select>
+                                <mat-option [value]="'libor'">LIBOR</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td style="width: 50%">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Contract Type</mat-label>
+                            <mat-select>
+                                <mat-option [value]="'loan'">Loan</mat-option>
+                                <mat-option [value]="'derivative'">Derivative</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>    
+        
+            <br>
+            <table>
+                <tr>
+                    <td style="width: 20%" class="bold">Regulatory Event </td>
+                    <td style="width: 30%"><input type="text" [disabled]="true" value="LIBOR" /></td>
+                    <td style="width: 20%" class="bold">Contract Type </td>
+                    <td style="width: 30%"><input type="text" [disabled]="true" value="Syndicate Loan" /></td>
+                </tr>
+                <tr>
+                    <td  class="bold">Domain Context Dictionary Id </td>
+                    <td >
+                        <mat-form-field>
+                            <mat-select [(value)]="selId" (selectionChange)="loadGlobalData()">
+                                <mat-option *ngFor="let item of globalDataFull" [value]="item.domainContextDictionaryId">{{item.domainContextDictionaryId}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                       <!--  <input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextDictionaryId" /> -->
+                    </td>
+                    <td class="bold">Reference Examples </td>
+                    <td><input type="text" [disabled]="true" [(ngModel)]="globalData.referenceExamples " /></td>
+                </tr>
+                <tr>
+                    <td  class="bold">Domain Context Type Id </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextTypeId" /></td>
+                    <td class="bold">Domain Context SubType Id </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextSubTypeId " /></td>
+                </tr>
+            
+                <tr>
+                    <td class="bold">Domain Context Possible Name Definitions </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleNameDefinitions " /></td>
+                    <td class="bold">Domain Context Possible Value Definitions </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleValueDefinitions " /></td>
+                </tr>
+                <tr>
+                    <td class="bold">Phrase Rule </td>
+                    <td><input type="text" [disabled]="true" [(ngModel)]="globalData.phraseRule " /></td>
+                    <td class="bold">Entity Rule </td>
+                    <td><input type="text" [disabled]="true" [(ngModel)]="globalData.entityRule " /></td>
+                </tr>
+                <tr>
+                    <td class="bold">Domain Context Name </td>
+                    <td colspan="3"><textarea rows="2" cols="115" [disabled]="true" [(ngModel)]="globalData.domainContextName" ></textarea>
+                    </td>
+                </tr>
+            </table>        
+        </div>
 
-<br><br>
-<div *ngIf="global">
-    <h1 style="text-align: center">Global Setup</h1>
-    <br>
-    <table *ngIf="globalData">
-        <tr>
-            <td style="width: 50%" class="bold">
-                <mat-form-field appearance="fill">
-                    <mat-label>Event Type</mat-label>
-                    <mat-select>
-                        <mat-option [value]="'libor'">LIBOR</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-            <td style="width: 50%">
-                <mat-form-field appearance="fill">
-                    <mat-label>Contract Type</mat-label>
-                    <mat-select>
-                        <mat-option [value]="'loan'">Loan</mat-option>
-                        <mat-option [value]="'derivative'">Derivative</mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </td>
-        </tr>
-    </table>    
+  </mat-tab>
+  <mat-tab label="Contract Metadata">
+        <div><br>
+            <mat-form-field appearance="fill">
+                <mat-label>Contact Id</mat-label>
+                <mat-select [(value)]="contractId" (selectionChange)="loadContractMetaData()">
+                    <mat-option *ngFor="let contract of contracts" [value]="contract.contractId">{{contract.contractId}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <br>
+            <br>
+        
+            <table *ngIf="contractMetaFull">
+                <tr>
+                    <td style="width: 15%" class="bold">Domain Context Dictionary Id </td>
+                    <td style="width: 35%">
+                        <mat-form-field>
+                            <mat-select [(value)]="selCid" (selectionChange)="loadContractData()">
+                                <mat-option *ngFor="let item of contractMetaFull" [value]="item.domainContextDictionaryId">{{item.domainContextDictionaryId}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </td>
+                    <td style="width: 15%"class="bold">Reference Examples </td>
+                    <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractMeta.referenceExamples " /></td>
+                </tr>
+                <tr>
+                    <td style="width: 15%" class="bold">Header Name</td>
+                    <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerName" /></td>
+                    <td style="width: 15%" class="bold">Header PageNo</td>
+                    <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerPageNo" /></td>
+                </tr>
+                <tr>
+                    <td  class="bold">Header Text Content</td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerTextContent" /></td>
+                    <td class="bold">Header Paragraph Index </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerParagraphIndex" /></td>
+                </tr>
+                <tr>
+                    <td  class="bold">Header FontName</td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerFontName" /></td>
+                    <td class="bold">Header FontSize</td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerFontSize " /></td>
+                </tr>
+            
+                <tr>
+                    <td class="bold">Start LocationX </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.startLocationX " /></td>
+                    <td class="bold">Start LocationY</td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.startLocationY " /></td>
+                </tr>
+                <tr>
+                    <td class="bold">End LocationX </td>
+                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.endLocationX " /></td>
+                    <td class="bold">End LocationY</td>
+                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.endLocationY " /></td>
+                </tr>
+                <tr>
+                    <td  class="bold">Domain Context Type Id </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.domainContextTypeId" /></td>
+                    <td class="bold">Domain Context SubType Id </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.domainContextSubTypeId " /></td>
+                </tr>
+            
+                <tr>
+                    <td class="bold">Domain Context Possible Name Definitions </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.domainContextPossibleNameDefinitions " /></td>
+                    <td class="bold">Domain Context Possible Value Definitions </td>
+                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.domainContextPossibleValueDefinitions " /></td>
+                </tr>
+                <tr>
+                    <td class="bold">Phrase Rule </td>
+                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.phraseRule " /></td>
+                    <td class="bold">Entity Rule </td>
+                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.entityRule " /></td>
+                </tr>
+                <tr>
+                    <td class="bold">Text Similarity </td>
+                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.textSimilarity " /></td>
+                    <td class="bold"></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="bold">Domain Context Name </td>
+                    <td colspan="3"><textarea rows="2" cols="115" [disabled]="true" [(ngModel)]="contractMeta.domainContextName" ></textarea>
+                    </td>
+                </tr>
+            </table>
+        
+        </div>
+            
+            
 
-    <br>
-    <table *ngFor="let globalData of globalData">
-        <tr>
-            <td style="width: 20%" class="bold">Regulatory Event </td>
-            <td style="width: 30%"><input type="text" [disabled]="true" value="LIBOR" /></td>
-            <td style="width: 20%" class="bold">Contract Type </td>
-            <td style="width: 30%"><input type="text" [disabled]="true" value="Syndicate Loan" /></td>
-        </tr>
-        <tr>
-            <td  class="bold">Domain Context Dictionary Id </td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextDictionaryId" /></td>
-            <td class="bold">Domain Context Name </td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextName" /></td>
-        </tr>
-        <tr>
-            <td  class="bold">Domain Context Type Id </td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextTypeId" /></td>
-            <td class="bold">Domain Context SubType Id </td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextSubTypeId " /></td>
-        </tr>
-    
-        <tr>
-            <td class="bold">Domain Context Possible Name Definitions </td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleNameDefinitions " /></td>
-            <td class="bold">Domain Context Possible Value Definitions </td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleValueDefinitions " /></td>
-        </tr>
-        <tr>
-            <td class="bold">Phrase Rule </td>
-            <td><input type="text" [disabled]="true" [(ngModel)]="globalData.phraseRule " /></td>
-            <td class="bold">Entity Rule </td>
-            <td><input type="text" [disabled]="true" [(ngModel)]="globalData.entityRule " /></td>
-        </tr>
-        <tr>
-            <td class="bold">Eeference Examples </td>
-            <td><input type="text" [disabled]="true" [(ngModel)]="globalData.referenceExamples " /></td>
-            <td class="bold"></td>
-            <td></td>
-        </tr>
-    </table>
+  </mat-tab>
+  <mat-tab label="Transition Priority">
 
+  </mat-tab>
+</mat-tab-group>
 
-</div>
-
-<div *ngIf="contract">
-    <h1 style="text-align: center">Contract Metadata</h1>
-    <br>
-    <mat-form-field appearance="fill">
-        <mat-label>Contact Id</mat-label>
-        <mat-select [(value)]="contractId" (selectionChange)="loadContractMetaData()">
-            <mat-option [value]="122345567">12345567</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <br>
-    <br>
-
-    <table *ngIf="contractMeta">
-        <tr>
-            <td style="width: 15%" class="bold">Header Name</td>
-            <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerName" /></td>
-            <td style="width: 15%" class="bold">Header PageNo</td>
-            <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerPageNo" /></td>
-        </tr>
-        <tr>
-            <td  class="bold">Header Text Content</td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerTextContent" /></td>
-            <td class="bold">Header Paragraph Index </td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerParagraphIndex" /></td>
-        </tr>
-        <tr>
-            <td  class="bold">Header FontName</td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerFontName" /></td>
-            <td class="bold">Header FontSize</td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerFontSize " /></td>
-        </tr>
-    
-        <tr>
-            <td class="bold">Start LocationX </td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.startLocationX " /></td>
-            <td class="bold">Start LocationY</td>
-            <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.startLocationY " /></td>
-        </tr>
-        <tr>
-            <td class="bold">End LocationX </td>
-            <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.endLocationX " /></td>
-            <td class="bold">End LocationY</td>
-            <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.endLocationY " /></td>
-        </tr>
-    </table>
-
-</div>
 

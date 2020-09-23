@@ -1,0 +1,20 @@
+
+<div>
+    <label id="example-radio-group-label">Suggested Text</label>
+    <mat-radio-group
+        aria-labelledby="example-radio-group-label"
+        class="example-radio-group"
+        [(ngModel)]="selectedText">
+        <mat-radio-button class="example-radio-button" *ngFor="let option of options" [value]="option">
+        {{option}}
+        </mat-radio-button>
+    </mat-radio-group>
+    <div>
+        <textarea cols="50" [(ngModel)]="customText" ></textarea>
+    </div>
+    
+    <div style="float: right"><button (click)="save()">Save</button></div>
+    
+</div>
+
+

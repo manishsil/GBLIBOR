@@ -34,6 +34,9 @@ import { LoginComponent } from './login/login.component';
 import { ContractDetailsComponent } from './contract-details/contract-details.component';
 import { MyApprovalsComponent } from './my-approvals/my-approvals.component';
 import { AnalyticsManagerComponent } from './analytics-manager/analytics-manager.component';
+import { DialogComponent } from './dialog/dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -47,14 +50,15 @@ import { AnalyticsManagerComponent } from './analytics-manager/analytics-manager
     LoginComponent,
     ContractDetailsComponent,
     MyApprovalsComponent,
-    AnalyticsManagerComponent
+    AnalyticsManagerComponent,
+    DialogComponent
   ],
   imports: [
     QuillModule.forRoot(),
     BrowserModule,NgApexchartsModule,FormsModule,ReactiveFormsModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
     MatStepperModule,MatIconModule, MatTabsModule, MatSelectModule,MatSnackBarModule,PdfViewerModule,MatCardModule,
-    MatMenuModule, MatCheckboxModule, PdfViewerModule,
+    MatMenuModule, MatCheckboxModule,MatDialogModule, MatRadioModule, PdfViewerModule,
     HttpClientModule, BrowserAnimationsModule
   ],
   providers: [

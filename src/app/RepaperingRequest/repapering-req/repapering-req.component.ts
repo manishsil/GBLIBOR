@@ -10,6 +10,10 @@ import { Subscription } from 'rxjs';
 import { User } from 'src/app/model/user';
 import { Approval } from 'src/app/model/approval';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from 'src/app/dialog/dialog.component';
+import { QuillEditorComponent } from 'ngx-quill';
+import { ContractMeta } from 'src/app/model/contractmeta';
 
 
 @Component({
@@ -19,6 +23,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
+  @ViewChild('editor') editor: QuillEditorComponent;
   @ViewChild('stepper') stepper: MatStepper;
   stepIndex: number;
   selectedTab: number;
@@ -45,14 +50,76 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   amendData = ['This is paragraph 1', 'This is paragraph 2', 'This is paragraph 3'];
   verifyDt: {state: string, verifier: string, notes: string, updatedOn: string}[];
   statusIds = {1: 'Pending', 2: 'completed', 3: 'Rejected', 4: 'Cancelled'};
+  listdocumentMetaData: ContractMeta[];
+  fallbackBenchmarkUnavailable: boolean;
+  fallbackBenchmarkIllegal: boolean;
+  editorContent: ContractMeta;
 
   constructor(private snackBar: MatSnackBar, private service: GbliborService,
-              private loginService: LoginService, private route: ActivatedRoute) {
+              private loginService: LoginService, private route: ActivatedRoute,
+              public dialog: MatDialog) {
                 this.modules = {toolbar: [['bold', 'italic', 'underline', 'strike']]};
-
               }
 
   ngOnInit(): void {
+
+    /* this.listdocumentMetaData = [
+      {
+          "headerName": null,
+          "headerPageNo": 0,
+          "headerTextContent": null,
+          "headerParagraphIndex": 0,
+          "headerFontName": null,
+          "headerFontSize": null,
+          "startLocationX": 0.0,
+          "startLocationY": 0.0,
+          "endLocationX": 0.0,
+          "endLocationY": 0.0,
+          "regulatoryEventId": 0,
+          "contractType": 1,
+          "domainContextDictionaryId": "Agreement_Name",
+          "domainContextName": "Agreement Name",
+          "domainContextTypeId": 1,
+          "domainContextSubTypeId": 1,
+          "domainContextPossibleNameDefinitions": "Agreement Name | Contract Name",
+          "domainContextPossibleValueDefinitions": "Loan Agreement | This is paragraph zero. This is paragraph 1. This is paragraph 2. <p>This is paragraph 3.</p> This is paragraph four",
+          "phraseRule": "followed by (\"Agreement\") or (\"Loan Agreement\")",
+          "entityRule": "",
+          "referenceExamples": null,
+          "textSimilarity": 0,
+          "domaincontextCurrentFieldValue": null,
+          "domaincontextProposedFieldValue": null,
+          "dictionaryIdupdateRequired": true
+      },
+      {
+          "headerName": null,
+          "headerPageNo": 0,
+          "headerTextContent": null,
+          "headerParagraphIndex": 0,
+          "headerFontName": null,
+          "headerFontSize": null,
+          "startLocationX": 0.0,
+          "startLocationY": 0.0,
+          "endLocationX": 0.0,
+          "endLocationY": 0.0,
+          "regulatoryEventId": 0,
+          "contractType": 1,
+          "domainContextDictionaryId": "Agreement_Date",
+          "domainContextName": "Agreement Date",
+          "domainContextTypeId": 1,
+          "domainContextSubTypeId": 1,
+          "domainContextPossibleNameDefinitions": "Agreement Date | Start Date",
+          "domainContextPossibleValueDefinitions": "July 15, 2019",
+          "phraseRule": "preceeded by \"dated as of\"",
+          "entityRule": "",
+          "referenceExamples": null,
+          "textSimilarity": 0,
+          "domaincontextCurrentFieldValue": null,
+          "domaincontextProposedFieldValue": null,
+          "dictionaryIdupdateRequired": true
+      }]; */
+
+    this.content = 'This is paragraph zero. This is paragraph 1. This is paragraph 2. <p>This is paragraph 3.</p> This is paragraph four. This is paragraph five. This is paragraph six. This is paragraph seven. This is paragraph eight. This is paragraph nine. This is paragraph ten. This is paragraph eleven';
     this.routesubc = this.route.queryParams.subscribe(params => {
       if (params && params.cId) {
         this.contractId = params.cId;
@@ -77,6 +144,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     switch (this.stepIndex){
       case 1: {
         this.loadReviewData();
+        this.showFallbackData();
         break;
       }
       case 2: {
@@ -103,7 +171,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   laodTabDetails($event: any){
     if ($event.index === 0) {
-      this.showRiskData();
+      this.showFallbackData();
     } else if ($event.index === 1) {
       this.showRiskData();
     } else if ($event.index === 2) {
@@ -255,9 +323,42 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   showFallbackData() {
-    this.service.getFallbackData(this.contractId).subscribe(dt => {
+    /* this.listdocumentMetaData.forEach((ele, index) => {
+      if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Unavailable') {
+        this.fallbackBenchmarkUnavailable = true;
+      } else {
+        this.fallbackBenchmarkUnavailable = false;
+      }
+      if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Illegal') {
+        this.fallbackBenchmarkIllegal = true;
+      } else {
+        this.fallbackBenchmarkIllegal = false;
+      }
+      if (!this.editorContent && ele.dictionaryIdupdateRequired) {
+        this.editorContent = ele;
+        this.index = index;
+      }
+    }); */
+    this.service.getContractMetadata(this.contractId).subscribe(dt => {
       console.log(JSON.stringify(dt));
-      this.fallbackData = dt;
+      this.listdocumentMetaData = dt.listdocumentMetaData;
+
+      this.listdocumentMetaData.forEach((ele, index) => {
+        if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Unavailable') {
+          this.fallbackBenchmarkUnavailable = true;
+        } else {
+          this.fallbackBenchmarkUnavailable = false;
+        }
+        if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Illegal') {
+          this.fallbackBenchmarkIllegal = true;
+        } else {
+          this.fallbackBenchmarkIllegal = false;
+        }
+        if (!this.editorContent && ele.dictionaryIdupdateRequired) {
+          this.editorContent = ele;
+          this.index = index;
+        }
+      });
     });
   }
 
@@ -266,15 +367,19 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
       this.contractDt = dt;
       console.log(JSON.stringify(dt));
       document.getElementById('pdfFrame1').setAttribute('src', this.pdfSrc);
-      this.content = this.amendData[0];
+      document.getElementById('pdfFrame2').setAttribute('src', this.pdfSrc);
+      //this.content = this.amendData[0];
     });
   }
 
   loadAuthorizeData() {
+    this.service.saveEditWorkflow({contractId: this.contractId, listdocumentMetaData: this.listdocumentMetaData}).subscribe(dt => {
+      console.log(dt);
+    });
     this.service.getAuthorizeData(this.contractId).subscribe(dt => {
       this.contractDt = dt;
       document.getElementById('pdfFrame3').setAttribute('src', this.pdfSrc);
-    //document.getElementById('pdfFrame4').setAttribute('src', this.pdfSrc);
+      document.getElementById('pdfFrame4').setAttribute('src', this.pdfSrc);
     });
   }
   loadVerifyData() {
@@ -289,22 +394,58 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   save() {
-    console.log(this.content);
-    this.amendData[this.index] = this.content;
-    this.index += 1;
-    const data = this.amendData[this.index];
-    this.content = data ? data : '';
+    this.listdocumentMetaData[this.index].domaincontextProposedFieldValue = this.editorContent.domainContextPossibleNameDefinitions;
+    this.listdocumentMetaData.forEach((ele, index) => {
+      if (index > this.index && ele.dictionaryIdupdateRequired) {
+        this.editorContent = ele;
+        this.index = index;
+      }
+    });
   }
 
   skip() {
-    this.index += 1;
-    const data = this.amendData[this.index];
-    this.content = data ? data : '';
+    this.listdocumentMetaData.forEach((ele, index) => {
+      if (index > this.index && ele.dictionaryIdupdateRequired) {
+        this.editorContent = ele;
+        this.index = index;
+      }
+    });
+  }
+
+  prev() {
+    this.listdocumentMetaData[this.index].domaincontextProposedFieldValue = this.editorContent.domainContextPossibleNameDefinitions;
+    for (let i = this.listdocumentMetaData.length - 1; i >= 0; i--) {
+      if (i < this.index && this.listdocumentMetaData[i].dictionaryIdupdateRequired) {
+        this.editorContent = this.listdocumentMetaData[i];
+        this.index = i;
+      }
+    }
   }
 
   preview() {
-    //service call
-    console.log(JSON.stringify(this.amendData));
+    document.getElementById('pdfFrame2').setAttribute('src', 'http://localhost:8081/file');
+    /* @RequestMapping(value = "/file", method = RequestMethod.GET)
+	  public ResponseEntity<byte[]> getWorkflowEditDetailsByStatusId() throws Exception {
+		HttpHeaders headers = new HttpHeaders();
+    headers.add("Content-type", "application/pdf");
+    byte[] bytes = Files.readAllBytes(Paths.get("C:\\Users\\ms\\Desktop\\docker.pdf"));
+		return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
+	  } */
+  }
+
+  modify() {
+    const range = this.editor.quillEditor.getSelection();
+    if (range && range.length !== 0) {
+      const text = this.editor.quillEditor.getText(range.index, range.length);
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '800px', data: this.editorContent.domainContextPossibleValueDefinitions
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.editorContent.domainContextPossibleNameDefinitions = result;
+        }
+      });
+    }
   }
 
   ngAfterViewInit() {
