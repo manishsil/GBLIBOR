@@ -59,7 +59,7 @@ export class AnalyticsManagerComponent implements OnInit {
     this.selId = this.globalDataFull[0].domainContextDictionaryId;
     this.globalData = this.globalDataFull[0]; */
     this.service.getGlobalData().subscribe(dt => {
-      this.globalData = dt;
+      this.globalDataFull = dt;
       this.selId = this.globalDataFull[0].domainContextDictionaryId;
       this.globalData = this.globalDataFull[0];
     });
@@ -80,7 +80,7 @@ export class AnalyticsManagerComponent implements OnInit {
       endLocationX: 2343,
       endLocationY: 778
     }; */
-    this.service.getContractMetaData(this.contractId).subscribe(dt => {
+    this.service.getContractMetadata(this.contractId).subscribe(dt => {
       this.contractMetaFull = dt.listdocumentMetaData;
       this.selCid = this.contractMetaFull[0].domainContextDictionaryId;
       this.contractMeta = this.contractMetaFull[0];

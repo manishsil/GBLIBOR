@@ -111,10 +111,6 @@ export class GbliborService {
     return this.http.get<any>(environment.apiUrl + '/get/domaindata/global').pipe(catchError(this.erroHandler));
   }
 
-  getContractMetaData(contractId: number) {
-    return this.http.post<any>(environment.apiUrl + '/get/contractmetadata', contractId).pipe(catchError(this.erroHandler));
-  }
-
   getFallbackData(contractId: number) {
     return this.http.post<any>(environment.apiUrl + '/get/fallbackdata', contractId).pipe(catchError(this.erroHandler));
   }
@@ -124,7 +120,7 @@ export class GbliborService {
   }
 
   getAllContracts() {
-    return this.http.get<any>(environment.apiUrl + 'get/contracts/all').pipe(catchError(this.erroHandler));
+    return this.http.get<any>(environment.apiUrl + '/get/contracts/all').pipe(catchError(this.erroHandler));
   }
 
   saveEditWorkflow(obj: any) {
