@@ -59,6 +59,7 @@ export class AnalyticsManagerComponent implements OnInit {
     this.selId = this.globalDataFull[0].domainContextDictionaryId;
     this.globalData = this.globalDataFull[0]; */
     this.service.getGlobalData().subscribe(dt => {
+      console.log(JSON.stringify(dt));
       this.globalDataFull = dt;
       this.selId = this.globalDataFull[0].domainContextDictionaryId;
       this.globalData = this.globalDataFull[0];

@@ -62,69 +62,31 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
               }
 
   ngOnInit(): void {
-
-    /* this.listdocumentMetaData = [
-      {
-          "headerName": null,
-          "headerPageNo": 0,
-          "headerTextContent": null,
-          "headerParagraphIndex": 0,
-          "headerFontName": null,
-          "headerFontSize": null,
-          "startLocationX": 0.0,
-          "startLocationY": 0.0,
-          "endLocationX": 0.0,
-          "endLocationY": 0.0,
-          "regulatoryEventId": 0,
-          "contractType": 1,
-          "domainContextDictionaryId": "Agreement_Name",
-          "domainContextName": "Agreement Name",
-          "domainContextTypeId": 1,
-          "domainContextSubTypeId": 1,
-          "domainContextPossibleNameDefinitions": "Agreement Name | Contract Name",
-          "domainContextPossibleValueDefinitions": "Loan Agreement | This is paragraph zero. This is paragraph 1. This is paragraph 2. <p>This is paragraph 3.</p> This is paragraph four",
-          "phraseRule": "followed by (\"Agreement\") or (\"Loan Agreement\")",
-          "entityRule": "",
-          "referenceExamples": null,
-          "textSimilarity": 0,
-          "domaincontextCurrentFieldValue": null,
-          "domaincontextProposedFieldValue": null,
-          "dictionaryIdupdateRequired": true
-      },
-      {
-          "headerName": null,
-          "headerPageNo": 0,
-          "headerTextContent": null,
-          "headerParagraphIndex": 0,
-          "headerFontName": null,
-          "headerFontSize": null,
-          "startLocationX": 0.0,
-          "startLocationY": 0.0,
-          "endLocationX": 0.0,
-          "endLocationY": 0.0,
-          "regulatoryEventId": 0,
-          "contractType": 1,
-          "domainContextDictionaryId": "Agreement_Date",
-          "domainContextName": "Agreement Date",
-          "domainContextTypeId": 1,
-          "domainContextSubTypeId": 1,
-          "domainContextPossibleNameDefinitions": "Agreement Date | Start Date",
-          "domainContextPossibleValueDefinitions": "July 15, 2019",
-          "phraseRule": "preceeded by \"dated as of\"",
-          "entityRule": "",
-          "referenceExamples": null,
-          "textSimilarity": 0,
-          "domaincontextCurrentFieldValue": null,
-          "domaincontextProposedFieldValue": null,
-          "dictionaryIdupdateRequired": true
-      }]; */
-
-    this.content = 'This is paragraph zero. This is paragraph 1. This is paragraph 2. <p>This is paragraph 3.</p> This is paragraph four. This is paragraph five. This is paragraph six. This is paragraph seven. This is paragraph eight. This is paragraph nine. This is paragraph ten. This is paragraph eleven';
     this.routesubc = this.route.queryParams.subscribe(params => {
-      if (params && params.cId) {
-        this.contractId = params.cId;
-        this.loadAuthorizeData();
-        this.currentStep = 3;
+      if (params && params.contractId) {
+        this.contractId = params.contractId;
+        const currStatusId = params.currStatus;
+        if (currStatusId <= 3) {
+          this.loadInitiateData();
+          this.currentStep = 0;
+        } else if (currStatusId  === 4) {
+          this.loadReviewData();
+          this.showFallbackData();
+          this.currentStep = 1;
+        } else if (currStatusId  === 5) {
+          this.loadAmendmendData();
+          this.currentStep = 2;
+        } else if (currStatusId > 5 && currStatusId < 10) {
+          this.loadAuthorizeData();
+          this.currentStep = 3;
+        } else if (currStatusId  === 10) {
+          this.loadVerifyData();
+          this.currentStep = 4;
+        } else if (currStatusId  === 11) {
+          this.loadCloseData();
+          this.currentStep = 5;
+        }
+
       }
     });
     /* this.subscription = this.loginService.getUserDetails().subscribe(dt => {

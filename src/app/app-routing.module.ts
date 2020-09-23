@@ -9,6 +9,7 @@ import { DashBoardComponent } from './dash-board/dash-board.component';
 import { LoginComponent } from './login/login.component';
 import { MyApprovalsComponent } from './my-approvals/my-approvals.component';
 import { AnalyticsManagerComponent } from './analytics-manager/analytics-manager.component';
+import { MyContractsComponent } from './my-contracts/my-contracts.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'search' , component: DocumentSearchComponent},
   {path: 'analysis' , component: ContractAnalysisComponent},
   {path: 'dashboard' , component: DashBoardComponent},
-  {path: 'approvals' , component: MyApprovalsComponent}
+  {path: 'approvals' , component: MyApprovalsComponent},
+  {path: 'mycontracts', component: MyContractsComponent}
 ];
 
 @NgModule({

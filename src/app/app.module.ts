@@ -37,6 +37,7 @@ import { AnalyticsManagerComponent } from './analytics-manager/analytics-manager
 import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
+import { MyContractsComponent } from './my-contracts/my-contracts.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { MatRadioModule } from '@angular/material/radio';
     ContractDetailsComponent,
     MyApprovalsComponent,
     AnalyticsManagerComponent,
-    DialogComponent
+    DialogComponent,
+    MyContractsComponent
   ],
   imports: [
     QuillModule.forRoot(),

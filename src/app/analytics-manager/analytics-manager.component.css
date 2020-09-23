@@ -23,3 +23,8 @@ table {
   input[type=text]{
     width: 90%;
   }
+
+
+::ng-deep .mat-form-field {
+  width: 280px;
+}

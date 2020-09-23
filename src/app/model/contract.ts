@@ -1,7 +1,8 @@
 export class Contract {
     id: number;
     contractId: number;
-    parentContractId: string;
+    parentContractId: number;
+    customContractId: number;
     documentFileName: string;
     contractName: string;
     legalEntityId: number;
@@ -16,6 +17,6 @@ export class Contract {
     currStatusId: number;
     createdOn: string;
     createdBy: string;
-    libor: true;
-    amendmentDoc: false;
+    libor: boolean;
+    amendmentDoc: boolean;
 }

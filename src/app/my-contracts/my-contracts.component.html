@@ -1,0 +1,29 @@
+<div style="font-weight: bold; background-color: lightgray; padding: 10px;margin-left: -15px;">
+    My Contracts
+</div>
+<br>
+<table>
+    <tr>
+        <th style="width: 10%">Contract ID</th>
+        <th style="width: 10%">Contract Name</th>
+        <th style="width: 15%">FileName</th>
+        <th style="width: 15%">Counter Party Name</th>
+        <th style="width: 10%">Start Date</th>
+        <th style="width: 10%">Expiry Date</th>
+        <th style="width: 10%">CreatedBy</th>
+        <th style="width: 10%">Status</th>
+        <th style="width: 10%">Libor</th>
+    </tr>
+    <tr *ngFor="let contract of contracts">
+        <td><span style="color: #0000EE; cursor: pointer;" (click)="navigate(contract)">{{contract.contractId}}</span></td>
+        <td>{{contract.contractName}}</td>
+        <td>{{contract.documentFileName}}</td>
+        <td>{{contract.counterPartyName}}</td>
+        <td>{{contract.contractStartDate}}</td>
+        <td>{{contract.contractExpiryDate}}</td>
+        <td>{{contract.createdBy}}</td>
+        <td>{{currStatus[contract.currStatusId]}}</td>
+        <td>{{contract.libor?'Yes':'No'}}</td>
+        
+    </tr>
+</table>
