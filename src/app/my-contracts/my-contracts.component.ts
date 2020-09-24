@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GbliborService } from 'src/service/gblibor.service';
 import { Contract } from '../model/contract';
 import { NavigationExtras, Router } from '@angular/router';
@@ -10,14 +10,19 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class MyContractsComponent implements OnInit {
 
-  contracts: Contract[];
+  @Input() contracts: Contract[];
+  showHeader = false;
   currStatus = {1: 'ScanUpload', 2: 'OCR', 3: 'Initiate', 4: 'Review', 5: 'Edit',
   6: 'AuthLegal', 7: 'AuthProgram', 8: 'AuthRisk', 9: 'AuthTreasury', 10: 'Verify', 11: 'Close'};
 
   constructor(private service: GbliborService, private router: Router) { }
 
   ngOnInit(): void {
-    this.getContracts();
+    console.log(JSON.stringify(this.contracts));
+    if (!this.contracts) {
+      this.showHeader = true;
+      this.getContracts();
+    }
   }
 
   getContracts(): void {

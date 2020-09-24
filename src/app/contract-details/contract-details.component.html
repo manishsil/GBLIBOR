@@ -1,7 +1,7 @@
 <table *ngIf="contractDt">
     <tr>
         <td style="width: 15%" class="bold">Contract ID</td>
-        <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.contractId" /></td>
+        <td style="width: 35%">{{contractDt.contractId}}</td>
         <td style="width: 15%" class="bold">Parent Contract ID</td>
         <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractDt.parentContractId" /></td>
     </tr>

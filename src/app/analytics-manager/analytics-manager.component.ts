@@ -68,19 +68,6 @@ export class AnalyticsManagerComponent implements OnInit {
   }
 
   loadContractMetaData() {
-  /*   console.log(this.contractId);
-    this.contractMeta = {
-      headerName: 'string',
-      headerPageNo: 123,
-      headerTextContent: 'string',
-      headerParagraphIndex: 122,
-      headerFontName: 'string',
-      headerFontSize: 'string',
-      startLocationX: 467,
-      startLocationY: 799,
-      endLocationX: 2343,
-      endLocationY: 778
-    }; */
     this.service.getContractMetadata(this.contractId).subscribe(dt => {
       this.contractMetaFull = dt.listdocumentMetaData;
       this.selCid = this.contractMetaFull[0].domainContextDictionaryId;

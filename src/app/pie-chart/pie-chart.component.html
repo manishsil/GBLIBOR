@@ -2,9 +2,14 @@
   <canvas  baseChart height="100vh"
         [data]="pieChartData"
         [labels]="pieChartLabels"
-        [chartType]="pieChartType"
-        (chartHover)="chartHovered($event)"
+        [chartType]="pieChartType" 
         (chartClick)="chartClicked($event)">
    </canvas>
 </div>
+<br>
+<div *ngIf="contractsF">
+  <app-my-contracts [contracts]="contractsF"></app-my-contracts>
+</div>
+<br>
+<br>
 

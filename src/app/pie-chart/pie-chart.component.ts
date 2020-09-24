@@ -15,6 +15,8 @@ export class PieChartComponent implements OnInit {
   showChart = false;
 
   contracts: Contract[];
+  contractsF: Contract[];
+
 
   constructor(private service: GbliborService) { }
 
@@ -48,11 +50,7 @@ export class PieChartComponent implements OnInit {
 
   // events
   public chartClicked(e: any): void {
-    console.log(e);
-  }
- 
-  public chartHovered(e: any): void {
-    console.log(e);
+    this.contractsF = this.contracts.filter(ele => ele.currStatusId === e.active[0]._index + 1);
   }
 
 }
