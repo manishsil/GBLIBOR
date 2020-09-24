@@ -10,7 +10,7 @@
   </mat-select>
 </mat-form-field>
 
-    <div class="container-fluid">
+    <div class="container-fluid" *ngIf="!selectedDashBoard">
       <div class="row">
 
 
@@ -31,6 +31,10 @@
      
     </div>
     
+  </div>
+
+  <div *ngIf="selectedDashBoard=='state'">
+    <app-pie-chart></app-pie-chart>
   </div>
   
 </div>

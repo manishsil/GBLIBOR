@@ -16,6 +16,7 @@ import { ContractAnalysisComponent } from './contract-analysis/contract-analysis
 import { DocumentSearchComponent } from './document-search/document-search.component';
 import { DocumentManagerComponent } from './document-manager/document-manager.component';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { ChartsModule } from 'ng2-charts';
 import { RepaperingReqComponent } from './RepaperingRequest/repapering-req/repapering-req.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
@@ -38,6 +39,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MyContractsComponent } from './my-contracts/my-contracts.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,8 @@ import { MyContractsComponent } from './my-contracts/my-contracts.component';
     MyApprovalsComponent,
     AnalyticsManagerComponent,
     DialogComponent,
-    MyContractsComponent
+    MyContractsComponent,
+    PieChartComponent
   ],
   imports: [
     QuillModule.forRoot(),
@@ -61,7 +64,7 @@ import { MyContractsComponent } from './my-contracts/my-contracts.component';
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
     MatStepperModule,MatIconModule, MatTabsModule, MatSelectModule,MatSnackBarModule,PdfViewerModule,MatCardModule,
     MatMenuModule, MatCheckboxModule,MatDialogModule, MatRadioModule, PdfViewerModule,
-    HttpClientModule, BrowserAnimationsModule
+    HttpClientModule, BrowserAnimationsModule, ChartsModule
   ],
   providers: [
     {

@@ -2,11 +2,11 @@
     My Contracts
 </div>
 <br>
-<table>
+
+<table id="contract">
     <tr>
         <th style="width: 10%">Contract ID</th>
         <th style="width: 10%">Contract Name</th>
-        <th style="width: 15%">FileName</th>
         <th style="width: 15%">Counter Party Name</th>
         <th style="width: 10%">Start Date</th>
         <th style="width: 10%">Expiry Date</th>
@@ -17,7 +17,6 @@
     <tr *ngFor="let contract of contracts">
         <td><span style="color: #0000EE; cursor: pointer;" (click)="navigate(contract)">{{contract.contractId}}</span></td>
         <td>{{contract.contractName}}</td>
-        <td>{{contract.documentFileName}}</td>
         <td>{{contract.counterPartyName}}</td>
         <td>{{contract.contractStartDate}}</td>
         <td>{{contract.contractExpiryDate}}</td>
@@ -27,3 +26,5 @@
         
     </tr>
 </table>
+
+

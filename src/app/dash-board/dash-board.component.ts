@@ -13,6 +13,7 @@ interface Dashboard {
   styleUrls: ['./dash-board.component.css']
 })
 export class DashBoardComponent implements OnInit {
+  selectedDashBoard: string;
   dashboards: Dashboard[] = [
     {value: 'portfolioManager', viewValue: 'Portfolio Managers'},
     {value: 'loanTypes', viewValue: 'Loan Types'},
@@ -28,8 +29,9 @@ export class DashBoardComponent implements OnInit {
   }
 
   onDashboardChange(ob){
-      let selectedDashBoard = ob.value;
-      this.service.getDashBoard(selectedDashBoard).subscribe(dt => {
+      this.selectedDashBoard = ob.value;
+      console.log(this.selectedDashBoard);
+      this.service.getDashBoard(this.selectedDashBoard).subscribe(dt => {
         this.dashBoardObj = dt;
       });
   }
