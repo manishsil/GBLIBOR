@@ -29,9 +29,9 @@
             <table>
                 <tr>
                     <td style="width: 20%" class="bold">Regulatory Event </td>
-                    <td style="width: 30%"><input type="text" [disabled]="true" value="LIBOR" /></td>
+                    <td style="width: 30%"><input type="text" class="form-control" [disabled]="true" value="LIBOR" /></td>
                     <td style="width: 20%" class="bold">Contract Type </td>
-                    <td style="width: 30%"><input type="text" [disabled]="true" value="Syndicate Loan" /></td>
+                    <td style="width: 30%"><input type="text" class="form-control" [disabled]="true" value="Syndicate Loan" /></td>
                 </tr>
                 <tr>
                     <td  class="bold">Domain Context Dictionary Id </td>
@@ -43,30 +43,30 @@
                         </mat-form-field>
                     </td>
                     <td class="bold">Reference Examples </td>
-                    <td><input type="text" [disabled]="true" [(ngModel)]="globalData.referenceExamples" /></td>
+                    <td><input type="text" class="form-control" [disabled]="true" [(ngModel)]="globalData.referenceExamples" /></td>
                 </tr>
                 <tr>
                     <td  class="bold">Domain Context Type Id </td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextTypeId" /></td>
+                    <td ><input type="text" class="form-control" [disabled]="true" [(ngModel)]="globalData.domainContextTypeId" /></td>
                     <td class="bold">Domain Context SubType Id </td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextSubTypeId" /></td>
+                    <td ><input type="text" class="form-control" [disabled]="true" [(ngModel)]="globalData.domainContextSubTypeId" /></td>
                 </tr>
             
                 <tr>
                     <td class="bold">Domain Context Possible Name Definitions </td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleNameDefinitions" /></td>
+                    <td ><input type="text" class="form-control" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleNameDefinitions" /></td>
                     <td class="bold">Domain Context Name </td>
-                    <td ><input type="text" [disabled]="true"  [(ngModel)]="globalData.domainContextName" /></td>
+                    <td ><input type="text" class="form-control" [disabled]="true"  [(ngModel)]="globalData.domainContextName" /></td>
                 </tr>
                 <tr>
                     <td class="bold">Phrase Rule </td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="globalData.phraseRule"  /></td>
+                    <td ><input type="text" class="form-control" [disabled]="true" [(ngModel)]="globalData.phraseRule"  /></td>
                     <td class="bold">Entity Rule </td>
-                    <td><input type="text" [disabled]="true" [(ngModel)]="globalData.entityRule" /></td>
+                    <td><input type="text" class="form-control" [disabled]="true" [(ngModel)]="globalData.entityRule" /></td>
                 </tr>
                 <tr>
                         <td class="bold">Domain Context Possible Value Definitions </td>
-                    <td colspan="3"><textarea rows="2" cols="115" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleValueDefinitions"></textarea>
+                    <td colspan="3"><textarea class="form-control" rows="2" cols="115" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleValueDefinitions"></textarea>
                     </td>
                 </tr>
             </table>        
@@ -95,68 +95,68 @@
                         </mat-form-field>
                     </td>
                     <td style="width: 15%"class="bold">Reference Examples </td>
-                    <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractMeta.referenceExamples " /></td>
+                    <td style="width: 35%"><input type="text" class="form-control" [disabled]="true" [(ngModel)]="contractMeta.referenceExamples " /></td>
                 </tr>
                 <tr>
                     <td style="width: 15%" class="bold">Header Name</td>
-                    <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerName" /></td>
+                    <td style="width: 35%"><input type="text" class="form-control" [disabled]="true" [(ngModel)]="contractMeta.headerName" /></td>
                     <td style="width: 15%" class="bold">Header PageNo</td>
-                    <td style="width: 35%"><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerPageNo" /></td>
+                    <td style="width: 35%"><input type="text" class="form-control" [disabled]="true" [(ngModel)]="contractMeta.headerPageNo" /></td>
                 </tr>
                 <tr>
                     <td  class="bold">Header Text Content</td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerTextContent" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.headerTextContent" /></td>
                     <td class="bold">Header Paragraph Index </td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerParagraphIndex" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.headerParagraphIndex" /></td>
                 </tr>
                 <tr>
                     <td  class="bold">Header FontName</td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerFontName" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.headerFontName" /></td>
                     <td class="bold">Header FontSize</td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.headerFontSize" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.headerFontSize" /></td>
                 </tr>
             
                 <tr>
                     <td class="bold">Start LocationX </td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.startLocationX" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.startLocationX" /></td>
                     <td class="bold">Start LocationY</td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.startLocationY" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.startLocationY" /></td>
                 </tr>
                 <tr>
                     <td class="bold">End LocationX </td>
-                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.endLocationX" /></td>
+                    <td><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.endLocationX" /></td>
                     <td class="bold">End LocationY</td>
-                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.endLocationY" /></td>
+                    <td><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.endLocationY" /></td>
                 </tr>
                 <tr>
                     <td  class="bold">Domain Context Type Id </td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.domainContextTypeId" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.domainContextTypeId" /></td>
                     <td class="bold">Domain Context SubType Id </td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.domainContextSubTypeId" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.domainContextSubTypeId" /></td>
                 </tr>
             
                 <tr>
                     <td class="bold">Domain Context Possible Name Definitions </td>
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.domainContextPossibleNameDefinitions" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.domainContextPossibleNameDefinitions" /></td>
                     <td class="bold">Domain Context Name </td>
                     
-                    <td ><input type="text" [disabled]="true" [(ngModel)]="contractMeta.domainContextName" /></td>
+                    <td ><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.domainContextName" /></td>
                 </tr>
                 <tr>
                     <td class="bold">Phrase Rule </td>
-                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.phraseRule" /></td>
+                    <td><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.phraseRule" /></td>
                     <td class="bold">Entity Rule </td>
-                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.entityRule" /></td>
+                    <td><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.entityRule" /></td>
                 </tr>
                 <tr>
                     <td class="bold">Text Similarity </td>
-                    <td><input type="text" [disabled]="true" [(ngModel)]="contractMeta.textSimilarity" /></td>
+                    <td><input type="text" [disabled]="true" class="form-control" [(ngModel)]="contractMeta.textSimilarity" /></td>
                     <td class="bold"></td>
                     <td></td>
                 </tr>
                 <tr>
-                        <td class="bold">Domain Context Possible Value Definitions </td>
-                    <td colspan="3"><textarea rows="2" cols="115" [disabled]="true" [(ngModel)]="contractMeta.domainContextPossibleValueDefinitions" ></textarea>
+                    <td class="bold">Domain Context Possible Value Definitions </td>
+                    <td colspan="3"><textarea class="form-control" rows="2" cols="115" [disabled]="true" [(ngModel)]="contractMeta.domainContextPossibleValueDefinitions" ></textarea>
                     </td>
                 </tr>
             </table>

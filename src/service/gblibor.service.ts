@@ -11,7 +11,7 @@ export class GbliborService {
 
   constructor( private http: HttpClient) { }
 
-  loggedUser = '';
+  previewUrl: string = environment.apiUrl + '/file';
 
   getUserDetails(username: string): Observable<any> {
     return this.http.get<any>(environment.apiUrl + '/find/user/' + username ).pipe(catchError(this.erroHandler));
@@ -124,7 +124,7 @@ export class GbliborService {
   }
 
   saveEditWorkflow(obj: any) {
-    return this.http.post<any>(environment.apiUrl + '', obj).pipe(catchError(this.erroHandler));
+    return this.http.post<any>(environment.apiUrl + '/edit/contract', obj).pipe(catchError(this.erroHandler));
   }
 
   erroHandler(error: HttpErrorResponse) {

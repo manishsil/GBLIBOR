@@ -40,6 +40,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MyContractsComponent } from './my-contracts/my-contracts.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,7 @@ import { PieChartComponent } from './pie-chart/pie-chart.component';
     BrowserModule,NgApexchartsModule,FormsModule,ReactiveFormsModule,
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
     MatStepperModule,MatIconModule, MatTabsModule, MatSelectModule,MatSnackBarModule,PdfViewerModule,MatCardModule,
-    MatMenuModule, MatCheckboxModule,MatDialogModule, MatRadioModule, PdfViewerModule,
+    MatMenuModule, MatCheckboxModule,MatDialogModule, MatRadioModule, MatExpansionModule, PdfViewerModule,
     HttpClientModule, BrowserAnimationsModule, ChartsModule
   ],
   providers: [

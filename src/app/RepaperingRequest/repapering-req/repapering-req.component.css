@@ -116,4 +116,8 @@ input[type=text]{
   background-color: #005691;
 }
 
+.btn {
+  line-height: 1;
+}
+
 

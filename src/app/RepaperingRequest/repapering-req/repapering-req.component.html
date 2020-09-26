@@ -9,24 +9,24 @@
       <table>
         <tr>
           <td style="width: 15%" class="bold">Upload Doc</td>
-        <td style="width: 25%"><input type="text" [disabled]="true" [(ngModel)]="fileName" /></td>
+        <td style="width: 25%"><input type="text" class="form-control" [disabled]="true" [(ngModel)]="fileName" /></td>
           <td style="width: 10%">
-            <button>
-              <label for="files">Upload</label>
-              <input id="files" (change)="handleFileInput($event.target.files)" type="file"  style="display: none" />
+            <button class="btn btn-primary"> <i class="fa fa-upload" aria-hidden="true"></i> &nbsp;
+              <label for="files" >Upload</label>
+              <input id="files"  (change)="handleFileInput($event.target.files)" type="file"  style="display: none" />
             </button>
           </td>
           <td style="width: 50%">
-              <input type="button" value="OCR" (click)="loadOCRData()" />
-              &nbsp;&nbsp;
-              <input type="button" value="Initiate" (click)="loadInitiateData()" [disabled]="!fileName"/>
+              <button class="btn btn-primary" (click)="loadOCRData()" ><i class="fa fa-barcode" aria-hidden="true"></i> &nbsp;&nbsp;OCR</button>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <input type="button" class="btn btn-primary" value="Initiate" (click)="loadInitiateData()" [disabled]="!fileName"/>
             </td>
         </tr>
       </table>      
       <div *ngIf="isInitated"><!---->
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
         <br>
-        <button mat-button matStepperNext>Review</button>
+        <button mat-button matStepperNext class="btn btn-primary">Review</button>
       </div>
     </mat-step>
   
@@ -34,42 +34,43 @@
       <app-contract-details [contractDt]="contractDt"></app-contract-details>
       <br>
       <div>
-        <button mat-button matStepperNext>Amend</button>
+        <button mat-button matStepperNext class="btn btn-primary">Amend</button>
       </div>
       <br>
     </mat-step>
   
     <mat-step label="Amendment">
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
-        <table><tr><th style="text-align: center">As is</th><th style="text-align: center">To be</th></tr>
-          <tr>
-            <td><iframe width='500px' height='300px' src='' id='pdfFrame1'></iframe></td>
-            <td><iframe width='500px' height='300px' src='' id='pdfFrame2'></iframe></td>
-          </tr>
-        </table>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title><span style="font-weight: bold;">As Is</span></mat-panel-title>
+          </mat-expansion-panel-header>
+          <iframe width='99%' height='400px' src='' id='pdfFrame1'></iframe>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title><span style="font-weight: bold;">To Be</span></mat-panel-title>
+          </mat-expansion-panel-header>
+          <iframe width='99%' height='400px' src='' id='pdfFrame2'></iframe>
+        </mat-expansion-panel>
         <br>
-        <table style="width: 99%">
+        <table style="width: 99%" *ngIf="editorContent">
+            <tr style="text-align: right;">
+              <td style="width: 100px;">Edit Page # {{pageNum}}</td>
+              <td><button class="btn btn-primary" mat-button (click)="save()" style="width: 100px">Next</button></td>
+              <td><button class="btn btn-primary" mat-button (click)="skip()" style="width: 100px">Skip</button></td>
+              <td> <button class="btn btn-primary" mat-button (click)="prev()" style="width: 100px">Previous</button></td>
+              <td> <button class="btn btn-primary" mat-button (click)="preview()" style="width: 100px">Preview</button></td>
+            </tr>
           <tr>
-            <td style="text-align: center; width: 500px">
-              <table>
-                <tr><td></td></tr>
-                <tr><td><button mat-button (click)="save()" style="width: 100px">Next</button></td></tr>
-                <tr><td></td></tr>
-                <tr><td><button mat-button (click)="skip()" [disabled]="!this.content" style="width: 100px">Skip</button></td></tr>
-                <tr><td></td></tr>
-                <tr><td> <button mat-button (click)="prev()" style="width: 100px">Previous</button></td></tr>
-                <tr><td></td></tr>
-                <tr><td> <button mat-button (click)="preview()" style="width: 100px">Preview</button></td></tr>
-              </table>
-              </td>
-              <td style=" width: 480px;" *ngIf="editorContent">
-                <quill-editor #editor (mouseup)="modify()" [styles]="{height: '200px'}" [(ngModel)]="editorContent.domainContextPossibleNameDefinitions" [modules]="modules"></quill-editor>
+              <td style=" width: 100%;" colspan="5"><!--headerTextContent-->
+                <quill-editor #editor (mouseup)="modify()" [styles]="{height: '300px'}" [(ngModel)]="editorContent" [modules]="modules"></quill-editor>
               </td>
           </tr>
         </table>
         <br>
         <div>
-          <button mat-button matStepperNext>Authorize</button>
+          <button mat-button matStepperNext class="btn btn-primary">Authorize</button>
         </div>
     </mat-step>
 
@@ -83,14 +84,14 @@
         </table>
         <br>         
         <div>
-          <button mat-button matStepperNext>Verify</button>
+          <button mat-button matStepperNext class="btn btn-primary">Verify</button>
         </div>
       </mat-step>
 
       <mat-step label="Verification">
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
         <div>
-          <button mat-button matStepperNext>Close</button>
+          <button mat-button matStepperNext class="btn btn-primary">Close</button>
         </div>
       </mat-step>
       <mat-step label="Close">
@@ -331,35 +332,35 @@
       <tr>
         <td style="width: 10%" class="bold">Client Name</td>
         <td colspan="2">
-          <input type="text" [(ngModel)]="clientOutreach.name" />
+          <input type="text" class="form-control" [(ngModel)]="clientOutreach.name" />
         </td>
-        <td><input style="width: 200px; text-align: center" type="button" value="Send Email" (click)="sendEmail()"/></td>
+        <td><input style="width: 200px; text-align: center" type="button" class="btn btn-primary" value="Send Email" (click)="sendEmail()"/></td>
       </tr>
       <tr>
         <td style="width: 10%" class="bold">Address</td>
         <td colspan="2">
-          <input type="text" [(ngModel)]="clientOutreach.address" />
+          <input type="text" class="form-control" [(ngModel)]="clientOutreach.address" />
         </td>
-        <td><input style="width: 200px; text-align: center" type="button" value="Send Email with Attachment" (click)="sendEmail()"/></td>
+        <td><input style="width: 200px; text-align: center" type="button" class="btn btn-primary" value="Send Email with Attachment" (click)="sendEmail()"/></td>
       </tr>
       <tr>
         <td style="width: 10%" class="bold">Zip</td>
         <td style="width: 40%">
-          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.zip" />
+          <input style="width: 50%" type="text" class="form-control" [(ngModel)]="clientOutreach.zip" />
         </td>
         <td style="width: 10%" class="bold">Phone</td>
         <td style="width: 40%">
-          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.phone" />
+          <input style="width: 50%" type="text" class="form-control" [(ngModel)]="clientOutreach.phone" />
         </td>
       </tr>
       <tr>
         <td class="bold">Fax</td>
         <td>
-          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.fax" />
+          <input style="width: 50%" type="text" class="form-control" [(ngModel)]="clientOutreach.fax" />
         </td>
         <td class="bold">Email</td>
         <td>
-          <input style="width: 50%" type="text" [(ngModel)]="clientOutreach.email" />
+          <input style="width: 50%" type="text" class="form-control" [(ngModel)]="clientOutreach.email" />
         </td>
       </tr>
     </table>
@@ -384,7 +385,7 @@
         <td>{{item.comments}}</td>
         <td>{{item.createdOn}}</td>
         <td>{{item.updatedOn}}</td>
-        <td><input type="button" value="Approve" (click)="approve()" /></td>
+        <td><input type="button" class="btn btn-primary" value="Approve" (click)="approve()" /></td>
       </tr>
     </table>
     <br>

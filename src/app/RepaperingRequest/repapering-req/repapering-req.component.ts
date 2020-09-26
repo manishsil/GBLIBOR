@@ -53,7 +53,8 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   listdocumentMetaData: ContractMeta[];
   fallbackBenchmarkUnavailable: boolean;
   fallbackBenchmarkIllegal: boolean;
-  editorContent: ContractMeta;
+  editorContent: string;
+  pageNum: number;
 
   constructor(private snackBar: MatSnackBar, private service: GbliborService,
               private loginService: LoginService, private route: ActivatedRoute,
@@ -285,22 +286,6 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   showFallbackData() {
-    /* this.listdocumentMetaData.forEach((ele, index) => {
-      if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Unavailable') {
-        this.fallbackBenchmarkUnavailable = true;
-      } else {
-        this.fallbackBenchmarkUnavailable = false;
-      }
-      if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Illegal') {
-        this.fallbackBenchmarkIllegal = true;
-      } else {
-        this.fallbackBenchmarkIllegal = false;
-      }
-      if (!this.editorContent && ele.dictionaryIdupdateRequired) {
-        this.editorContent = ele;
-        this.index = index;
-      }
-    }); */
     this.service.getContractMetadata(this.contractId).subscribe(dt => {
       console.log(JSON.stringify(dt));
       this.listdocumentMetaData = dt.listdocumentMetaData;
@@ -317,7 +302,9 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
           this.fallbackBenchmarkIllegal = false;
         }
         if (!this.editorContent && ele.dictionaryIdupdateRequired) {
-          this.editorContent = ele;
+          this.editorContent =
+          ele.headerTextContent.replace(ele.domainContextPossibleNameDefinitions, "<span style='color:red'>" + ele.domainContextPossibleNameDefinitions + "</span>");
+          this.pageNum = ele.headerPageNo;
           this.index = index;
         }
       });
@@ -329,15 +316,12 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
       this.contractDt = dt;
       console.log(JSON.stringify(dt));
       document.getElementById('pdfFrame1').setAttribute('src', this.pdfSrc);
-      document.getElementById('pdfFrame2').setAttribute('src', this.pdfSrc);
+      //document.getElementById('pdfFrame2').setAttribute('src', this.pdfSrc);
       //this.content = this.amendData[0];
     });
   }
 
   loadAuthorizeData() {
-    this.service.saveEditWorkflow({contractId: this.contractId, listdocumentMetaData: this.listdocumentMetaData}).subscribe(dt => {
-      console.log(dt);
-    });
     this.service.getAuthorizeData(this.contractId).subscribe(dt => {
       this.contractDt = dt;
       document.getElementById('pdfFrame3').setAttribute('src', this.pdfSrc);
@@ -356,10 +340,12 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   save() {
-    this.listdocumentMetaData[this.index].domaincontextProposedFieldValue = this.editorContent.domainContextPossibleNameDefinitions;
+    this.listdocumentMetaData[this.index].domaincontextProposedFieldValue = this.editorContent;
     this.listdocumentMetaData.forEach((ele, index) => {
       if (index > this.index && ele.dictionaryIdupdateRequired) {
-        this.editorContent = ele;
+        this.editorContent =
+        ele.headerTextContent.replace(ele.domainContextPossibleNameDefinitions, "<span style='color:red'>" + ele.domainContextPossibleNameDefinitions + "</span>");
+        this.pageNum = ele.headerPageNo;
         this.index = index;
       }
     });
@@ -368,24 +354,32 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   skip() {
     this.listdocumentMetaData.forEach((ele, index) => {
       if (index > this.index && ele.dictionaryIdupdateRequired) {
-        this.editorContent = ele;
+        this.editorContent =
+        ele.headerTextContent.replace(ele.domainContextPossibleNameDefinitions, "<span style='color:red'>" + ele.domainContextPossibleNameDefinitions + "</span>");
         this.index = index;
       }
     });
   }
 
   prev() {
-    this.listdocumentMetaData[this.index].domaincontextProposedFieldValue = this.editorContent.domainContextPossibleNameDefinitions;
+    this.listdocumentMetaData[this.index].domaincontextProposedFieldValue = this.editorContent;
     for (let i = this.listdocumentMetaData.length - 1; i >= 0; i--) {
       if (i < this.index && this.listdocumentMetaData[i].dictionaryIdupdateRequired) {
-        this.editorContent = this.listdocumentMetaData[i];
+        this.editorContent = this.listdocumentMetaData[i].headerTextContent.replace(
+          this.listdocumentMetaData[i].domainContextPossibleNameDefinitions,
+          "<span style='color:red'>" + this.listdocumentMetaData[i].domainContextPossibleNameDefinitions + "</span>");
+        this.pageNum = this.listdocumentMetaData[i].headerPageNo;
         this.index = i;
       }
     }
   }
 
   preview() {
-    document.getElementById('pdfFrame2').setAttribute('src', 'http://localhost:8081/file');
+    this.service.saveEditWorkflow({contractId: this.contractId, listDocumentMetadata: this.listdocumentMetaData}).subscribe(dt => {
+      console.log(dt);
+      document.getElementById('pdfFrame2').setAttribute('src', this.service.previewUrl);
+    });
+    // document.getElementById('pdfFrame2').setAttribute('src', 'http://localhost:8081/file');
     /* @RequestMapping(value = "/file", method = RequestMethod.GET)
 	  public ResponseEntity<byte[]> getWorkflowEditDetailsByStatusId() throws Exception {
 		HttpHeaders headers = new HttpHeaders();
@@ -399,12 +393,21 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     const range = this.editor.quillEditor.getSelection();
     if (range && range.length !== 0) {
       const text = this.editor.quillEditor.getText(range.index, range.length);
+      console.log(text);
       const dialogRef = this.dialog.open(DialogComponent, {
-        width: '800px', data: this.editorContent.domainContextPossibleValueDefinitions
+        width: '800px', data: this.listdocumentMetaData[this.index].domainContextPossibleValueDefinitions
       });
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          this.editorContent.domainContextPossibleNameDefinitions = result;
+          let str = '';
+          if (this.editorContent.includes('</span>')) {
+            str = this.editorContent.replace("<span style='color:red'>" +
+            this.listdocumentMetaData[this.index].domainContextPossibleNameDefinitions + "</span>", result + ' ');
+          } else {
+            str = this.editorContent.replace(text, result + ' ');
+          }
+          this.editorContent = str;
+          this.listdocumentMetaData[this.index].domaincontextProposedFieldValue = this.editorContent;
         }
       });
     }
