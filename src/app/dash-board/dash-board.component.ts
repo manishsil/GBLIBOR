@@ -13,12 +13,12 @@ interface Dashboard {
   styleUrls: ['./dash-board.component.css']
 })
 export class DashBoardComponent implements OnInit {
-  selectedDashBoard = 'portfolioManager';
+  selectedDashBoard = 'state';
   dashboards: Dashboard[] = [
+    {value: 'state', viewValue: 'State Wise'},
     {value: 'portfolioManager', viewValue: 'Portfolio Managers'},
     {value: 'loanTypes', viewValue: 'Loan Types'},
     {value: 'derivatives', viewValue: 'Derivatives Types'},
-    {value: 'state', viewValue: 'State Wise'},
     {value: 'process', viewValue: 'Process Matrics'}
   ];
   constructor( private service: DashboardService) {
@@ -28,9 +28,7 @@ export class DashBoardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onDashboardChange(ob){
-      this.selectedDashBoard = ob.value;
-      console.log(this.selectedDashBoard);
+  onDashboardChange(){
       if (this.selectedDashBoard !== 'state') {
         this.service.getDashBoard(this.selectedDashBoard).subscribe(dt => {
           this.dashBoardObj = dt;

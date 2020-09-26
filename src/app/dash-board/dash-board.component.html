@@ -3,7 +3,7 @@
 
 <mat-form-field appearance="fill">
   <mat-label>Select Dash Board Type</mat-label>
-  <mat-select (selectionChange)="onDashboardChange($event)">
+  <mat-select [(ngModel)]="selectedDashBoard" (selectionChange)="onDashboardChange()">
     <mat-option *ngFor="let dashboard of dashboards" [value]="dashboard.value">
       {{dashboard.viewValue}}
     </mat-option>
