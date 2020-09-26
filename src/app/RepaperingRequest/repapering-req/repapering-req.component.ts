@@ -377,7 +377,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   preview() {
     this.service.saveEditWorkflow({contractId: this.contractId, listDocumentMetadata: this.listdocumentMetaData}).subscribe(dt => {
       console.log(dt);
-      document.getElementById('pdfFrame2').setAttribute('src', this.service.previewUrl);
+      document.getElementById('pdfFrame2').setAttribute('src', this.service.previewUrl + '/' + this.fileName);
     });
     // document.getElementById('pdfFrame2').setAttribute('src', 'http://localhost:8081/file');
     /* @RequestMapping(value = "/file", method = RequestMethod.GET)
