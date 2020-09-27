@@ -325,7 +325,8 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     this.service.getAuthorizeData(this.contractId).subscribe(dt => {
       this.contractDt = dt;
       document.getElementById('pdfFrame3').setAttribute('src', this.pdfSrc);
-      document.getElementById('pdfFrame4').setAttribute('src', this.pdfSrc);
+      //document.getElementById('pdfFrame4').setAttribute('src', this.pdfSrc);
+      document.getElementById('pdfFrame4').setAttribute('src', this.service.previewUrl + '/' + this.contractId);
     });
   }
   loadVerifyData() {
@@ -377,16 +378,8 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   preview() {
     this.service.saveEditWorkflow({contractId: this.contractId, listDocumentMetadata: this.listdocumentMetaData}).subscribe(dt => {
       console.log(dt);
-      document.getElementById('pdfFrame2').setAttribute('src', this.service.previewUrl + '/' + this.fileName);
+      document.getElementById('pdfFrame2').setAttribute('src', this.service.previewUrl + '/' + this.contractId);
     });
-    // document.getElementById('pdfFrame2').setAttribute('src', 'http://localhost:8081/file');
-    /* @RequestMapping(value = "/file", method = RequestMethod.GET)
-	  public ResponseEntity<byte[]> getWorkflowEditDetailsByStatusId() throws Exception {
-		HttpHeaders headers = new HttpHeaders();
-    headers.add("Content-type", "application/pdf");
-    byte[] bytes = Files.readAllBytes(Paths.get("C:\\Users\\ms\\Desktop\\docker.pdf"));
-		return new ResponseEntity<>(bytes, headers, HttpStatus.OK);
-	  } */
   }
 
   modify() {
