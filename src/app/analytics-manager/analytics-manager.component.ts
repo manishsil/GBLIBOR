@@ -22,6 +22,7 @@ export class AnalyticsManagerComponent implements OnInit {
   selCid: string;
   globalDataFull: Global[];
   contractMetaFull: ContractMeta[];
+  details = false;
 
   constructor(private service: GbliborService) { }
 
@@ -95,7 +96,7 @@ export class AnalyticsManagerComponent implements OnInit {
     } else if ($event.index === 1) {
       this.getAllContracts();
     } else if ($event.index === 2) {
-
+      this.getAllContracts();
     }
   }
 

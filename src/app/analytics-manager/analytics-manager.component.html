@@ -65,8 +65,14 @@
                     <td><input type="text" class="form-control" [disabled]="true" [(ngModel)]="globalData.entityRule" /></td>
                 </tr>
                 <tr>
-                        <td class="bold">Domain Context Possible Value Definitions </td>
-                    <td colspan="3"><textarea class="form-control" rows="2" cols="115" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleValueDefinitions"></textarea>
+                    <td class="bold">Domain Context Possible Value Definitions </td>
+                    <td colspan="3" style="padding-right: 35px;"><textarea class="form-control" rows="2" [disabled]="true" [(ngModel)]="globalData.domainContextPossibleValueDefinitions"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: right; padding-right: 50px; padding-top: 20px;">
+                        <button class="btn btn-primary" style="width: 100px">Add</button> &nbsp; &nbsp; &nbsp;&nbsp;
+                        <button class="btn btn-primary" style="width: 100px">Update</button>
                     </td>
                 </tr>
             </table>        
@@ -156,8 +162,14 @@
                 </tr>
                 <tr>
                     <td class="bold">Domain Context Possible Value Definitions </td>
-                    <td colspan="3"><textarea class="form-control" rows="2" cols="115" [disabled]="true" [(ngModel)]="contractMeta.domainContextPossibleValueDefinitions" ></textarea>
+                    <td colspan="3" style="padding-right: 35px;"><textarea class="form-control" rows="2" [disabled]="true" [(ngModel)]="contractMeta.domainContextPossibleValueDefinitions" ></textarea>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="text-align: right; padding-right: 50px; padding-top: 20px;">
+                        <button class="btn btn-primary" style="width: 100px">Add</button> &nbsp; &nbsp; &nbsp;&nbsp;
+                        <button class="btn btn-primary" style="width: 100px">Update</button>
+                    </td>    
                 </tr>
             </table>
         
@@ -166,8 +178,97 @@
             
 
   </mat-tab>
-  <mat-tab label="Transition Priority">
+  <mat-tab label="Transition Priority Setup">
+      <br>
+    <table>
+        <tr>
+            <td style="width: 30%; padding: 10px" class="bold">Counter Party Weigtage Value</td>
+            <td style="width: 10%; padding: 10px"><input type="text" class="form-control" /></td>
+            <td style="width: 60%; padding: 10px"></td>
+        </tr>
+        <tr>
+            <td style="width: 30%; padding: 10px" class="bold">Contract Expiry Date length (beyond Dec,2021)</td>
+            <td style="width: 10%; padding: 10px"><input type="text" class="form-control" /></td>
+            <td style="width: 60%; padding: 10px"></td>
+        </tr>
+        <tr>
+            <td style="width: 30%; padding: 10px" class="bold">Contract Amount (Weigtage)</td>
+            <td style="width: 10%; padding: 10px"><input type="text" class="form-control" /></td>
+            <td style="width: 60%; padding: 10px"></td>
+        </tr>
+        <tr>
+            <td style="width: 30%; padding: 10px" class="bold">Contract Category (Weigtage)</td>
+            <td style="width: 10%; padding: 10px"><input type="text" class="form-control" /></td>
+            <td style="width: 60%; padding: 10px"></td>
+        </tr>
+        <tr>
+            <td style="width: 30%; padding: 10px" class="bold">Fallback Complexity</td>
+            <td style="width: 10%; padding: 10px"><input type="text" class="form-control" /></td>
+            <td style="width: 60%; padding: 10px; text-align: center;">
+                    <button class="btn btn-primary" style="width: 100px">Add</button> &nbsp; &nbsp; &nbsp;&nbsp;<button class="btn btn-primary" style="width: 100px">Update</button>
+            </td>
+        </tr>
+    </table>
 
+    <br>
+    <br>
+    <h1>Calculate Transition Priority Score</h1>
+    <table>
+        <tr>
+            <td style="width: 30%; padding: 10px" class="bold">Select Contact Id</td>
+            <td style="width: 10%; padding: 10px">
+                <mat-form-field>
+                    <mat-select>
+                        <mat-option *ngFor="let contract of contracts" [value]="contract.contractId">{{contract.contractId}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </td>
+            <td style="width: 60%; padding: 10px; text-align: center;">
+                <button class="btn btn-primary" style="width: 100px" (click)="details=false">Calculate</button>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 30%; padding: 10px" class="bold">Score</td>
+            <td style="width: 10%; padding: 10px">{{700}}</td>
+            <td style="width: 60%; padding: 10px; text-align: center;">
+                <button class="btn btn-primary" style="width: 100px" (click)="details=true">Details</button>
+            </td>
+        </tr>
+    </table>
+    <br>    
+    <table *ngIf="details" style="width: 70%">
+        <tr>
+            <td style="width: 25%">Counter Party Value</td>
+            <td style="width: 25%"><input type="text" class="form-control" [disabled]="true" style="width: 100px" /></td>
+            <td style="width: 25%"> Score</td>
+            <td style="width: 25%"><input type="text" class="form-control" [disabled]="true" style="width: 100px" /></td>
+        </tr>
+        <tr>
+            <td >Expiry Value</td>
+            <td ><input type="text" class="form-control" [disabled]="true" style="width: 100px"/></td>
+            <td > Score</td>
+            <td ><input type="text" class="form-control" [disabled]="true" style="width: 100px"/></td>
+        </tr>
+        <tr>
+            <td >Amount</td>
+            <td ><input type="text" class="form-control" [disabled]="true" style="width: 100px"/></td>
+            <td >Amount Score</td>
+            <td ><input type="text" class="form-control" [disabled]="true" style="width: 100px"/></td>
+        </tr>
+        <tr>
+            <td >Contract Value</td>
+            <td ><input type="text" class="form-control" [disabled]="true" style="width: 100px"/></td>
+            <td >Contract Score</td>
+            <td ><input type="text" class="form-control" [disabled]="true" style="width: 100px"/></td>
+        </tr>
+        <tr>
+            <td >Fallback Value</td>
+            <td ><input type="text" class="form-control" [disabled]="true" style="width: 100px"/></td>
+            <td >Fallback Score</td>
+            <td ><input type="text" class="form-control" [disabled]="true" style="width: 100px"/></td>
+        </tr>
+    </table>
+    <br><br>
   </mat-tab>
 </mat-tab-group>
 

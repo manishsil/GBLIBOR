@@ -28,3 +28,7 @@ table {
 ::ng-deep .mat-form-field {
   width: 280px;
 }
+
+.btn {
+  line-height: 1;
+}
