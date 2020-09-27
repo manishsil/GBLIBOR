@@ -41,6 +41,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MyContractsComponent } from './my-contracts/my-contracts.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { SpinnerComponent } from './spinner/spinner.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     AnalyticsManagerComponent,
     DialogComponent,
     MyContractsComponent,
-    PieChartComponent
+    PieChartComponent,
+    SpinnerComponent
   ],
   imports: [
     QuillModule.forRoot(),
@@ -65,7 +69,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
     AppRoutingModule,MatFormFieldModule,MatInputModule,MatSliderModule,MatTableModule,CdkTableModule,MatPaginatorModule,
     MatStepperModule,MatIconModule, MatTabsModule, MatSelectModule,MatSnackBarModule,PdfViewerModule,MatCardModule,
     MatMenuModule, MatCheckboxModule,MatDialogModule, MatRadioModule, MatExpansionModule, PdfViewerModule,
-    HttpClientModule, BrowserAnimationsModule, ChartsModule
+    HttpClientModule, BrowserAnimationsModule, ChartsModule, MatProgressSpinnerModule
   ],
   providers: [
     {

@@ -14,6 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from 'src/app/dialog/dialog.component';
 import { QuillEditorComponent } from 'ngx-quill';
 import { ContractMeta } from 'src/app/model/contractmeta';
+import { SpinnerServiceService } from 'src/service/spinner-service.service';
 
 
 @Component({
@@ -58,7 +59,7 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   constructor(private snackBar: MatSnackBar, private service: GbliborService,
               private loginService: LoginService, private route: ActivatedRoute,
-              public dialog: MatDialog) {
+              public dialog: MatDialog, private spinnerService: SpinnerServiceService) {
                 this.modules = {toolbar: [['bold', 'italic', 'underline', 'strike']]};
               }
 
@@ -176,7 +177,9 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
 
   loadInitiateData() {
     // server call to load intitiate screen data
+    this.spinnerService.setspinnerSubj(true);
     this.service.getWorkFlowIntiateData(this.contractId).subscribe(resp => {
+      this.spinnerService.setspinnerSubj(false);
       this.contractDt = resp;
       this.counterPartyId = resp.counterPartyId;
       this.isInitated = true;
@@ -376,9 +379,11 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   preview() {
+    this.spinnerService.setspinnerSubj(true);
     this.service.saveEditWorkflow({contractId: this.contractId, listDocumentMetadata: this.listdocumentMetaData}).subscribe(dt => {
       console.log(dt);
       document.getElementById('pdfFrame2').setAttribute('src', this.service.previewUrl + '/' + this.contractId);
+      this.spinnerService.setspinnerSubj(false);
     });
   }
 
