@@ -12,10 +12,11 @@
             <a id="header" [routerLink] = "'/login'" ><span class="glyphicon glyphicon-log-in"></span> Login</a>
           </li>
           <li *ngIf="username" style="padding: 10px;margin-top: 5px;color: #fff">
-              <span *ngIf="username" >{{username}}</span>
+              <span *ngIf="username" ><i class="fa fa-user-circle-o" aria-hidden="true" style="padding-right: 5px"></i>{{username}}</span>
           </li>
-          <li id="searchbox"><input type="text" placeholder="Search.." name="search"></li>
-          <li><i class="fas fa-search" aria-hidden="true"></i></li>
+          <li id="searchbox"><input type="text" placeholder="Search.." name="search" style="margin-right: -20px;">
+            <i class="fa fa-search" aria-hidden="true"></i></li>
+          <li></li>
         </ul>
       </div>
     </div>
@@ -25,16 +26,16 @@
   <div class="container-fluid text-center">    
     <div class="row content1 row-flex">
       <div class="col-sm-2 sidenav text-left">
-          <p><a [routerLink] = "'/'">Home</a></p>
-          <p><a [routerLink] = "'/analytics'">Analytics Manager</a></p>
-          <p><a [routerLink] = "'/repapering'">Repapering Request </a></p>
-          <p><a [routerLink] = "'/dashboard'">Dashboard  </a></p>
-          <p><a [routerLink] = "'/'">Scan to Text</a></p>
-          <p><a [routerLink] = "'/'">Classify Contracts </a></p>
-          <p><a [routerLink] = "'/'">Review Contracts</a></p>
-          <p><a [routerLink] = "'/'">Edit Contracts  </a></p>
-          <p><a [routerLink] = "'/'">My Approval</a></p>
-          <p><a [routerLink] = "'/mycontracts'">My Contract</a></p>
+          <p><a [routerLink] = "'/'"><i class="fa fa-home" aria-hidden="true" style="padding-right: 10px"></i>Home</a></p>
+          <p><a [routerLink] = "'/analytics'"><i class="fa fa-cogs" aria-hidden="true" style="padding-right: 10px"></i>Analytics Manager</a></p>
+          <p><a [routerLink] = "'/repapering'"><i class="fa fa-paper-plane" aria-hidden="true" style="padding-right: 10px"></i>Repapering Request </a></p>
+          <p><a [routerLink] = "'/dashboard'"><i class="fa fa-tachometer" aria-hidden="true" style="padding-right: 10px"></i>Dashboard  </a></p>
+          <p><a [routerLink] = "'/'"><i class="fa fa-barcode" aria-hidden="true" style="padding-right: 10px"></i>Scan to Text</a></p>
+          <p><a [routerLink] = "'/'"><i class="fa fa-list-alt" aria-hidden="true" style="padding-right: 10px"></i>Classify Contracts </a></p>
+          <p><a [routerLink] = "'/'"><i class="fa fa-eye" aria-hidden="true" style="padding-right: 10px"></i>Review Contracts</a></p>
+          <p><a [routerLink] = "'/'"><i class="fa fa-pencil-square-o" aria-hidden="true" style="padding-right: 10px"></i>Edit Contracts</a></p>
+          <p><a [routerLink] = "'/'"><i class="fa fa-check-square-o" aria-hidden="true" style="padding-right: 10px"></i>My Approval</a></p>
+          <p><a [routerLink] = "'/mycontracts'"> <i class="fa fa-envelope" aria-hidden="true" style="padding-right: 10px"></i>My Contract</a></p>
 
         <!--<p><a [routerLink] = "'/template'">Template Upload  </a></p>
         <p><a [routerLink] = "'/documents'">Document Manager </a></p>

@@ -19,14 +19,15 @@
           <td style="width: 50%">
               <button class="btn btn-primary" (click)="loadOCRData()" ><i class="fa fa-barcode" aria-hidden="true"></i> &nbsp;&nbsp;OCR</button>
               &nbsp;&nbsp;&nbsp;&nbsp;
-              <input type="button" class="btn btn-primary" value="Initiate" (click)="loadInitiateData()" [disabled]="!fileName"/>
+              <button class="btn btn-primary" (click)="loadInitiateData()" [disabled]="!fileName">
+              <i class="fa fa-object-group" aria-hidden="true" style="padding-right: 5px"></i> Classify</button>
             </td>
         </tr>
       </table>      
       <div *ngIf="isInitated"><!---->
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
         <br>
-        <button mat-button matStepperNext class="btn btn-primary">Review</button>
+        <button mat-button matStepperNext class="btn btn-primary"><i class="fa fa-eye" aria-hidden="true" style="padding-right: 10px"></i>Review</button>
       </div>
     </mat-step>
   
@@ -34,7 +35,7 @@
       <app-contract-details [contractDt]="contractDt"></app-contract-details>
       <br>
       <div>
-        <button mat-button matStepperNext class="btn btn-primary">Amend</button>
+        <button mat-button matStepperNext class="btn btn-primary" ><i class="fa fa-pencil-square-o" aria-hidden="true" style="padding-right: 10px"></i>Amend</button>
       </div>
       <br>
     </mat-step>
@@ -57,21 +58,21 @@
         <table style="width: 99%" *ngIf="editorContent">
             <tr style="text-align: right;">
               <td style="width: 60px;">Edit Page # {{pageNum}}</td>
-              <td><button class="btn btn-primary" mat-button (click)="save()" style="width: 100px">Next</button></td>
-              <td><button class="btn btn-primary" mat-button (click)="skip()" style="width: 100px">Skip</button></td>
-              <td> <button class="btn btn-primary" mat-button (click)="prev()" style="width: 100px">Previous</button></td>
-              <td> <button class="btn btn-primary" mat-button (click)="saveData()" style="width: 100px">Save</button></td>
-              <td> <button class="btn btn-primary" mat-button (click)="preview()" style="width: 100px">Preview</button></td>
+              <td><button class="btn btn-primary" mat-button (click)="save()" style="width: 100px"><i class="fa fa-chevron-circle-right" aria-hidden="true" style="padding-right: 10px"></i>Next</button></td>
+          <!--     <td><button class="btn btn-primary" mat-button (click)="skip()" style="width: 100px">Skip</button></td> -->
+              <td> <button class="btn btn-primary" mat-button (click)="prev()" style="width: 100px"><i class="fa fa-chevron-circle-left" aria-hidden="true" style="padding-right: 10px"></i>Previous</button></td>
+              <td> <button class="btn btn-primary" mat-button (click)="saveData()" style="width: 100px"><i class="fa fa-floppy-o" aria-hidden="true" style="padding-right: 10px"></i>Save</button></td>
+              <td> <button class="btn btn-primary" mat-button (click)="preview()" style="width: 100px"><i class="fa fa-eye" aria-hidden="true" style="padding-right: 10px"></i>Preview</button></td>
             </tr>
           <tr>
-              <td style=" width: 100%;" colspan="6"><!--headerTextContent-->
+              <td style=" width: 100%;" colspan="5"><!--headerTextContent-->
                 <quill-editor #editor (mouseup)="modify()" [styles]="{height: '300px'}" [(ngModel)]="editorContent" [modules]="modules"></quill-editor>
               </td>
           </tr>
         </table>
         <br>
         <div>
-          <button mat-button matStepperNext class="btn btn-primary">Authorize</button>
+          <button mat-button matStepperNext class="btn btn-primary"><i class="fa fa-check" aria-hidden="true" style="padding-right: 10px"></i>Authorize</button>
         </div>
     </mat-step>
 
@@ -85,14 +86,14 @@
         </table>
         <br>         
         <div>
-          <button mat-button matStepperNext class="btn btn-primary">Verify</button>
+          <button mat-button matStepperNext class="btn btn-primary"><i class="fa fa-thumbs-up" aria-hidden="true" style="padding-right: 10px"></i>Verify</button>
         </div>
       </mat-step>
 
       <mat-step label="Verification">
         <app-contract-details [contractDt]="contractDt"></app-contract-details>
         <div>
-          <button mat-button matStepperNext class="btn btn-primary">Close</button>
+          <button mat-button matStepperNext class="btn btn-primary"><i class="fa fa-thumbs-up" aria-hidden="true" style="padding-right: 10px"></i>Close</button>
         </div>
       </mat-step>
       <mat-step label="Close">
@@ -189,15 +190,15 @@
     <br> 
     <table style="width: 90%" *ngIf="financialLoanData">
         <tr>
-          <td style="width: 20%">Loan Amount ($)</td>
+          <td style="width: 20%">Loan Amount <i class="fa fa-usd" aria-hidden="true" style="padding-left: 5px"></i></td>
           <td style="width: 30%">{{financialLoanData.loanAmount}}</td>
           <td style="width: 20%">Loan Currency</td>
           <td style="width: 30%">{{financialLoanData.loanCurrency}}</td>
         </tr>
         <tr>
-          <td style="width: 20%">Start Date</td>
+          <td style="width: 20%">Start Date <i class="fa fa-calendar" aria-hidden="true" style="padding-left: 5px"></i></td>
           <td style="width: 30%">{{financialLoanData.startDate}}</td>
-          <td style="width: 20%">Maturity Date</td>
+          <td style="width: 20%">Maturity Date <i class="fa fa-calendar" aria-hidden="true" style="padding-left: 5px"></i></td>
           <td style="width: 30%">{{financialLoanData.maturityDate}}</td>
         </tr>
         <tr>

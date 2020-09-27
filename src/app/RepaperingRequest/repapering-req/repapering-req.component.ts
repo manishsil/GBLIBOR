@@ -56,11 +56,25 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   fallbackBenchmarkIllegal: boolean;
   editorContent: string;
   pageNum: number;
+  toolbarOptions = [
+    ['bold', 'italic', 'underline', 'strike'],
+    ['blockquote', 'code-block'],
+    [{ 'header': 1 }, { 'header': 2 }],
+    [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+    [{ 'script': 'sub'}, { 'script': 'super' }],
+    [{ 'indent': '-1'}, { 'indent': '+1' }],
+    [{ 'size': ['small', false, 'large', 'huge'] }],
+    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    [{ 'color': [] }, { 'background': [] }],
+    [{ 'font': [] }],
+    [{ 'align': [] }],
+    ['clean']
+  ];
 
   constructor(private snackBar: MatSnackBar, private service: GbliborService,
               private loginService: LoginService, private route: ActivatedRoute,
               public dialog: MatDialog, private spinnerService: SpinnerServiceService) {
-                this.modules = {toolbar: [['bold', 'italic', 'underline', 'strike']]};
+                this.modules = {toolbar: this.toolbarOptions};
               }
 
   ngOnInit(): void {
