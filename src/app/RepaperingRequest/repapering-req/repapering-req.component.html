@@ -8,7 +8,7 @@
     <mat-step label="Initiation">
       <table>
         <tr>
-          <td style="width: 15%" class="bold">Upload Doc &nbsp;&nbsp;<i class="fa fa-file-pdf-o" aria-hidden="true" matTooltip="Info about the action"></i></td>
+          <td style="width: 15%" class="bold">Upload Doc &nbsp;&nbsp;<i class="fa fa-file-pdf-o" aria-hidden="true"></i></td>
         <td style="width: 25%"><input type="text" class="form-control" [disabled]="true" [(ngModel)]="fileName" /></td>
           <td style="width: 10%">
             <button class="btn btn-primary"> <i class="fa fa-upload" aria-hidden="true"></i> &nbsp;
@@ -56,14 +56,15 @@
         <br>
         <table style="width: 99%" *ngIf="editorContent">
             <tr style="text-align: right;">
-              <td style="width: 100px;">Edit Page # {{pageNum}}</td>
+              <td style="width: 60px;">Edit Page # {{pageNum}}</td>
               <td><button class="btn btn-primary" mat-button (click)="save()" style="width: 100px">Next</button></td>
               <td><button class="btn btn-primary" mat-button (click)="skip()" style="width: 100px">Skip</button></td>
               <td> <button class="btn btn-primary" mat-button (click)="prev()" style="width: 100px">Previous</button></td>
+              <td> <button class="btn btn-primary" mat-button (click)="saveData()" style="width: 100px">Save</button></td>
               <td> <button class="btn btn-primary" mat-button (click)="preview()" style="width: 100px">Preview</button></td>
             </tr>
           <tr>
-              <td style=" width: 100%;" colspan="5"><!--headerTextContent-->
+              <td style=" width: 100%;" colspan="6"><!--headerTextContent-->
                 <quill-editor #editor (mouseup)="modify()" [styles]="{height: '300px'}" [(ngModel)]="editorContent" [modules]="modules"></quill-editor>
               </td>
           </tr>

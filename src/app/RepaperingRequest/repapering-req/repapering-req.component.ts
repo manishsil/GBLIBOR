@@ -379,10 +379,13 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   preview() {
+    document.getElementById('pdfFrame2').setAttribute('src', this.service.previewUrl + '/' + this.contractId);
+  }
+
+  saveData() {
     this.spinnerService.setspinnerSubj(true);
     this.service.saveEditWorkflow({contractId: this.contractId, listDocumentMetadata: this.listdocumentMetaData}).subscribe(dt => {
       console.log(dt);
-      document.getElementById('pdfFrame2').setAttribute('src', this.service.previewUrl + '/' + this.contractId);
       this.spinnerService.setspinnerSubj(false);
     });
   }
