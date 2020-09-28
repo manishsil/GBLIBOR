@@ -306,17 +306,14 @@ export class RepaperingReqComponent implements OnInit,AfterViewInit,OnDestroy {
     this.service.getContractMetadata(this.contractId).subscribe(dt => {
       console.log(JSON.stringify(dt));
       this.listdocumentMetaData = dt.listdocumentMetaData;
-
+      this.fallbackBenchmarkUnavailable = false;
+      this.fallbackBenchmarkIllegal = false;
       this.listdocumentMetaData.forEach((ele, index) => {
-        if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Unavailable') {
+        if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Unavailable' && ele.headerTextContent) {
           this.fallbackBenchmarkUnavailable = true;
-        } else {
-          this.fallbackBenchmarkUnavailable = false;
         }
-        if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Illegal') {
+        if (ele.domainContextDictionaryId === 'Fallback_Benchmark_Illegal' && ele.headerTextContent) {
           this.fallbackBenchmarkIllegal = true;
-        } else {
-          this.fallbackBenchmarkIllegal = false;
         }
         if (!this.editorContent && ele.dictionaryIdupdateRequired) {
           this.editorContent =
