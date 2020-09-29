@@ -21,7 +21,7 @@ export class ContractMeta {
  phraseRule: string;
  entityRule: string;
  referenceExamples: string;
- dictionaryIdupdateRequired: boolean;
+// dictionaryIdupdateRequired: boolean;
 
 //
  textSimilarity: number;

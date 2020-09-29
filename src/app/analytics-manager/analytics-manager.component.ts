@@ -87,7 +87,7 @@ export class AnalyticsManagerComponent implements OnInit {
   }
 
   loadContractData() {
-    this.contractMeta = this.contractMetaFull.filter(ele => ele.domainContextDictionaryId === this.selId)[0];
+    this.contractMeta = this.contractMetaFull.filter(ele => ele.domainContextDictionaryId === this.selCid)[0];
   }
 
   laodTabDetails($event: any){
